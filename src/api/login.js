@@ -16,7 +16,7 @@ const login = async (user, pass) => {
     headerHTTP);
   
   if (response.ok) 
-    console.warn('Login aceito');
+    return response.headers.get('x-access-token');
   else 
     throw new Error('Não foi possível efetuar o login.');
 };

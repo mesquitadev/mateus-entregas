@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Text, TextInput, Button, View } from 'react-native';
+import { Text, TextInput, Button, View, AsyncStorage } from 'react-native';
 
 import styles from './styles';
 import login from '../../../src/api/login';
@@ -9,9 +9,10 @@ const Login = () => {
   const [ pass, setPass ] = useState('');
   const [ errorMessage, setErrorMessage ] = useState('');
 
-  const login = async () => {
+  const setLogin = async () => {
     try {
-      await login(user, pass);
+      const token = await login(user, pass);
+      await AsyncStorage.setItem('entregas_user_token', token);
     } catch(err) {
       setErrorMessage(err.message);
     }
@@ -34,7 +35,7 @@ const Login = () => {
         <Text>{errorMessage}</Text>
       </View>
       <View style={styles.primaryButton}>
-        <Button title="Entrar" onPress={login} />
+        <Button title="Entrar" onPress={setLogin} />
       </View>
     </Fragment>
   );
