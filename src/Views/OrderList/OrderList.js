@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, FlatList } from 'react-native';
 
 import UserHeader from '../../Components/UserHeader/UserHeader';
+import SearchFilter from '../../Components/SearchFilter/SearchFilter';
 import OrderItem from '../../Components/OrderItem/OrderItem';
 import styles from './styles';
 
@@ -22,6 +23,7 @@ const OrderList = () => {
   return (
     <View>
       <UserHeader />
+      <SearchFilter />
       <View style={styles.orderList}>
         <Text style={styles.title}>Pedidos disponíveis</Text>
         <View>
