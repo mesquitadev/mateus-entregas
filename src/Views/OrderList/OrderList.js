@@ -19,7 +19,7 @@ const OrderList = () => {
   );
   
   return (
-    <View>  
+    <View style={styles.orderList}>  
       <FlatList 
         data={response}
         keyExtractor={item => item.key}
