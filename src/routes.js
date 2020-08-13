@@ -7,7 +7,13 @@ const Stack = createStackNavigator();
 
 const Routes = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Home" component={OrderList} />
+    <Stack.Screen 
+      name="Home" 
+      component={OrderList} 
+      options={{
+        headerShown: false,
+      }}
+    />
   </Stack.Navigator>
 );
 

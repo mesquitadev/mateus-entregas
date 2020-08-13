@@ -8,7 +8,7 @@ const OrderItem = ({ data }) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   
   return (
-    <View style={[styles.container, toggleCheckBox ? styles.active : styles.inactive]}>
+    <View style={[styles.orderItem, toggleCheckBox ? styles.active : styles.inactive]}>
       <Text style={styles.text}>No #{data.number}</Text>
       <Text style={styles.label}>Realizado em {data.date}</Text>
       <Text style={styles.label}>Cliente</Text>

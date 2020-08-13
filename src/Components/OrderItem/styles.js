@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 const screenWidth = Dimensions.get('screen').width;
 const styles = StyleSheet.create({
-  container: {
+  orderItem: {
     backgroundColor: "#FFF",
     borderWidth: 3,
     borderRadius: 8,

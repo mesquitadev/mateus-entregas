@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 
+import UserHeader from '../../Components/UserHeader/UserHeader';
 import OrderItem from '../../Components/OrderItem/OrderItem';
 import styles from './styles';
 
@@ -19,12 +20,18 @@ const OrderList = () => {
   );
   
   return (
-    <View style={styles.orderList}>  
-      <FlatList 
-        data={response}
-        keyExtractor={item => item.key}
-        renderItem={this.renderItem}
-        />
+    <View>
+      <UserHeader />
+      <View style={styles.orderList}>
+        <Text style={styles.title}>Pedidos disponíveis</Text>
+        <View>
+          <FlatList 
+            data={response}
+            keyExtractor={item => item.key}
+            renderItem={this.renderItem}
+            />
+        </View>
+      </View>
     </View>
   );
 }
