@@ -4,6 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import OrderList from '../../Views/OrderList/OrderList';
 import Reports from '../../Views/Reports/Reports';
+import Profile from '../../Views/Profile/Profile';
 
 Ionicons.loadFont();
 
@@ -33,7 +34,7 @@ const BottomTabNavigator = () => (
   >
     <Tab.Screen name="Pedidos" component={OrderList} />
     <Tab.Screen name="Relatórios" component={Reports} />
-    <Tab.Screen name="Perfil" component={Reports} />
+    <Tab.Screen name="Perfil" component={Profile} />
   </Tab.Navigator>
 );
 
