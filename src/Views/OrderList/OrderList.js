@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, FlatList } from 'react-native';
 
 import UserHeader from '../../Components/UserHeader/UserHeader';
@@ -15,23 +15,40 @@ const response = [
 ];
 
 const OrderList = () => {
+  const [listItems, setListItems] = useState(response);
 
+  // Criar o useEffect para carregar os pedidos da api
+  // setListItems com a resposta do endpoint
+  
   renderItem = ({ item }) => (
     <OrderItem data={item} />
   );
+
+  startSearchFilter = text => {
+    const newData = response.filter(item => {
+      const itemData = `${item.clientName.toUpperCase()} ${item.address.toUpperCase()}`;      
+      const textData = text.toUpperCase();
+      
+      return itemData.indexOf(textData) > -1;    
+    });
+    
+    setListItems(newData);
+  };
   
   return (
     <View>
       <UserHeader />
-      <SearchFilter />
+
+      <SearchFilter onChangeText={this.startSearchFilter} />
+      
       <View style={styles.orderList}>
         <Text style={styles.title}>Pedidos disponíveis</Text>
         <View>
           <FlatList 
-            data={response}
+            data={listItems}
             keyExtractor={item => item.key}
             renderItem={this.renderItem}
-            />
+          />
         </View>
       </View>
     </View>
