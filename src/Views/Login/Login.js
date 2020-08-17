@@ -1,5 +1,6 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { Text, TextInput, Button, View, AsyncStorage } from 'react-native';
+import { TextInputMask } from 'react-native-masked-text';
 
 import styles from './styles';
 import login from '../../../src/api/login';
@@ -8,6 +9,7 @@ const Login = () => {
   const [ user, setUser ] = useState('');
   const [ pass, setPass ] = useState('');
   const [ errorMessage, setErrorMessage ] = useState('');
+  const [ activeButton, setActiveButton ] = useState(false);
 
   const setLogin = async () => {
     try {
@@ -19,25 +21,31 @@ const Login = () => {
   }
   
   return (
-    <Fragment>
-      <View style={styles.container}>
-        <TextInput 
-          style={styles.inputs} 
-          placeholder="CPF"
-          onChangeText={text => setUser(text)}
+    <View style={styles.container}>
+      <TextInputMask 
+        type={"cpf"}
+        placeholder="CPF"
+        value={user}
+        onChangeText={text => setUser(text)}
+        style={styles.inputs}
+      />
+      <TextInput 
+        style={styles.inputs} 
+        placeholder="Senha" 
+        onChangeText={text => setPass(text)}
+        secureTextEntry
+      />
+      <Text>{errorMessage}</Text>
+      <View style={[styles.primaryButton, activeButton ? styles.active : styles.inactive]}>
+        <Button 
+          title="Entrar" 
+          onPress={setLogin} 
+          disabled={!activeButton} 
+          color={activeButton ? "#FFF" : "#CCC"}
         />
-        <TextInput 
-          style={styles.inputs} 
-          placeholder="Senha" 
-          onChangeText={text => setPass(text)}
-          secureTextEntry
-        />
-        <Text>{errorMessage}</Text>
       </View>
-      <View style={styles.primaryButton}>
-        <Button title="Entrar" onPress={setLogin} />
-      </View>
-    </Fragment>
+      <Button title="Cadastrar" color="#0095DA" />
+    </View>
   );
 };
 
