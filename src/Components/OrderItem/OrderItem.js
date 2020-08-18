@@ -4,12 +4,12 @@ import CheckBox from '@react-native-community/checkbox';
 
 import styles from './styles';
 
-const OrderItem = ({ data }) => {
+const OrderItem = ({ data, navigate }) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   
   return (
     <View style={[styles.orderItem, toggleCheckBox ? styles.active : styles.inactive]}>
-      <Text style={styles.text}>No #{data.number}</Text>
+      <Text style={styles.text}>Nº #{data.number}</Text>
       <Text style={styles.label}>Realizado em {data.date}</Text>
       <Text style={styles.label}>Cliente</Text>
       <Text style={styles.text}>{data.clientName}</Text>
@@ -20,7 +20,9 @@ const OrderItem = ({ data }) => {
         <View style={styles.status}>
           <Text style={styles.barText}>Aguardando entrega</Text>
         </View>
-        <TouchableOpacity style={styles.more}>
+        <TouchableOpacity 
+          style={styles.more} 
+          onPress={() => navigate('OrderDetails', { item: data })}>
           <Text style={styles.barText}>Ver mais</Text>
         </TouchableOpacity>
       </View>

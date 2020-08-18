@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 
 import UserHeader from '../../Components/UserHeader/UserHeader';
 import SearchFilter from '../../Components/SearchFilter/SearchFilter';
@@ -14,14 +14,14 @@ const response = [
   { key: "04", number: "000345567", date: "12/08/2020", clientName: "Bill Gates", address: "Seattle" },
 ];
 
-const OrderList = () => {
+const OrderList = ({ navigation: { navigate } }) => {
   const [listItems, setListItems] = useState(response);
 
   // Criar o useEffect para carregar os pedidos da api
   // setListItems com a resposta do endpoint
   
   renderItem = ({ item }) => (
-    <OrderItem data={item} />
+    <OrderItem data={item} navigate={navigate} />
   );
 
   startSearchFilter = text => {
