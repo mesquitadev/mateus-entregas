@@ -15,10 +15,22 @@ const response = [
 ];
 
 const OrderList = ({ navigation: { navigate } }) => {
-  const [listItems, setListItems] = useState(response);
+  const [ listItems, setListItems ] = useState(response);
+  const [ selectedItems, setSelectedItems ] = useState([]); 
 
   // Criar o useEffect para carregar os pedidos da api
   // setListItems com a resposta do endpoint
+  
+  loadSelectedItems = (data, status) => {
+    if (!status) {
+      delete selectedItems[data.key];
+      return;
+    }
+
+    setSelectedItems([...selectedItems, data]);
+
+    console.warn(selectedItems);
+  };
   
   renderItem = ({ item }) => (
     <OrderItem data={item} navigate={navigate} />

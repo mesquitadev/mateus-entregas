@@ -34,7 +34,10 @@ const OrderItem = ({ data, navigate }) => {
           onFillColor={'#00A349'}
           disable={false}
           value={toggleCheckBox}
-          onValueChange={(newValue) => setToggleCheckBox(newValue)}
+          onValueChange={(newValue) => {
+            setToggleCheckBox(newValue)
+            loadSelectedItems(data, !toggleCheckBox)
+          }}
         />
       </View>
     </View>
