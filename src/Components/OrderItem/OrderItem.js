@@ -36,7 +36,7 @@ const OrderItem = ({ data, navigate }) => {
           value={toggleCheckBox}
           onValueChange={(newValue) => {
             setToggleCheckBox(newValue)
-            loadSelectedItems(data, !toggleCheckBox)
+            loadSelectedItems(data)
           }}
         />
       </View>
