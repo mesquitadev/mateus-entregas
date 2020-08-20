@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 
 import UserHeader from '../../Components/UserHeader/UserHeader';
@@ -6,25 +6,25 @@ import SearchFilter from '../../Components/SearchFilter/SearchFilter';
 import OrderItem from '../../Components/OrderItem/OrderItem';
 import styles from './styles';
 
-// Temp object
-const response = [
-  { key: "01", number: "123345567", date: "12/08/2020", clientName: "Higo Sampaio", address: "Recanto dos Vinhais" },
-  { key: "02", number: "123345000", date: "12/08/2020", clientName: "Bruce Wayne", address: "Gotham" },
-  // { key: "03", number: "129995567", date: "12/08/2020", clientName: "Albert Einstein", address: "Nova Jersey" },
-  // { key: "04", number: "000345567", date: "12/08/2020", clientName: "Bill Gates", address: "Seattle" },
-];
-
 const OrderList = ({ navigation: { navigate } }) => {
-  const [ listItems, setListItems ] = useState(response);
+  const [ listItems, setListItems ] = useState('');
   const [ selectedItems, setSelectedItems ] = useState([]);
   const [ count, setCount ] = useState(0);
   
-  // Criar o useEffect para carregar os pedidos da api
-  // setListItems com a resposta do endpoint
+  useEffect(() => {
+    const fetchData = () => {
+      const result = [
+        { key: "01", number: "123345567", date: "12/08/2020", clientName: "Higo Sampaio", address: "Recanto dos Vinhais" },
+        { key: "02", number: "123345000", date: "12/08/2020", clientName: "Bruce Wayne", address: "Gotham" },
+        { key: "03", number: "129995567", date: "12/08/2020", clientName: "Albert Einstein", address: "Nova Jersey" },
+        { key: "04", number: "000345567", date: "12/08/2020", clientName: "Bill Gates", address: "Seattle" },
+      ];
+  
+      setListItems(result);
+    };
 
-  onPressButton = () => {
-    console.warn(count);
-  }
+    fetchData();
+  }, []);
   
   loadSelectedItems = data => {
     if (selectedItems.includes(data)) {
@@ -39,7 +39,7 @@ const OrderList = ({ navigation: { navigate } }) => {
   };
   
   renderItem = ({ item }) => (
-    <OrderItem data={item} navigate={navigate} />
+    <OrderItem data={item} navigate={navigate} showCheckBox={true} />
   );
 
   startSearchFilter = text => {
@@ -61,7 +61,7 @@ const OrderList = ({ navigation: { navigate } }) => {
 
       <TouchableOpacity
         style={[ styles.selectedItemsButton, count > 0 ? styles.active : styles.inactive ]}
-        onPress={this.onPressButton}>
+        onPress={() => navigate('SelectedItems', selectedItems)}>
         <Text style={styles.selectedItemsButtonText}>
           {`Ver pedidos selecionados  ${count}`}
         </Text>

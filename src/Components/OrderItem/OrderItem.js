@@ -4,8 +4,9 @@ import CheckBox from '@react-native-community/checkbox';
 
 import styles from './styles';
 
-const OrderItem = ({ data, navigate }) => {
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+const OrderItem = ({ data, navigate, showCheckBox }) => {
+  const [ toggleCheckBox, setToggleCheckBox ] = useState(false);
+  const [ checkBox, setCheckBox ] = useState(true);
   
   return (
     <View style={[styles.orderItem, toggleCheckBox ? styles.active : styles.inactive]}>
@@ -26,7 +27,7 @@ const OrderItem = ({ data, navigate }) => {
           <Text style={styles.barText}>Ver mais</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.checkBox}>
+      <View style={styles.checkBox, showCheckBox ? styles.checkBox : styles.hide}>
         <CheckBox
           boxType={'square'}
           onTintColor={'#00A349'}

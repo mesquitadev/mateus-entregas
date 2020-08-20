@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './Views/Login/Login';
 import BottomTabNavigator from './Components/BottomTabNavigator/BottomTabNavigator';
 import OrderDetails from './Views/OrderDetails/OrderDetails';
-import SelectedOrders from './Views/SelectedOrders/SelectedOrders';
+import SelectedItems from './Views/SelectedItems/SelectedItems';
 
 const Stack = createStackNavigator();
 
@@ -30,8 +30,8 @@ const Routes = () => (
       }}
     />
     <Stack.Screen 
-      name="SelectedOrders"
-      component={SelectedOrders}
+      name="SelectedItems"
+      component={SelectedItems}
       options={{
         title: "Pedidos selecionados"
       }}

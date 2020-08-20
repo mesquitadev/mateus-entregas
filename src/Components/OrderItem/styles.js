@@ -64,6 +64,10 @@ const styles = StyleSheet.create({
     top: 15,
     right: 15,
   },
+
+  hide: {
+    display: "none",
+  },
 });
 
 export default styles;
