@@ -35,7 +35,7 @@ const SelectDeliveryPerson = ({ route: { params }, navigation: { navigate } }) =
   };
 
   renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.card} onPress={() => navigate('DeliveryInformation', item)}>
+    <TouchableOpacity style={styles.card} onPress={() => navigate('DeliveryInformation', { person: item, orders: params })}>
         <Image style={styles.image} source={require('../../res/img/entregador.png')} />
         <View>
           <Text style={styles.name}>{item.name}</Text>

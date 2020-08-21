@@ -9,7 +9,7 @@ const SelectedItems = ({ route: { params }, navigation: { navigate } }) => {
 
   useEffect(() => {
     setSelectedItems(params);
-  });
+  }, []);
 
   renderItem = ({ item }) => (
     <OrderItem data={item} navigate={navigate} showCheckBox={false} />

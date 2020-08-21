@@ -11,8 +11,8 @@ const DeliveryInformation = ({ route: { params }, navigation: { navigate } }) =>
     <View style={styles.container}>
       <View style={styles.info}>
         <Ionicons name={'person-circle'} size={146} color={"#777"}/>
-        <Text style={styles.userName}>{params.name}</Text>
-        <Text style={styles.text}>CPF: {params.cpf}</Text>
+        <Text style={styles.userName}>{params.person.name}</Text>
+        <Text style={styles.text}>CPF: {params.person.cpf}</Text>
         <Text style={styles.text}>Código: 000000</Text>
       </View>
       <View style={styles.buttonBar}>
@@ -24,6 +24,7 @@ const DeliveryInformation = ({ route: { params }, navigation: { navigate } }) =>
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          onPress={() => navigate('OrderCheck', params)}
           style={styles.buttonNext}>
           <Text style={styles.buttonNextText}>
             Avançar

@@ -7,6 +7,7 @@ import OrderDetails from './Views/OrderDetails/OrderDetails';
 import SelectedItems from './Views/SelectedItems/SelectedItems';
 import SelectDeliveryPerson from './Views/SelectDeliveryPerson/SelectDeliveryPerson';
 import DeliveryInformation from './Views/DeliveryInformation/DeliveryInformation';
+import OrderCheck from './Views/OrderCheck/OrderCheck';
 
 const Stack = createStackNavigator();
 
@@ -28,28 +29,40 @@ const Routes = () => (
       name="OrderDetails"
       component={OrderDetails}
       options={{
-        title: "Detalhes do pedido"
+        title: "Detalhes do pedido",
+        headerBackTitle: "Voltar",
       }}
     />
     <Stack.Screen 
       name="SelectedItems"
       component={SelectedItems}
       options={{
-        title: "Pedidos selecionados"
+        title: "Pedidos selecionados",
+        headerBackTitle: "Voltar",
       }}
     />
     <Stack.Screen 
       name="SelectDeliveryPerson"
       component={SelectDeliveryPerson}
       options={{
-        title: "Selecionar entregador"
+        title: "Selecionar entregador",
+        headerBackTitle: "Voltar",
       }}
     />
     <Stack.Screen 
       name="DeliveryInformation"
       component={DeliveryInformation}
       options={{
-        title: "Entregador"
+        title: "Entregador",
+        headerBackTitle: "Voltar",
+      }}
+    />
+    <Stack.Screen 
+      name="OrderCheck"
+      component={OrderCheck}
+      options={{
+        title: "Conferência de pedido",
+        headerBackTitle: "Voltar",
       }}
     />
   </Stack.Navigator>
