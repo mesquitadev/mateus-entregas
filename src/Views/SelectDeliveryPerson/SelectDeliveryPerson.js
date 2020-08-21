@@ -25,7 +25,7 @@ const SelectDeliveryPerson = ({ route: { params }, navigation: { navigate } }) =
 
   startSearchFilter = text => {
     const newData = deliveryPersonFilter.filter(item => {
-      const itemData = `${item.name.toUpperCase()} ${item.cpf.toUpperCase()}`;      
+      const itemData = `${item.name.toUpperCase()} ${item.cpf.toUpperCase()}`;
       const textData = text.toUpperCase();
       
       return itemData.indexOf(textData) > -1;    
@@ -35,11 +35,11 @@ const SelectDeliveryPerson = ({ route: { params }, navigation: { navigate } }) =
   };
 
   renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={() => navigate('DeliveryInformation', item)}>
         <Image style={styles.image} source={require('../../res/img/entregador.png')} />
         <View>
           <Text style={styles.name}>{item.name}</Text>
-          <Text style={styles.cpf}>{item.cpf}</Text>
+          <Text style={styles.cpf}>CPF: {item.cpf}</Text>
         </View>
     </TouchableOpacity>
   );

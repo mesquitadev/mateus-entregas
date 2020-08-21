@@ -28,6 +28,16 @@ const styles = StyleSheet.create({
     height: 40,
     marginRight: 15,
   },
+
+  name: {
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+
+  cpf: {
+    fontSize: 12,
+    color: "#787B7D",
+  },
 });
 
 export default styles;

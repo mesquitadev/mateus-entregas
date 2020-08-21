@@ -6,6 +6,7 @@ import BottomTabNavigator from './Components/BottomTabNavigator/BottomTabNavigat
 import OrderDetails from './Views/OrderDetails/OrderDetails';
 import SelectedItems from './Views/SelectedItems/SelectedItems';
 import SelectDeliveryPerson from './Views/SelectDeliveryPerson/SelectDeliveryPerson';
+import DeliveryInformation from './Views/DeliveryInformation/DeliveryInformation';
 
 const Stack = createStackNavigator();
 
@@ -42,6 +43,13 @@ const Routes = () => (
       component={SelectDeliveryPerson}
       options={{
         title: "Selecionar entregador"
+      }}
+    />
+    <Stack.Screen 
+      name="DeliveryInformation"
+      component={DeliveryInformation}
+      options={{
+        title: "Entregador"
       }}
     />
   </Stack.Navigator>
