@@ -8,6 +8,7 @@ import styles from './styles';
 
 const OrderList = ({ navigation: { navigate } }) => {
   const [ listItems, setListItems ] = useState('');
+  const [ listItemsFilter, setListItemsFilter ] = useState('');
   const [ selectedItems, setSelectedItems ] = useState([]);
   const [ count, setCount ] = useState(0);
   
@@ -19,7 +20,8 @@ const OrderList = ({ navigation: { navigate } }) => {
         { key: "03", number: "129995567", date: "12/08/2020", clientName: "Albert Einstein", address: "Nova Jersey" },
         { key: "04", number: "000345567", date: "12/08/2020", clientName: "Bill Gates", address: "Seattle" },
       ];
-  
+      
+      setListItemsFilter(result);
       setListItems(result);
     };
 
@@ -43,7 +45,7 @@ const OrderList = ({ navigation: { navigate } }) => {
   );
 
   startSearchFilter = text => {
-    const newData = response.filter(item => {
+    const newData = listItemsFilter.filter(item => {
       const itemData = `${item.clientName.toUpperCase()} ${item.address.toUpperCase()}`;      
       const textData = text.toUpperCase();
       

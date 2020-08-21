@@ -27,7 +27,7 @@ const SelectedItems = ({ route: { params }, navigation: { navigate } }) => {
       <View style={styles.buttonBar}>
         <TouchableOpacity
           style={styles.selectedItemsButton}
-          onPress={() => navigate('SelectedItems', selectedItems)}>
+          onPress={() => navigate('SelectDeliveryPerson', selectedItems)}>
           <Text style={styles.selectedItemsButtonText}>
             Encaminhar pedidos
           </Text>
