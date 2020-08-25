@@ -11,8 +11,8 @@ const OrderCheckItem = ({ data }) => {
     <View style={[styles.card, toggleCheckBox ? styles.active : styles.inactive]}>
       <Image style={styles.image} source={require('../../res/img/caixa.png')} />
       <View style={styles.info}>
-        <Text style={styles.number}>Nº #{data.number}</Text>
-        <Text style={styles.name}>{data.clientName}</Text>
+        <Text style={styles.number}>Nº #{data.numeroPedido}</Text>
+        <Text style={styles.name}>{data.cliente.pessoaFisica.nome}</Text>
       </View>
       <CheckBox
         boxType={'circle'}
