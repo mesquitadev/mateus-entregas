@@ -12,10 +12,13 @@ import OrderCheck from './Views/OrderCheck/OrderCheck';
 const Stack = createStackNavigator();
 
 const Routes = () => (
-  <Stack.Navigator initialRouteName="OrderList">
+  <Stack.Navigator initialRouteName="Login">
     <Stack.Screen
-      name="Acesse a sua conta"
+      name="Login"
       component={Login}
+      options={{
+        title: "Acesse a sua conta"
+      }}
     />
     <Stack.Screen 
       name="OrderList" 

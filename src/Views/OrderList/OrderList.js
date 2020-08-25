@@ -5,24 +5,20 @@ import UserHeader from '../../Components/UserHeader/UserHeader';
 import SearchFilter from '../../Components/SearchFilter/SearchFilter';
 import OrderItem from '../../Components/OrderItem/OrderItem';
 import styles from './styles';
+import api from '../../services/api';
 
 const OrderList = ({ navigation: { navigate } }) => {
-  const [ listItems, setListItems ] = useState('');
-  const [ listItemsFilter, setListItemsFilter ] = useState('');
+  const [ listItems, setListItems ] = useState([]);
+  const [ listItemsFilter, setListItemsFilter ] = useState([]);
   const [ selectedItems, setSelectedItems ] = useState([]);
   const [ count, setCount ] = useState(0);
   
   useEffect(() => {
-    const fetchData = () => {
-      const result = [
-        { key: "01", number: "123345567", date: "12/08/2020", clientName: "Higo Sampaio", address: "Recanto dos Vinhais" },
-        { key: "02", number: "123345000", date: "12/08/2020", clientName: "Bruce Wayne", address: "Gotham" },
-        { key: "03", number: "129995567", date: "12/08/2020", clientName: "Albert Einstein", address: "Nova Jersey" },
-        { key: "04", number: "000345567", date: "12/08/2020", clientName: "Bill Gates", address: "Seattle" },
-      ];
+    const fetchData = async () => {
+      const response = await api.get(`/pedidos-pronta-entrega`);
       
-      setListItemsFilter(result);
-      setListItems(result);
+      setListItemsFilter(response.data);
+      setListItems(response.data);
     };
 
     fetchData();
@@ -46,7 +42,10 @@ const OrderList = ({ navigation: { navigate } }) => {
 
   startSearchFilter = text => {
     const newData = listItemsFilter.filter(item => {
-      const itemData = `${item.clientName.toUpperCase()} ${item.address.toUpperCase()}`;      
+      const itemData = `
+        ${item.cliente.pessoaFisica.nome.toUpperCase()} 
+        ${item.endereco.bairro.toUpperCase()}
+        `;      
       const textData = text.toUpperCase();
       
       return itemData.indexOf(textData) > -1;    
@@ -74,7 +73,7 @@ const OrderList = ({ navigation: { navigate } }) => {
         <View>
           <FlatList 
             data={listItems}
-            keyExtractor={item => item.key}
+            keyExtractor={(item, index) => index.toString()}
             renderItem={this.renderItem}
           />
         </View>

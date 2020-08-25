@@ -10,12 +10,12 @@ const OrderItem = ({ data, navigate, showCheckBox }) => {
   
   return (
     <View style={[styles.orderItem, toggleCheckBox ? styles.active : styles.inactive]}>
-      <Text style={styles.text}>Nº #{data.number}</Text>
-      <Text style={styles.label}>Realizado em {data.date}</Text>
+      <Text style={styles.text}>Nº #{data.numeroPedido}</Text>
+      <Text style={styles.label}>Realizado em {data.dataPedido}</Text>
       <Text style={styles.label}>Cliente</Text>
-      <Text style={styles.text}>{data.clientName}</Text>
+      <Text style={styles.text}>{data.cliente.pessoaFisica.nome}</Text>
       <Text style={styles.label}>Endereço de entrega</Text>
-      <Text style={styles.text}>{data.address}</Text>
+      <Text style={styles.text}>{data.endereco.bairro}</Text>
       <View style={styles.horizontalRule} />
       <View style={styles.bar}>
         <View style={styles.status}>

@@ -22,17 +22,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
-  primaryButton: {
-    backgroundColor: "#EEE",
-    paddingVertical: 7,
-    width: screenWidth * 0.9,
-    borderRadius: 8,
-    marginBottom: 15,
-  },
-
-  active: {
-    backgroundColor: "#0095DA"
-  }
+  
 });
 
 export default styles;

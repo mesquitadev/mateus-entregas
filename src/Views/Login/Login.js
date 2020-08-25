@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Text, TextInput, Button, View, AsyncStorage } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
+import AsyncStorage from '@react-native-community/async-storage';
 
+import login from '../../services/login';
 import styles from './styles';
-import login from '../../../src/api/login';
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const [ user, setUser ] = useState('');
   const [ pass, setPass ] = useState('');
   const [ errorMessage, setErrorMessage ] = useState('');
@@ -13,10 +14,13 @@ const Login = () => {
 
   const setLogin = async () => {
     try {
-      const token = await login(user, pass);
-      await AsyncStorage.setItem('entregas_user_token', token);
+      const response = await login(user, pass);
+      // await AsyncStorage.setItem('entregas_user_token', response.token);
+      await AsyncStorage.setItem('entregas_user_name', response.data.username);
+      navigation.navigate('OrderList');
     } catch(err) {
-      setErrorMessage(err.message);
+      console.warn(err);
+      setErrorMessage(err);
     }
   }
   
@@ -26,7 +30,7 @@ const Login = () => {
         type={"cpf"}
         placeholder="CPF"
         value={user}
-        onChangeText={text => setUser(text)}
+        onChangeText={text => setUser(text.replace(/[^\d]+/g,''))}
         style={styles.inputs}
       />
       <TextInput 
@@ -35,16 +39,13 @@ const Login = () => {
         onChangeText={text => setPass(text)}
         secureTextEntry
       />
-      <Text>{errorMessage}</Text>
-      <View style={[styles.primaryButton, activeButton ? styles.active : styles.inactive]}>
-        <Button 
-          title="Entrar" 
-          onPress={setLogin} 
-          disabled={!activeButton} 
-          color={activeButton ? "#FFF" : "#CCC"}
-        />
-      </View>
-      <Button title="Cadastrar" color="#0095DA" />
+      <TouchableOpacity
+        onPress={() => setLogin()}
+        style={styles.btnPrimary}>
+        <Text style={styles.btnPrimaryText}>
+          Entrar
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };

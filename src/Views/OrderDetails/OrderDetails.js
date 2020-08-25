@@ -8,13 +8,7 @@ const OrderDetails = ({ route: { params } }) => {
 
   useEffect(() => {
     const fetchData = () => {
-      const result = [
-        { key: "01", image: "../../res/img/account.png", text: "Biscoito Cream Cracker Fortaleza 400g x 30"},
-        { key: "02", image: "../../res/img/account.png", text: "Massa para Tapioca Amafil 1kg x 24"},
-        { key: "03", image: "../../res/img/account.png", text: "Refrigerante Guaraná Antarctica 2 Litros x 6"},
-      ];
-  
-      setListItems(result);
+      setListItems(params.item.items);
     };
 
     fetchData();
@@ -23,21 +17,21 @@ const OrderDetails = ({ route: { params } }) => {
   renderItem = ({ item }) => (
     <View style={styles.item}>
       <Image style={styles.itemImage} source={require("../../res/img/account.png")} />
-      <Text style={styles.itemText}>{item.text}</Text>
+      <Text style={styles.itemText}>{item.nome}</Text>
     </View>
   );
   
   return(
     <View style={styles.container}>
       <View style={styles.info}>
-        <Text style={styles.text}>Nº #{ params.item.number }</Text>
-        <Text style={styles.label}>Realizado em { params.item.date}</Text>
+        <Text style={styles.text}>Nº #{ params.item.numeroPedido }</Text>
+        <Text style={styles.label}>Realizado em { params.item.dataPedido}</Text>
         <Text style={styles.label}>Origem</Text>
-        <Text style={styles.text}>Loja </Text>
+        <Text style={styles.text}>Loja -</Text>
         <Text style={styles.label}>Cliente</Text>
-        <Text style={styles.text}>{ params.item.clientName }</Text>
+        <Text style={styles.text}>{ params.item.cliente.pessoaFisica.nome }</Text>
         <Text style={styles.label}>Endereço de entrega</Text>
-        <Text style={styles.text}>{ params.item.address }</Text>
+        <Text style={styles.text}>{ params.item.endereco.bairro }</Text>
         <Text style={styles.status}>Aguardando entrega</Text>
       </View>
       
@@ -47,7 +41,7 @@ const OrderDetails = ({ route: { params } }) => {
         <Text style={styles.label}>Itens</Text>
         <FlatList 
           data={listItems}
-          keyExtractor={item => item.key}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={this.renderItem}
         />
       </View>
