@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 
-import OrderItem from '../../Components/OrderItem/OrderItem';
+import OrderItem from '../../../Components/OrderItem/OrderItem';
 import styles from './styles';
 
 const SelectedItems = ({ route: { params }, navigation: { navigate } }) => {

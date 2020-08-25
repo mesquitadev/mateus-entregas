@@ -2,9 +2,9 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import OrderList from '../../Views/OrderList/OrderList';
-import Reports from '../../Views/Reports/Reports';
-import Profile from '../../Views/Profile/Profile';
+import OrderList from '../../Views/Colaborador/OrderList/OrderList';
+import Reports from '../../Views/Colaborador/Reports/Reports';
+import Profile from '../../Views/Colaborador/Profile/Profile';
 
 Ionicons.loadFont();
 

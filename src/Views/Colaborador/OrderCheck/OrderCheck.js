@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 
-import OrderCheckItem from '../../Components/OrderCheckItem/OrderCheckItem';
+import OrderCheckItem from '../../../Components/OrderCheckItem/OrderCheckItem';
 import styles from './styles';
 
 const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {

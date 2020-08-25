@@ -3,7 +3,7 @@ import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import login from '../../services/login';
+import login from '../../../services/login';
 import styles from './styles';
 
 const Login = ({ navigation }) => {

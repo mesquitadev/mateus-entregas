@@ -16,7 +16,7 @@ const OrderDetails = ({ route: { params } }) => {
   
   renderItem = ({ item }) => (
     <View style={styles.item}>
-      <Image style={styles.itemImage} source={require("../../res/img/account.png")} />
+      <Image style={styles.itemImage} source={require("../../../res/img/account.png")} />
       <Text style={styles.itemText}>{item.nome}</Text>
     </View>
   );

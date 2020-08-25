@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 
-import UserHeader from '../../Components/UserHeader/UserHeader';
-import SearchFilter from '../../Components/SearchFilter/SearchFilter';
-import OrderItem from '../../Components/OrderItem/OrderItem';
+import UserHeader from '../../../Components/UserHeader/UserHeader';
+import SearchFilter from '../../../Components/SearchFilter/SearchFilter';
+import OrderItem from '../../../Components/OrderItem/OrderItem';
 import styles from './styles';
-import api from '../../services/api';
+import api from '../../../services/api';
 
 const OrderList = ({ navigation: { navigate } }) => {
   const [ listItems, setListItems ] = useState([]);

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 
-import SearchFilter from '../../Components/SearchFilter/SearchFilter';
+import SearchFilter from '../../../Components/SearchFilter/SearchFilter';
 import styles from './styles';
-import api from '../../services/api';
+import api from '../../../services/api';
 
 const SelectDeliveryPerson = ({ route: { params }, navigation: { navigate } }) => {
   const [ deliveryPerson, setDeliveryPerson ] = useState('');
@@ -33,7 +33,7 @@ const SelectDeliveryPerson = ({ route: { params }, navigation: { navigate } }) =
 
   renderItem = ({ item }) => (
     <TouchableOpacity style={styles.card} onPress={() => navigate('DeliveryInformation', { person: item, orders: params })}>
-        <Image style={styles.image} source={require('../../res/img/entregador.png')} />
+        <Image style={styles.image} source={require('../../../res/img/entregador.png')} />
         <View>
           <Text style={styles.name}>{item.nome}</Text>
           <Text style={styles.cpf}>CPF: {item.cpf}</Text>
@@ -47,7 +47,7 @@ const SelectDeliveryPerson = ({ route: { params }, navigation: { navigate } }) =
       <View style={styles.container}>
         <FlatList 
           data={deliveryPerson}
-          keyExtractor={item => item.key}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={this.renderItem}
         />
       </View>

@@ -1,13 +1,13 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Login from './Views/Login/Login';
+import Login from './Views/Colaborador/Login/Login';
 import BottomTabNavigator from './Components/BottomTabNavigator/BottomTabNavigator';
-import OrderDetails from './Views/OrderDetails/OrderDetails';
-import SelectedItems from './Views/SelectedItems/SelectedItems';
-import SelectDeliveryPerson from './Views/SelectDeliveryPerson/SelectDeliveryPerson';
-import DeliveryInformation from './Views/DeliveryInformation/DeliveryInformation';
-import OrderCheck from './Views/OrderCheck/OrderCheck';
+import OrderDetails from './Views/Colaborador/OrderDetails/OrderDetails';
+import SelectedItems from './Views/Colaborador/SelectedItems/SelectedItems';
+import SelectDeliveryPerson from './Views/Colaborador/SelectDeliveryPerson/SelectDeliveryPerson';
+import DeliveryInformation from './Views/Colaborador/DeliveryInformation/DeliveryInformation';
+import OrderCheck from './Views/Colaborador/OrderCheck/OrderCheck';
 
 const Stack = createStackNavigator();
 
