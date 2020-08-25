@@ -46,6 +46,12 @@ const Login = ({ navigation }) => {
           Entrar
         </Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.btnSecondary}>
+        <Text style={styles.btnSecondaryText}>
+          Cadastrar
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };

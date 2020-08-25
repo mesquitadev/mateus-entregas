@@ -3,21 +3,18 @@ import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 
 import SearchFilter from '../../Components/SearchFilter/SearchFilter';
 import styles from './styles';
+import api from '../../services/api';
 
 const SelectDeliveryPerson = ({ route: { params }, navigation: { navigate } }) => {
   const [ deliveryPerson, setDeliveryPerson ] = useState('');
   const [ deliveryPersonFilter, setDeliveryPersonFilter ] = useState('');
 
   useEffect(() => {
-    const fetchData = () => {
-      const result = [
-        { key: "01", name: "Sidney Sampaio Souza", cpf: "000000000-53"},
-        { key: "02", name: "Mateus Sampaio Santos", cpf: "000000000-65"},
-        { key: "03", name: "Debora Souza Sampaio", cpf: "000000000-78"},
-      ];
+    const fetchData = async () => {
+      const response = await api.get(`/entregadores`);
       
-      setDeliveryPersonFilter(result);
-      setDeliveryPerson(result);
+      setDeliveryPersonFilter(response.data);
+      setDeliveryPerson(response.data);
     };
 
     fetchData();
@@ -38,7 +35,7 @@ const SelectDeliveryPerson = ({ route: { params }, navigation: { navigate } }) =
     <TouchableOpacity style={styles.card} onPress={() => navigate('DeliveryInformation', { person: item, orders: params })}>
         <Image style={styles.image} source={require('../../res/img/entregador.png')} />
         <View>
-          <Text style={styles.name}>{item.name}</Text>
+          <Text style={styles.name}>{item.nome}</Text>
           <Text style={styles.cpf}>CPF: {item.cpf}</Text>
         </View>
     </TouchableOpacity>

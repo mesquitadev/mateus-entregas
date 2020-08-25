@@ -20,7 +20,7 @@ const SelectedItems = ({ route: { params }, navigation: { navigate } }) => {
       <View style={styles.container}>
         <FlatList 
           data={selectedItems}
-          keyExtractor={item => item.key}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={this.renderItem}
         />
       </View>
