@@ -7,7 +7,7 @@ Ionicons.loadFont();
 
 import styles from './styles';
 
-const Profile = () => {
+const Profile = ( { navigation })=> {
 
   const [ userData, setUserData ] = useState('');
 
@@ -37,7 +37,9 @@ const Profile = () => {
         <Text style={styles.text}>CPF: 000000000-00</Text>
       </View>
       <View style={styles.button}>
-        <Button title="Sair" />
+        <Button
+        onPress={() => navigation.navigate('Login')}
+        title="Sair" />
       </View>
     </View>
   );
