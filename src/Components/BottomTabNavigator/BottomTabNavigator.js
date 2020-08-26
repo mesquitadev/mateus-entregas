@@ -12,10 +12,9 @@ const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => (
   <Tab.Navigator
-    screenOptions={({ route }) => ({
+    screenOptions={({ route }) => ({        
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
-
         if (route.name === 'Pedidos') {
           iconName = focused ? 'md-documents' : 'md-documents-outline';
         } else if (route.name === 'Relatórios') {
