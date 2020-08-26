@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   image: {
     width: 15,
     height: 15,
-    marginRight: 10
+    marginRight: 5
   }
 });
 
