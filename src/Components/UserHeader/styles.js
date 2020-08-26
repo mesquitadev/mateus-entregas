@@ -4,8 +4,7 @@ const screenWidth = Dimensions.get('screen').width;
 const styles = StyleSheet.create({
   userHeader: {
     backgroundColor: "#FFF",
-    paddingTop: 60,
-    paddingBottom: 10,
+    paddingVertical: 10,
     alignItems: "center",
     borderBottomWidth: 1,
     borderBottomColor: "#EEE"

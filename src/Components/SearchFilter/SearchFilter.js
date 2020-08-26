@@ -19,7 +19,8 @@ const SearchFilter = ({ onChangeText }) => {
         <TextInput 
           onChangeText={text => this.handleChangeText(text)}
           placeholder="Pesquisar"
-          style={styles.input}
+          style={styles.inputSearch}
+          
         />
       </View>
     </View>

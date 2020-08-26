@@ -11,6 +11,8 @@ import OrderCheck from './Views/Colaborador/OrderCheck/OrderCheck';
 import DeliverymanRegister from './Views/Entregador/DeliverymanRegister/DeliverymanRegister';
 import DeliverymanPhotos from './Views/Entregador/DeliverymanPhotos/DeliverymanPhotos';
 
+// import DeliverymanRegister from './Views/Entregador/DeliverymanRegister/DeliverymanRegister';
+import AcceptOrders from './Views/Entregador/AcceptOrders/AcceptOrders';
 
 const Stack = createStackNavigator();
 
@@ -71,7 +73,10 @@ const Routes = () => (
         headerBackTitle: "Voltar",
       }}
     />
-    <Stack.Screen 
+
+    {/* Rotas do Entregador */}
+
+    {/* <Stack.Screen 
       name="DeliverymanRegister"
       component={DeliverymanRegister}
       options={{
@@ -86,6 +91,13 @@ const Routes = () => (
       options={{
         title: "Conclua as etapas a seguir",
         headerBackTitle: "Voltar",
+      }}
+    /> */}
+    <Stack.Screen 
+      name="AcceptOrders"
+      component={AcceptOrders}
+      options={{
+        headerShown: false
       }}
     />
   </Stack.Navigator>
