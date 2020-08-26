@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
 import Login from './Views/Colaborador/Login/Login';
 import BottomTabNavigator from './Components/BottomTabNavigator/BottomTabNavigator';
@@ -8,6 +8,8 @@ import SelectedItems from './Views/Colaborador/SelectedItems/SelectedItems';
 import SelectDeliveryPerson from './Views/Colaborador/SelectDeliveryPerson/SelectDeliveryPerson';
 import DeliveryInformation from './Views/Colaborador/DeliveryInformation/DeliveryInformation';
 import OrderCheck from './Views/Colaborador/OrderCheck/OrderCheck';
+import DeliverymanRegister from './Views/Entregador/DeliverymanRegister/DeliverymanRegister';
+
 
 const Stack = createStackNavigator();
 
@@ -20,9 +22,9 @@ const Routes = () => (
         title: "Acesse a sua conta"
       }}
     />
-    <Stack.Screen 
-      name="OrderList" 
-      component={BottomTabNavigator} 
+    <Stack.Screen
+      name="OrderList"
+      component={BottomTabNavigator}
       options={{
         title: "Pedidos",
         headerShown: false,
@@ -68,7 +70,15 @@ const Routes = () => (
         headerBackTitle: "Voltar",
       }}
     />
+    <Stack.Screen 
+      name="DeliverymanRegister"
+      component={DeliverymanRegister}
+      options={{
+        title: "Cadastrar entregador",
+        headerBackTitle: "Voltar",
+      }}
+    />
   </Stack.Navigator>
 );
-
+ 
 export default Routes;
