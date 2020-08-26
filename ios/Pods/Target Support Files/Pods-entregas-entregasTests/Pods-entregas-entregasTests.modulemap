@@ -1,0 +1,6 @@
+module Pods_entregas_entregasTests {
+  umbrella header "Pods-entregas-entregasTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -4,15 +4,16 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import UserHeader from '../../../Components/UserHeader/UserHeader';
 import styles from './styles';
 
-const AcceptOrders = () => {
-  return (
+const AcceptOrders = ({ navigation }) => {
+  return(
     <>
       <UserHeader />
       
       <View style={styles.container}>
         <View style={styles.card}>
-          <Image style={styles.image} source={require("../../../res/img/logo_mateus.png")} />
+          <Image style={styles.image} source={require("../../../res/img/mateus_entrega.png")} />
           <TouchableOpacity
+            onPress={() => navigation.navigate('ScanDeliveryCode')}
             style={styles.button}>
             <Text style={styles.buttonText}>
               Aceitar pedidos

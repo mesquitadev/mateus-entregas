@@ -11,11 +11,12 @@ import OrderCheck from './Views/Colaborador/OrderCheck/OrderCheck';
 
 // import DeliverymanRegister from './Views/Entregador/DeliverymanRegister/DeliverymanRegister';
 import AcceptOrders from './Views/Entregador/AcceptOrders/AcceptOrders';
+import ScanDeliveryCode from './Views/Entregador/ScanDeliveryCode/ScanDeliveryCode';
 
 const Stack = createStackNavigator();
 
 const Routes = () => (
-  <Stack.Navigator initialRouteName="AcceptOrders">
+  <Stack.Navigator initialRouteName="Login">
     <Stack.Screen
       name="Login"
       component={Login}
@@ -87,6 +88,14 @@ const Routes = () => (
       component={AcceptOrders}
       options={{
         headerShown: false
+      }}
+    />
+    <Stack.Screen 
+      name="ScanDeliveryCode"
+      component={ScanDeliveryCode}
+      options={{
+        title: "Escanear QR code",
+        headerBackTitle: "Voltar",
       }}
     />
   </Stack.Navigator>
