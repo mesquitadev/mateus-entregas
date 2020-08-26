@@ -7,11 +7,7 @@ const login = async (user, pass) => {
   };
 
   const response = await api.post(`/login`, headerHTTP);
-  
-  if (response.status === 200) 
-    return response;
-  else 
-    throw new Error('Não foi possível efetuar o login.');
+  return response;
 };
 
 export default login;
