@@ -9,10 +9,12 @@ import SelectDeliveryPerson from './Views/Colaborador/SelectDeliveryPerson/Selec
 import DeliveryInformation from './Views/Colaborador/DeliveryInformation/DeliveryInformation';
 import OrderCheck from './Views/Colaborador/OrderCheck/OrderCheck';
 
+import AcceptOrders from './Views/Entregador/AcceptOrders/AcceptOrders';
+
 const Stack = createStackNavigator();
 
 const Routes = () => (
-  <Stack.Navigator initialRouteName="Login">
+  <Stack.Navigator initialRouteName="AcceptOrders">
     <Stack.Screen
       name="Login"
       component={Login}
@@ -66,6 +68,16 @@ const Routes = () => (
       options={{
         title: "Conferência de pedido",
         headerBackTitle: "Voltar",
+      }}
+    />
+
+    {/* Rotas do Entregador */}
+    
+    <Stack.Screen 
+      name="AcceptOrders"
+      component={AcceptOrders}
+      options={{
+        headerShown: false
       }}
     />
   </Stack.Navigator>
