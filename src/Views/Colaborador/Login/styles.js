@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     flex: 1,
     alignItems: "center",
-    paddingTop: screenWidth / 10,
+    paddingTop: 0,
   },
 
   logo: {
