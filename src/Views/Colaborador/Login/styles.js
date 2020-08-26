@@ -6,13 +6,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     flex: 1,
     alignItems: "center",
-    paddingTop: screenWidth / 4,
+    paddingTop: 0,
   },
 
   logo: {
     width: screenWidth * 0.6,
     resizeMode: 'contain',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingVertical: 0
   },
 
   inputs: {
