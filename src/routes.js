@@ -13,6 +13,7 @@ import DeliverymanPhotos from './Views/Entregador/DeliverymanPhotos/DeliverymanP
 
 // import DeliverymanRegister from './Views/Entregador/DeliverymanRegister/DeliverymanRegister';
 import AcceptOrders from './Views/Entregador/AcceptOrders/AcceptOrders';
+import ScanDeliveryCode from './Views/Entregador/ScanDeliveryCode/ScanDeliveryCode';
 
 const Stack = createStackNavigator();
 
@@ -98,6 +99,14 @@ const Routes = () => (
       component={AcceptOrders}
       options={{
         headerShown: false
+      }}
+    />
+    <Stack.Screen 
+      name="ScanDeliveryCode"
+      component={ScanDeliveryCode}
+      options={{
+        title: "Escanear QR code",
+        headerBackTitle: "Voltar",
       }}
     />
   </Stack.Navigator>
