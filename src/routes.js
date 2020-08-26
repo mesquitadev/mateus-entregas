@@ -9,6 +9,7 @@ import SelectDeliveryPerson from './Views/Colaborador/SelectDeliveryPerson/Selec
 import DeliveryInformation from './Views/Colaborador/DeliveryInformation/DeliveryInformation';
 import OrderCheck from './Views/Colaborador/OrderCheck/OrderCheck';
 import DeliverymanRegister from './Views/Entregador/DeliverymanRegister/DeliverymanRegister';
+import DeliverymanPhotos from './Views/Entregador/DeliverymanPhotos/DeliverymanPhotos';
 
 
 const Stack = createStackNavigator();
@@ -74,7 +75,16 @@ const Routes = () => (
       name="DeliverymanRegister"
       component={DeliverymanRegister}
       options={{
-        title: "Cadastrar entregador",
+        title: "Digite seus dados pessoais",
+        headerBackTitle: "Voltar",
+      }}
+    />
+
+    <Stack.Screen 
+      name="DeliverymanPhotos"
+      component={DeliverymanPhotos}
+      options={{
+        title: "Conclua as etapas a seguir",
         headerBackTitle: "Voltar",
       }}
     />
