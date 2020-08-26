@@ -24,6 +24,8 @@ const Login = ({ navigation }) => {
   }
 
   const doLogin = async () => {
+    //const response = await login(25936732061, "RV4WGBUVUL"); // passando direto -- develop
+
     if(!CPF.isValid(user)) {
       alert('CPF inválido, verifique o número digitado e tente novamente.');
       return;
@@ -81,6 +83,7 @@ const Login = ({ navigation }) => {
       </TouchableOpacity>
       
       <TouchableOpacity
+        onPress={() => navigation.navigate('DeliverymanRegister')}
         style={styles.btnSecondary}>
         <Text style={styles.btnSecondaryText}>
           Cadastrar Entregador
