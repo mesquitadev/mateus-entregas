@@ -77,7 +77,7 @@ const Routes = () => (
 
     {/* Rotas do Entregador */}
 
-    {/* <Stack.Screen 
+    <Stack.Screen 
       name="DeliverymanRegister"
       component={DeliverymanRegister}
       options={{
@@ -93,7 +93,7 @@ const Routes = () => (
         title: "Conclua as etapas a seguir",
         headerBackTitle: "Voltar",
       }}
-    /> */}
+    /> 
     <Stack.Screen 
       name="AcceptOrders"
       component={AcceptOrders}
