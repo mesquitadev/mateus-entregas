@@ -16,7 +16,7 @@ const Login = ({ navigation }) => {
   const CPF = require('cpf');
 
   const enableLoginButton = () => {
-    if(user.length >= 10 && pass.length >= 6) {
+    if(user.length >= 1 && pass.length >= 6) {
         setDeactiveButton(false);
     } else {
       setDeactiveButton(true)
@@ -24,17 +24,18 @@ const Login = ({ navigation }) => {
   }
 
   const doLogin = async () => {
-    //const response = await login(25936732061, "RV4WGBUVUL"); // passando direto -- develop
 
-    if(!CPF.isValid(user)) {
-      alert('CPF inválido, verifique o número digitado e tente novamente.');
-      return;
-    }
+    // if(!CPF.isValid(user)) {
+    //   alert('CPF inválido, verifique o número digitado e tente novamente.');
+    //   return;
+    // }
 
-    if(pass.length < 6) alert('Verifique os dados digitados e tente novamente.')
+    //if(pass.length < 6) alert('Verifique os dados digitados e tente novamente.')
   
     try {
-      const response =  await login(user, pass);
+     // const response =  await login(user, pass);
+      const response = await login(25936732061, "RV4WGBUVUL"); // passando direto -- develop
+
       await AsyncStorage.setItem('entregas_user_data', JSON.stringify(response.data));
       navigation.navigate('OrderList');
     } catch(error) {
@@ -47,10 +48,10 @@ const Login = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Image
+      {/* <Image
         source={require('../../../res/img/logo_mateus.png')}
         style={styles.logo}
-      />
+      /> */}
 
       <TextInputMask 
         type={"cpf"}
@@ -72,10 +73,10 @@ const Login = ({ navigation }) => {
 
       <TouchableOpacity
         onPress={() => doLogin()}
-        disabled={deactiveButton}
+        //disabled={deactiveButton}
         style={
           deactiveButton ?
-          styles.btnPrimaryDisabled :
+          styles.btnPrimary :
           styles.btnPrimary}>
         <Text style={styles.btnPrimaryText}>
           Entrar
