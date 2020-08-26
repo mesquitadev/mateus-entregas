@@ -9,6 +9,12 @@ const styles = StyleSheet.create({
     paddingTop: screenWidth / 4,
   },
 
+  logo: {
+    width: screenWidth * 0.6,
+    resizeMode: 'contain',
+    alignItems: 'center'
+  },
+
   inputs: {
     width: screenWidth * 0.9,
     paddingVertical: 15,
@@ -20,6 +26,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     fontSize: 16,
+  },
+
+  btnPrimaryDisabled: {
+    backgroundColor: "#CCCCCC",
+    width: screenWidth * 0.9,
+    alignItems: "center",
+    paddingVertical: 18,
+    borderRadius: 5,
+    marginTop: 15,
   },
 
   btnPrimary: {
