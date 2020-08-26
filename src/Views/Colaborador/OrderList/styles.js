@@ -6,6 +6,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   
+  flatListEstilo:{
+    marginTop: 30,
+    marginVertical:200
+  },
+
   title: {
     width: screenWidth * 0.9,
     marginVertical: 15,
