@@ -15,7 +15,7 @@ import AcceptOrders from './Views/Entregador/AcceptOrders/AcceptOrders';
 const Stack = createStackNavigator();
 
 const Routes = () => (
-  <Stack.Navigator initialRouteName="Login">
+  <Stack.Navigator initialRouteName="AcceptOrders">
     <Stack.Screen
       name="Login"
       component={Login}
