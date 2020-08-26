@@ -5,12 +5,14 @@ import AsyncStorage from '@react-native-community/async-storage';
 import styles from './styles';
 
 const UserHeader = () => {
-  const [ userName, setUserName ] = useState('');
+  const [ userData, setUserData ] = useState('');
 
   useEffect(() => {
     const getUserData = async () => {
       try {
-        setUserName( await AsyncStorage.getItem('entregas_user_name') )
+        var dataUser = await AsyncStorage.getItem('entregas_user_name')
+        dataUser = JSON.parse(dataUser)
+        setUserData( dataUser )
       } catch(err) {
         console.warn(err);
       }
@@ -24,8 +26,8 @@ const UserHeader = () => {
       <View style={styles.container}>
         <Image style={styles.image} source={require('../../res/img/account.png')} />
         <View>
-          <Text style={styles.name}>{userName}</Text>
-          <Text style={styles.store}>{userName}</Text>
+          <Text style={styles.name}>{userData.username}</Text>
+          <Text style={styles.store}>{userData.id}</Text>
         </View>
       </View>
     </View>

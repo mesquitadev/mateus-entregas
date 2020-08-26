@@ -14,9 +14,10 @@ const Login = ({ navigation }) => {
 
   const setLogin = async () => {
     try {
-      const response = await login(user, pass);
+      //const response = await login(user, pass);
       // await AsyncStorage.setItem('entregas_user_token', response.token);
-      await AsyncStorage.setItem('entregas_user_name', response.data.username);
+//      const response = await login(25936732061, "RV4WGBUVUL");
+      await AsyncStorage.setItem('entregas_user_name',JSON.stringify(response.data));
       navigation.navigate('OrderList');
     } catch(err) {
       console.warn(err);
