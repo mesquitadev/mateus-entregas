@@ -21,7 +21,7 @@ import EnterDeliverymanCode from './Views/Entregador/EnterDeliverymanCode/EnterD
 const Stack = createStackNavigator();
 
 const Routes = () => (
-  <Stack.Navigator initialRouteName="EnterDeliverymanCode">
+  <Stack.Navigator initialRouteName="Login">
     <Stack.Screen
       name="Login"
       component={Login}

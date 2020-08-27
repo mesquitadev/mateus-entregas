@@ -58,7 +58,6 @@ const DeliverymanRegister = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
 
-
      </View>
     );
   
