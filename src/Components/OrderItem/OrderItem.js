@@ -8,12 +8,23 @@ const OrderItem = ({ data, navigate, showCheckBox }) => {
   const [ toggleCheckBox, setToggleCheckBox ] = useState(false);
   const [ checkBox, setCheckBox ] = useState(true);
   
+
+if(data.cliente.pessoaJuridica == null) {
+  nome = data.cliente.pessoaFisica.nome;
+} else {
+  if(data.cliente.pessoaJuridica.razaoSocial == null) {
+    nome = data.cliente.pessoaJuridica.cnpj;
+  } else {
+    nome = data.cliente.pessoaJuridica.razaoSocial;
+  }
+}
+
   return (
     <View style={[styles.orderItem, toggleCheckBox ? styles.active : styles.inactive]}>
       <Text style={styles.text}>Nº #{data.numeroPedido}</Text>
       <Text style={styles.label}>Realizado em {data.dataPedido}</Text>
       <Text style={styles.label}>Cliente</Text>
-      <Text style={styles.text}>{data.cliente.pessoaFisica.nome}</Text>
+      <Text style={styles.text}>{nome}</Text>
       <Text style={styles.label}>Endereço de entrega</Text>
       <Text style={styles.text}>{data.endereco.bairro}</Text>
       <View style={styles.horizontalRule} />

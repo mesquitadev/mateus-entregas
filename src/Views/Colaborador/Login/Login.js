@@ -11,36 +11,29 @@ const Login = ({ navigation }) => {
   const [ user, setUser ] = useState('');
   const [ pass, setPass ] = useState('');
   const [ errorMessage, setErrorMessage ] = useState('');
-  const [ deactiveButton, setDeactiveButton ] = useState(true);
- 
-  const CPF = require('cpf');
+  const [ buttonEnabled, setButtonEnabled ] = useState(true);
 
-  const enableLoginButton = () => {
-    if(user.length >= 1 && pass.length >= 6) {
-        setDeactiveButton(false);
-    } else {
-      setDeactiveButton(true)
-    }
-  }
 
   const doLogin = async () => {
-
+    const CPF = require('cpf');
     // if(!CPF.isValid(user)) {
     //   alert('CPF inválido, verifique o número digitado e tente novamente.');
     //   return;
     // }
 
-    //if(pass.length < 6) alert('Verifique os dados digitados e tente novamente.')
+    // if(pass.length < 6) 
+    //   alert('Verifique os dados digitados e tente novamente.')
   
     try {
-     // const response =  await login(user, pass);
+      setButtonEnabled(false);
       const response = await login(25936732061, "RV4WGBUVUL"); // passando direto -- develop
-
+      //const response =  await login(user, pass);
       await AsyncStorage.setItem('entregas_user_data', JSON.stringify(response.data));
       navigation.navigate('OrderList');
     } catch(error) {
       if(error.response) {
         if(error.response.status == 404) alert('Usuário ou senha inválidos.')
+        setButtonEnabled(true);
         return;
       }
     }
@@ -48,10 +41,10 @@ const Login = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {/* <Image
+      <Image
         source={require('../../../res/img/logo_mateus.png')}
         style={styles.logo}
-      /> */}
+      />
 
       <TextInputMask 
         type={"cpf"}
@@ -60,24 +53,20 @@ const Login = ({ navigation }) => {
         onChangeText={text => setUser(text.replace(/[^\d]+/g,''))}
         style={styles.inputs}
         maxLength={14}
-        onKeyPress={enableLoginButton}
       />
-      
+
       <TextInput 
         style={styles.inputs} 
         placeholder="Senha" 
         onChangeText={text => setPass(text)}
         secureTextEntry
-        onKeyPress={enableLoginButton}
       />
 
       <TouchableOpacity
         onPress={() => doLogin()}
-        //disabled={deactiveButton}
         style={
-          deactiveButton ?
-          styles.btnPrimary :
-          styles.btnPrimary}>
+          buttonEnabled ? 
+          styles.btnPrimary : styles.btnPrimaryDisabled}>
         <Text style={styles.btnPrimaryText}>
           Entrar
         </Text>
