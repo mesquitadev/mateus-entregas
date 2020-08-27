@@ -20,6 +20,9 @@ import DeliverymanSetPassword from './Views/Entregador/DeliverymanSetPassword/De
 import DeliverymanSetRegister from './Views/Entregador/DeliverymanSetRegister/DeliverymanSetRegister';
 import EnterDeliverymanCode from './Views/Entregador/EnterDeliverymanCode/EnterDeliverymanCode';
 import ReceiveOrder from './Views/Entregador/ReceiveOrder/ReceiveOrder';
+import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
+
+
 
 const Stack = createStackNavigator();
 
@@ -183,6 +186,16 @@ const Routes = () => (
        headerBackTitle: "Voltar",
       }}
     />
+    <Stack.Screen 
+     name="GenerateQrCode"
+     component={GenerateQrCode}
+     options={{
+       title: "GenerateQrCode",
+       headerBackTitle: "Voltar",
+      }}
+    />
+
+
   </Stack.Navigator>
 );
 export default Routes;
