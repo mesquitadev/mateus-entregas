@@ -5,7 +5,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import login from '../../../services/login';
 import styles from './styles';
-import { ScreenStackHeaderLeftView } from 'react-native-screens';
 
 const Login = ({ navigation }) => {
   const [ user, setUser ] = useState('');
@@ -13,22 +12,22 @@ const Login = ({ navigation }) => {
   const [ errorMessage, setErrorMessage ] = useState('');
   const [ buttonEnabled, setButtonEnabled ] = useState(true);
 
-
   const doLogin = async () => {
     const CPF = require('cpf');
     // if(!CPF.isValid(user)) {
     //   alert('CPF inválido, verifique o número digitado e tente novamente.');
     //   return;
     // }
-
+    //
     // if(pass.length < 6) 
     //   alert('Verifique os dados digitados e tente novamente.')
-  
+
     try {
+      //const response =  await login(user, pass);
       setButtonEnabled(false);
       const response = await login("00000000000", "123456"); // passando direto -- develop
-      //const response =  await login(user, pass);
       await AsyncStorage.setItem('entregas_user_data', JSON.stringify(response.data));
+
       setButtonEnabled(true);
       setUser('');
       setPass('');
