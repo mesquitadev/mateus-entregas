@@ -14,11 +14,12 @@ import DeliverymanPhotos from './Views/Entregador/DeliverymanPhotos/DeliverymanP
 // import DeliverymanRegister from './Views/Entregador/DeliverymanRegister/DeliverymanRegister';
 import AcceptOrders from './Views/Entregador/AcceptOrders/AcceptOrders';
 import ScanDeliveryCode from './Views/Entregador/ScanDeliveryCode/ScanDeliveryCode';
+import EnterDeliverymanCode from './Views/Entregador/EnterDeliverymanCode/EnterDeliverymanCode';
 
 const Stack = createStackNavigator();
 
 const Routes = () => (
-  <Stack.Navigator initialRouteName="Login">
+  <Stack.Navigator initialRouteName="EnterDeliverymanCode">
     <Stack.Screen
       name="Login"
       component={Login}
@@ -106,6 +107,14 @@ const Routes = () => (
       component={ScanDeliveryCode}
       options={{
         title: "Escanear QR code",
+        headerBackTitle: "Voltar",
+      }}
+    />
+    <Stack.Screen 
+      name="EnterDeliverymanCode"
+      component={EnterDeliverymanCode}
+      options={{
+        title: "Digite o código do entregador",
         headerBackTitle: "Voltar",
       }}
     />

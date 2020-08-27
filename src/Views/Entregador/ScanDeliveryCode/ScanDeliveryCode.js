@@ -10,7 +10,7 @@ import { RNCamera } from 'react-native-camera';
 
 import styles from './styles';
 
-const ScanDeliveryCode = () => {
+const ScanDeliveryCode = ({ navigation }) => {
   onSuccess = e => {
     Linking.openURL(e.data).catch(err =>
       console.error('An error occured', err)
@@ -20,7 +20,7 @@ const ScanDeliveryCode = () => {
   return(
     <QRCodeScanner
       onRead={this.onSuccess}
-      flashMode={RNCamera.Constants.FlashMode.torch}
+      flashMode={RNCamera.Constants.FlashMode.auto}
       topContent={
         <Text style={styles.text}>
           <Text style={styles.textBold}>Escaneie o QR code</Text> para 
@@ -28,7 +28,9 @@ const ScanDeliveryCode = () => {
         </Text>
       }
       bottomContent={
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity 
+          onPress={() => navigation.navigate('EnterDeliverymanCode')}
+          style={styles.button}>
           <Text style={styles.buttonText}>Digitar o código do entregador</Text>
         </TouchableOpacity>
       }
