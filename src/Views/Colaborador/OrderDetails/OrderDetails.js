@@ -21,6 +21,16 @@ const OrderDetails = ({ route: { params } }) => {
     </View>
   );
   
+  if(params.item.cliente.pessoaJuridica == null) {
+    nome = params.item.cliente.pessoaFisica.nome;
+  } else {
+    if(params.item.cliente.pessoaJuridica.razaoSocial == null) {
+      nome = params.item.cliente.pessoaJuridica.cnpj;
+    } else {
+      nome = params.item.cliente.pessoaJuridica.razaoSocial;
+    }
+  }
+
   return(
     <View style={styles.container}>
       <View style={styles.info}>
@@ -29,7 +39,7 @@ const OrderDetails = ({ route: { params } }) => {
         <Text style={styles.label}>Origem</Text>
         <Text style={styles.text}>Loja -</Text>
         <Text style={styles.label}>Cliente</Text>
-        <Text style={styles.text}>{ params.item.cliente.pessoaFisica.nome }</Text>
+        <Text style={styles.text}>{ nome }</Text>
         <Text style={styles.label}>Endereço de entrega</Text>
         <Text style={styles.text}>{ params.item.endereco.bairro }</Text>
         <Text style={styles.status}>Aguardando entrega</Text>

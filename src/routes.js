@@ -33,6 +33,7 @@ const Routes = () => (
       component={Login}
       options={{
         title: 'Acesse a sua conta',
+        headerTitleAlign: 'center'
       }}
     />
     <Stack.Screen
@@ -41,6 +42,7 @@ const Routes = () => (
       options={{
         title: 'Pedidos',
         headerShown: false,
+        headerTitleAlign: 'center'
       }}
     />
     <Stack.Screen
