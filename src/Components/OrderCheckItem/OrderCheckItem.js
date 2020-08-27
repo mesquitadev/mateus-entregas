@@ -7,12 +7,22 @@ import styles from './styles';
 const OrderCheckItem = ({ data }) => {
   const [ toggleCheckBox, setToggleCheckBox ] = useState(false);
   
+  if(data.cliente.pessoaJuridica == null) {
+    nome = data.cliente.pessoaFisica.nome;
+  } else {
+    if(data.cliente.pessoaJuridica.razaoSocial == null) {
+      nome = data.cliente.pessoaJuridica.cnpj;
+    } else {
+      nome = data.cliente.pessoaJuridica.razaoSocial;
+    }
+  }
+
   return (
     <View style={[styles.card, toggleCheckBox ? styles.active : styles.inactive]}>
       <Image style={styles.image} source={require('../../res/img/caixa.png')} />
       <View style={styles.info}>
         <Text style={styles.number}>Nº #{data.numeroPedido}</Text>
-        <Text style={styles.name}>{data.cliente.pessoaFisica.nome}</Text>
+        <Text style={styles.name}>{nome}</Text>
       </View>
       <CheckBox
         boxType={'circle'}

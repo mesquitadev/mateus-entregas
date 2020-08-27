@@ -43,7 +43,6 @@ const OrderList = ({ navigation: { navigate } }) => {
   startSearchFilter = text => {
     const newData = listItemsFilter.filter(item => {
       const itemData = `
-        ${item.cliente.pessoaFisica.nome.toUpperCase()} 
         ${item.endereco.bairro.toUpperCase()}
         `;      
       const textData = text.toUpperCase();
