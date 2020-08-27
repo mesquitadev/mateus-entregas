@@ -8,8 +8,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFF",
         flex: 1,
         alignItems: "center",
-        paddingTop: 20
-        
+        paddingTop: 20,
+
     },
 
     textmsg: {
@@ -48,8 +48,36 @@ const styles = StyleSheet.create({
         fontSize: 10
     },
 
+    wrapper: {
+        marginVertical: 10,
+        borderWidth: 1,
+        borderColor: "#00A349",
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 6,
+        width: screenWidth * 0.9,
+        flexDirection: "row",
+        justifyContent: "space-between",
+
+    },
+
+    wrapper_espera: {
+        marginVertical: 10,
+        borderWidth: 1,
+        borderColor: "#D98016",
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 6,
+        width: screenWidth * 0.9,
+        flexDirection: "row",
+        justifyContent: "space-between",
+
+    },
+
     approved: {
-        fontSize: 16
+        color: "#2B2D2E",
+        fontSize: 16,
+        fontWeight: "600"
     },
     
     resultConfirm: {

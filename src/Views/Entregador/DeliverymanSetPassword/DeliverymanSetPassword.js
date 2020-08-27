@@ -7,6 +7,17 @@ const DeliverymanSetPassword = ({navigation}) => {
 
     const [ pass, setPass ] = useState('');
     const [ confirmpass, setConfirmPass] = useState('');
+    const [ isTouchableActive, setIsTouchableActive ] = useState(true);
+
+    const enableTouchable = () => {
+        if (!pass.length && !confirmpass.length) {
+            setIsTouchableActive(false);
+          return;
+        }else{
+            setIsTouchableActive(true);
+        }
+     
+      };
 
     return (
         <View style={styles.container}>
@@ -15,7 +26,9 @@ const DeliverymanSetPassword = ({navigation}) => {
                     style={styles.inputs} 
                     placeholder="Senha" 
                     onChangeText={text => setPass(text)}
+                    onKeyPress={enableTouchable}
                     secureTextEntry
+                    
                 />
                 <Text 
                     style={styles.observer}>
@@ -26,14 +39,16 @@ const DeliverymanSetPassword = ({navigation}) => {
                     style={styles.inputs} 
                     placeholder="Confirmar senha" 
                     onChangeText={text => setConfirmPass(text)}
+                    onKeyPress={enableTouchable}
                     secureTextEntry
                 />
             </View>
 
             <TouchableOpacity
+                disabled={!isTouchableActive}
                 onPress={() => navigation.navigate('DeliverymanSetRegister')}
-                style={styles.btnPrimary}>
-                <Text style={styles.btnPrimaryText}>
+                style={isTouchableActive ? styles.btnPrimary : styles.btnDisabled}>
+                <Text style={isTouchableActive ? styles.btnPrimaryText : styles.btnDisabledText}>
                     Cadastrar
                 </Text>
             </TouchableOpacity>            

@@ -9,15 +9,14 @@ import styles from './styles';
 
 const Profile = ( { navigation })=> {
 
-  const [ userData, setUserData ] = useState('');
+  const [ user, setUser ] = useState('');
 
   useEffect(() => {
     const getUserData = async () => {
       try {
-        var userData = await AsyncStorage.getItem('entregas_user_name')
-        userData = JSON.parse(userData)
-        console.log(userData)
-        setUserData( userData )
+        const data = await AsyncStorage.getItem('entregas_user_data');
+        const userData = JSON.parse(data);
+        setUser(userData);
       } catch(err) {
         console.warn(err);
       }
@@ -26,14 +25,13 @@ const Profile = ( { navigation })=> {
     getUserData();
   }, []);
 
-
   // Criar o useEffect para carregar os pedidos da api
   // setListItems com a resposta do endpoint
   return (
     <View style={styles.container}>
       <View style={styles.info}>
         <Ionicons name={'person-circle'} size={146} color={"#777"}/>
-        <Text style={styles.text}>{userData.username}</Text>
+        <Text style={styles.text}>{user.username}</Text>
         <Text style={styles.text}>Separador</Text>
         <Text style={styles.text}>CPF: 000000000-00</Text>
       </View>
