@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
+import Moment from 'moment';
 
 import styles from './styles';
 
@@ -22,7 +23,7 @@ if(data.cliente.pessoaJuridica == null) {
   return (
     <View style={[styles.orderItem, toggleCheckBox ? styles.active : styles.inactive]}>
       <Text style={styles.text}>Nº #{data.numeroPedido}</Text>
-      <Text style={styles.label}>Realizado em {data.dataPedido}</Text>
+      <Text style={styles.label}>Realizado em {Moment(data.dataPedido).format('MM/DD/YYYY HH:mm')}</Text>
       <Text style={styles.label}>Cliente</Text>
       <Text style={styles.text}>{nome}</Text>
       <Text style={styles.label}>Endereço de entrega</Text>
