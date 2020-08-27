@@ -7,7 +7,6 @@ import styles from './styles';
 const EnterDeliverymanCode = ({ navigation }) => {
   const [ inputValue, setInputValue ] = useState('');
   const [ isTouchableActive, setIsTouchableActive ] = useState(false);
-  const [ deliveryData, setDeliveryData ] = useState('');
 
   const enableTouchable = () => {
     if (!inputValue.length) {
@@ -22,11 +21,10 @@ const EnterDeliverymanCode = ({ navigation }) => {
     try {
       const response = await checkDelivery(inputValue);
 
-      setDeliveryData(response);
-      // navigation.navigate('')
+      navigation.navigate('ReceiveOrder', response.data);
     } catch(error) {
       if (error.response) {
-        if (error.response.status === 404) alert('Usuário ou senha inválidos.')
+        if (error.response.status === 404) alert('Não existem pedidos para esse código.')
         return;
       }
     }

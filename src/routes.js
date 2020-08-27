@@ -15,11 +15,12 @@ import DeliverymanPhotos from './Views/Entregador/DeliverymanPhotos/DeliverymanP
 import AcceptOrders from './Views/Entregador/AcceptOrders/AcceptOrders';
 import ScanDeliveryCode from './Views/Entregador/ScanDeliveryCode/ScanDeliveryCode';
 import EnterDeliverymanCode from './Views/Entregador/EnterDeliverymanCode/EnterDeliverymanCode';
+import ReceiveOrder from './Views/Entregador/ReceiveOrder/ReceiveOrder';
 
 const Stack = createStackNavigator();
 
 const Routes = () => (
-  <Stack.Navigator initialRouteName="EnterDeliverymanCode">
+  <Stack.Navigator initialRouteName="AcceptOrders">
     <Stack.Screen
       name="Login"
       component={Login}
@@ -115,6 +116,14 @@ const Routes = () => (
       component={EnterDeliverymanCode}
       options={{
         title: "Digite o código do entregador",
+        headerBackTitle: "Voltar",
+      }}
+    />
+    <Stack.Screen 
+      name="ReceiveOrder"
+      component={ReceiveOrder}
+      options={{
+        title: "Receber pedido",
         headerBackTitle: "Voltar",
       }}
     />
