@@ -1,9 +1,21 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 
+import confirmReceiptOfDelivery from '../../../services/confirmReceiptOfDelivery';
 import styles from './styles';
 
-const ReceiveOrder = ({ route: { params } }) => {
+const ReceiveOrder = ({ route: { params }, navigation }) => {
+
+  const confirmReceipt = async () => {
+    try {
+      // const response = await confirmReceiptOfDelivery(params);
+      // console.warn(response);
+      navigation.navigate('DeliveryOrders');
+    } catch(error) {
+      alert('Ocorreu um problema ao confirmar o recebimento dos pedidos.')
+    }
+  };
+  
   return(
     <View style={styles.container}>
       <View style={styles.info}>
@@ -18,6 +30,7 @@ const ReceiveOrder = ({ route: { params } }) => {
         </View>
       </View>
       <TouchableOpacity
+        onPress={confirmReceipt}
         style={styles.button}>
         <Text style={styles.buttonText}>
           Confirmar

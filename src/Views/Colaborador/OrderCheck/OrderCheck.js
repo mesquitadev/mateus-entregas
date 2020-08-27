@@ -16,7 +16,7 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
     if (selectedOrders.length !== orders.length) 
       console.warn('Você precisa conferir todos os pedidos.')
     else
-      navigate('GenerateQrCode');
+      navigate('GenerateQrCode', params);
   };
 
   loadSelectedOrders = item => {

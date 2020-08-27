@@ -20,14 +20,14 @@ import DeliverymanSetPassword from './Views/Entregador/DeliverymanSetPassword/De
 import DeliverymanSetRegister from './Views/Entregador/DeliverymanSetRegister/DeliverymanSetRegister';
 import EnterDeliverymanCode from './Views/Entregador/EnterDeliverymanCode/EnterDeliverymanCode';
 import ReceiveOrder from './Views/Entregador/ReceiveOrder/ReceiveOrder';
+import DeliveryOrders from './Views/Entregador/DeliveryOrders/DeliveryOrders';
 import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
-
-
 
 const Stack = createStackNavigator();
 
 const Routes = () => (
   <Stack.Navigator initialRouteName="Login">
+    
     <Stack.Screen
       name="Login"
       component={Login}
@@ -188,15 +188,21 @@ const Routes = () => (
        headerBackTitle: "Voltar",
       }}
     />
+    <Stack.Screen
+     name="DeliveryOrders"
+     component={DeliveryOrders}
+     options={{
+       headerShown: false
+      }}
+    />
     <Stack.Screen 
      name="GenerateQrCode"
      component={GenerateQrCode}
      options={{
-       title: "Comfirmação",
+       title: "Confirmação",
        headerBackTitle: "Voltar",
       }}
     />
-
 
   </Stack.Navigator>
 );
