@@ -41,7 +41,7 @@ const OrderDetails = ({ route: { params } }) => {
         <Text style={styles.text}>Loja -</Text>
         <Text style={styles.label}>Cliente</Text>
         <Text style={styles.text}>{ nome }</Text>
-        <Text style={styles.label}>Endereço de entrega</Text>
+        <Text style={styles.label}>Rota de entrega</Text>
         <Text style={styles.text}>{ params.item.endereco.bairro }</Text>
         <Text style={styles.status}>Aguardando entrega</Text>
       </View>

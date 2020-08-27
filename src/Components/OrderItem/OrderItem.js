@@ -26,7 +26,7 @@ if(data.cliente.pessoaJuridica == null) {
       <Text style={styles.label}>Realizado em {Moment(data.dataPedido).format('MM/DD/YYYY HH:mm')}</Text>
       <Text style={styles.label}>Cliente</Text>
       <Text style={styles.text}>{nome}</Text>
-      <Text style={styles.label}>Endereço de entrega</Text>
+      <Text style={styles.label}>Rota de Entrega</Text>
       <Text style={styles.text}>{data.endereco.bairro}</Text>
       <View style={styles.horizontalRule} />
       <View style={styles.bar}>
