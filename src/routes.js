@@ -26,7 +26,7 @@ import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
 const Stack = createStackNavigator();
 
 const Routes = () => (
-  <Stack.Navigator initialRouteName="AcceptOrders">
+  <Stack.Navigator initialRouteName="Login">
 
     <Stack.Screen
       name="Login"
