@@ -20,8 +20,17 @@ const styles = StyleSheet.create({
     color: "#2B2D2E",
   },
 
+  identificador: {
+    color: "#000000",
+    marginBottom: 5,
+    marginVertical:35,
+    fontSize: 14,
+    textAlign: "center",
+    width: screenWidth * 0.7,
+  },
   text: {
-    color: "#787B7D",
+    marginVertical:35,
+    color: "#CCCCCC",
     marginBottom: 5,
     fontSize: 14,
     textAlign: "center",
