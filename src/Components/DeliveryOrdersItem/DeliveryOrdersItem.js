@@ -1,28 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 
 const DeliveryOrdersItem = ({ data, navigate }) => {
-  
-  // if (data.cliente.pessoaJuridica == null) {
-  //   nome = data.cliente.pessoaFisica.nome;
+
+  // if (data.pedido.cliente.pessoaJuridica == null) {
+  //   setClientName(data.pedido.cliente.pessoaFisica.nome);
   // } else {
-  //   if (data.cliente.pessoaJuridica.razaoSocial == null) {
-  //     nome = data.cliente.pessoaJuridica.cnpj;
+  //   if(data.pedido.cliente.pessoaJuridica.razaoSocial == null) {
+  //     setClientName(data.pedido.cliente.pessoaJuridica.cnpj);
   //   } else {
-  //     nome = data.cliente.pessoaJuridica.razaoSocial;
+  //     setClientName(data.pedido.cliente.pessoaJuridica.razaoSocial);
   //   }
   // }
-
+  
   return (
     <View style={styles.orderItem}>
-      <Text style={styles.text}>Nº #{data.numeroPedido}</Text>
-      <Text style={styles.label}>Realizado em {data.dataPedido}</Text>
+      <Text style={styles.text}>Nº #{data.pedido.numeroPedido}</Text>
+      <Text style={styles.label}>Realizado em {data.pedido.dataPedido}</Text>
       <Text style={styles.label}>Cliente</Text>
-      <Text style={styles.text}>Nome</Text>
+      {/* <Text style={styles.text}>{data.pedido.cliente.pessoaFisica.nome}</Text> */}
+      <Text style={styles.text}>Nome do cliente</Text>
       <Text style={styles.label}>Endereço de entrega</Text>
-      <Text style={styles.text}>Recanto dos Vinhais</Text>
+      <Text style={styles.text}>{data.pedido.endereco.bairro}</Text>
       <View style={styles.horizontalRule} />
       <View style={styles.bar}>
         <View style={styles.status}>

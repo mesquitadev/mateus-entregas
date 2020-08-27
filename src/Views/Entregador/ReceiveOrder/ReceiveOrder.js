@@ -8,9 +8,8 @@ const ReceiveOrder = ({ route: { params }, navigation }) => {
 
   const confirmReceipt = async () => {
     try {
-      // const response = await confirmReceiptOfDelivery(params);
-      // console.warn(response);
-      navigation.navigate('DeliveryOrders');
+      const response = await confirmReceiptOfDelivery(params);
+      navigation.navigate('DeliveryOrders', response.data);
     } catch(error) {
       alert('Ocorreu um problema ao confirmar o recebimento dos pedidos.')
     }

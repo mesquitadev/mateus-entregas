@@ -9,20 +9,11 @@ import styles from './styles';
 const DeliveryOrders = ({ route: { params }, navigation: { navigate } }) => {
   const [ listItems, setListItems ] = useState([]);
   const [ listItemsFilter, setListItemsFilter ] = useState([]);
-  const [ selectedItems, setSelectedItems ] = useState([]);
-  const [ count, setCount ] = useState(0);
   
   useEffect(() => {
     const fetchData = () => {
-      const response = [
-        { "numeroPedido": "000001", "dataPedido": "00/00/0000" },
-        { "numeroPedido": "000002", "dataPedido": "00/00/0000" },
-        { "numeroPedido": "000003", "dataPedido": "00/00/0000" },
-        { "numeroPedido": "000004", "dataPedido": "00/00/0000" }
-      ];
-      
-      setListItemsFilter(response);
-      setListItems(response);
+      setListItemsFilter(params.entregaPedidos);
+      setListItems(params.entregaPedidos);
     };
 
     fetchData();

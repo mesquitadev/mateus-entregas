@@ -4,8 +4,8 @@ const confirmReceiptOfDelivery = async data => {
   const bodyHTTP = {
     identificador: data.identificador,
     entregador: {
-        id : 35,
-        username: data.username
+        id : data.entregador.id,
+        username: data.entregador.username
     },
     log: {
         ip: "",
