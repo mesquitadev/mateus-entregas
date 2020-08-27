@@ -40,7 +40,7 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
         <View style={styles.list}>
           <FlatList 
             data={orders}
-            keyExtractor={item => item.key}
+            keyExtractor={(item, index) => index.toString()}
             renderItem={this.renderItem}
           />
         </View>
