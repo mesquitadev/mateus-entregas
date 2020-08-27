@@ -26,8 +26,8 @@ const Login = ({ navigation }) => {
   
     try {
       setButtonEnabled(false);
-      const response = await login(25936732061, "RV4WGBUVUL"); // passando direto -- develop
-      //const response =  await login(user, pass);
+      //const response = await login(25936732061, "RV4WGBUVUL"); // passando direto -- develop
+      const response =  await login(user, pass);
       await AsyncStorage.setItem('entregas_user_data', JSON.stringify(response.data));
       navigation.navigate('OrderList');
     } catch(error) {

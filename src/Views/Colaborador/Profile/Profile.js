@@ -14,9 +14,10 @@ const Profile = ( { navigation })=> {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        var dataUser = await AsyncStorage.getItem('entregas_user_name')
-        dataUser = JSON.parse(dataUser)
-        setUserData( dataUser )
+        var userData = await AsyncStorage.getItem('entregas_user_name')
+        userData = JSON.parse(userData)
+        console.log(userData)
+        setUserData( userData )
       } catch(err) {
         console.warn(err);
       }
@@ -32,7 +33,7 @@ const Profile = ( { navigation })=> {
     <View style={styles.container}>
       <View style={styles.info}>
         <Ionicons name={'person-circle'} size={146} color={"#777"}/>
-        <Text style={styles.userName}>{userData.username}</Text>
+        <Text style={styles.text}>{userData.username}</Text>
         <Text style={styles.text}>Separador</Text>
         <Text style={styles.text}>CPF: 000000000-00</Text>
       </View>
