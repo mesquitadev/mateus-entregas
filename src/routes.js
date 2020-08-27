@@ -192,7 +192,7 @@ const Routes = () => (
      name="GenerateQrCode"
      component={GenerateQrCode}
      options={{
-       title: "Comfirmação",
+       title: "Confirmação",
        headerBackTitle: "Voltar",
       }}
     />
