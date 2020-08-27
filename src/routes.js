@@ -20,6 +20,7 @@ import DeliverymanSetPassword from './Views/Entregador/DeliverymanSetPassword/De
 import DeliverymanSetRegister from './Views/Entregador/DeliverymanSetRegister/DeliverymanSetRegister';
 import EnterDeliverymanCode from './Views/Entregador/EnterDeliverymanCode/EnterDeliverymanCode';
 import ReceiveOrder from './Views/Entregador/ReceiveOrder/ReceiveOrder';
+import DeliveryOrders from './Views/Entregador/DeliveryOrders/DeliveryOrders';
 
 const Stack = createStackNavigator();
 
@@ -183,6 +184,13 @@ const Routes = () => (
      options={{
        title: "Digite o código do entregador",
        headerBackTitle: "Voltar",
+      }}
+    />
+    <Stack.Screen
+     name="DeliveryOrders"
+     component={DeliveryOrders}
+     options={{
+       headerShown: false
       }}
     />
   </Stack.Navigator>
