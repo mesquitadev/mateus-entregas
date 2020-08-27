@@ -43,14 +43,11 @@ const OrderList = ({ navigation: { navigate } }) => {
   startSearchFilter = text => {
     const newData = listItemsFilter.filter(item => {
       const itemData = `
-        ${item.cliente.pessoaFisica.nome.toUpperCase()} 
         ${item.endereco.bairro.toUpperCase()}
         `;      
       const textData = text.toUpperCase();
-      
       return itemData.indexOf(textData) > -1;    
     });
-    
     setListItems(newData);
   };
   
@@ -71,8 +68,7 @@ const OrderList = ({ navigation: { navigate } }) => {
       <View style={styles.orderList}>
         <Text style={styles.title}>Pedidos disponíveis</Text>
         <View>
-          <FlatList
-            style={styles.flatListEstilo}
+          <FlatList 
             data={listItems}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this.renderItem}
