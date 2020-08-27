@@ -44,6 +44,20 @@ const styles = StyleSheet.create({
       btnPrimaryText: {
         color: "#FFF",
         fontWeight: "bold",
+      },
+
+      btnDisabled: {
+        backgroundColor: "#DAE0E3",
+        width: screenWidth * 0.9,
+        alignItems: "center",
+        paddingVertical: 18,
+        borderRadius: 5,
+        marginTop: 15,
+        marginBottom: 50
+      },
+    
+      btnDisabledText: {
+        color: "#787B7D"
       }
 
 

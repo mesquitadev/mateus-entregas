@@ -27,14 +27,16 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     flexDirection: "row",
     alignItems: "center",
-    fontSize: 16,
-    marginRight: 10
+    fontSize: 14,
+    marginRight: 10,
+    height: 45
   },
 
   image: {
-    width: 15,
-    height: 15,
-    marginRight: 5
+    width: 20,
+    height: 20,
+    marginRight: 5,
+    marginLeft: 10
   }
 });
 

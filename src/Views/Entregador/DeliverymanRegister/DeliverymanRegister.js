@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Text, TextInput, TouchableOpacity, View, ScrollView} from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
 
 import styles from './styles';
@@ -13,8 +13,10 @@ const DeliverymanRegister = ({ navigation }) => {
     const [ datanascimento, setDataNascimento ] = useState('');
     const [ tel, setTel ] = useState('');
     const [ email, setEmail] = useState('');
-   
+  
+
     return (
+      <ScrollView>
       <View style={styles.container}>
         <TextInput
           style= {styles.inputs} 
@@ -30,25 +32,36 @@ const DeliverymanRegister = ({ navigation }) => {
           style={styles.inputs}
           maxLength={14}
         />
-        <TextInput
+        <TextInputMask
+          type={'datetime'}
+          options={{
+            format: 'DD/MM/YYYY'
+          }}
+          value={datanascimento}
+          onChangeText={text => setDataNascimento(text)}
           style={styles.inputs}
           placeholder="Data de Nascimento"
-          value={datanascimento}
-          onChange={text => setDataNascimento(text)}
+          maxLength={10}
         />
-        <TextInput
+        <TextInputMask
+          type={'cel-phone'}
+          options={{
+            maskType: 'BRL',
+            withDDD: true,
+            dddMask: '(99)'
+          }}
+          value={tel}
+          onChangeText={text => setTel(text)}
           style={styles.inputs}
           placeholder="Telefone"
-          type={"tel"}
-          value={tel}
-          onChange={text => setTel(text)}
+          maxLength={14}
         />
         <TextInput 
           style={styles.inputs}
           placeholder="E-mail"
           type={"email"}
           value={email}
-          onChange={text => setEmail(text)}
+          onChangeText={text => setEmail(text)}
         />
         <TouchableOpacity
           onPress={() => navigation.navigate('DeliverymanPhotos')}
@@ -58,8 +71,8 @@ const DeliverymanRegister = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
 
-
      </View>
+     </ScrollView>
     );
   
 }

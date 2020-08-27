@@ -3,6 +3,7 @@ import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 
 import OrderCheckItem from '../../../Components/OrderCheckItem/OrderCheckItem';
 import styles from './styles';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
   const [ orders, setOrders ] = useState([]);
@@ -16,7 +17,7 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
     if (selectedOrders.length !== orders.length) 
       console.warn('Você precisa conferir todos os pedidos.')
     else
-      navigate('DeliveryInformation');
+      navigate('GenerateQrCode', params);
   };
 
   loadSelectedOrders = item => {
@@ -29,22 +30,26 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
     }
   };
 
-  renderItem = ({ item }) => (
+  let renderItem = ({ item }) => (
     <OrderCheckItem data={item} />
   );
   
   return (
     <>
+    <ScrollView>
       <View style={styles.container}>
         <Text style={styles.title}>Pedidos</Text>
         <View style={styles.list}>
           <FlatList 
             data={orders}
-            keyExtractor={item => item.key}
-            renderItem={this.renderItem}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={renderItem}
           />
         </View>
       </View>
+      </ScrollView>
+
+      
       <View style={styles.buttonBar}>
         <TouchableOpacity
           onPress={() => checkSelectedOrders()}
@@ -54,6 +59,7 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
           </Text>
         </TouchableOpacity>
       </View>
+      
     </>
   );
 };

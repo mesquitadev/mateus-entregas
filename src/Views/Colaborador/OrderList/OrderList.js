@@ -40,14 +40,30 @@ const OrderList = ({ navigation: { navigate } }) => {
     <OrderItem data={item} navigate={navigate} showCheckBox={true} />
   );
 
+  tipoPessoa = (objeto) => {
+    if(objeto.cliente.pessoaJuridica == null) {
+      return objeto.cliente.pessoaFisica.nome;
+    } else {
+      if(objeto.cliente.pessoaJuridica.razaoSocial == null) {
+        return objeto.cliente.pessoaJuridica.cnpj;
+      } else {
+        return objeto.cliente.pessoaJuridica.razaoSocial;
+      }
+    }
+  }
+
   startSearchFilter = text => {
     const newData = listItemsFilter.filter(item => {
       const itemData = `
+        ${tipoPessoa(item)}
+        ${item.numeroPedido} 
         ${item.endereco.bairro.toUpperCase()}
         `;      
       const textData = text.toUpperCase();
+      
       return itemData.indexOf(textData) > -1;    
     });
+    
     setListItems(newData);
   };
   
@@ -68,7 +84,8 @@ const OrderList = ({ navigation: { navigate } }) => {
       <View style={styles.orderList}>
         <Text style={styles.title}>Pedidos disponíveis</Text>
         <View>
-          <FlatList 
+          <FlatList
+            style={styles.flatListEstilo}
             data={listItems}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this.renderItem}

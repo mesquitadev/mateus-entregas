@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
     width: screenWidth * 0.6,
     resizeMode: 'contain',
     alignItems: 'center',
-    paddingVertical: 0
+    paddingVertical: 0,
+    left: screenWidth / 8
   },
 
   inputs: {
