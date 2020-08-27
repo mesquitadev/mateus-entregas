@@ -76,7 +76,7 @@ const Login = ({ navigation }) => {
       </TouchableOpacity>
       
       <TouchableOpacity
-        onPress={() => navigation.navigate('DeclineOrders')}
+        onPress={() => navigation.navigate('DeliverymanRegister')}
         style={styles.btnSecondary}>
         <Text style={styles.btnSecondaryText}>
           Cadastrar Entregador
