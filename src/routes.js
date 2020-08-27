@@ -10,10 +10,12 @@ import DeliveryInformation from './Views/Colaborador/DeliveryInformation/Deliver
 import OrderCheck from './Views/Colaborador/OrderCheck/OrderCheck';
 import DeliverymanRegister from './Views/Entregador/DeliverymanRegister/DeliverymanRegister';
 import DeliverymanPhotos from './Views/Entregador/DeliverymanPhotos/DeliverymanPhotos';
-
-// import DeliverymanRegister from './Views/Entregador/DeliverymanRegister/DeliverymanRegister';
 import AcceptOrders from './Views/Entregador/AcceptOrders/AcceptOrders';
 import ScanDeliveryCode from './Views/Entregador/ScanDeliveryCode/ScanDeliveryCode';
+import DeliverymanPhotoCnh from './Views/Entregador/DeliverymanPhotoCnh/DeliverymanPhotoCnh';
+import DeliverymanPhotoProfile from './Views/Entregador/DeliverymanPhotoProfile/DeliverymanPhotoProfile';
+import DeliverymanSetPassword from './Views/Entregador/DeliverymanSetPassword/DeliverymanSetPassword';
+import DeliverymanSetRegister from './Views/Entregador/DeliverymanSetRegister/DeliverymanSetRegister';
 import EnterDeliverymanCode from './Views/Entregador/EnterDeliverymanCode/EnterDeliverymanCode';
 
 const Stack = createStackNavigator();
@@ -111,14 +113,45 @@ const Routes = () => (
       }}
     />
     <Stack.Screen 
-      name="EnterDeliverymanCode"
-      component={EnterDeliverymanCode}
+      name="DeliverymanPhotoCnh"
+      component={DeliverymanPhotoCnh}
       options={{
-        title: "Digite o código do entregador",
+        title: "",
         headerBackTitle: "Voltar",
+      }}
+    />
+    <Stack.Screen 
+      name="DeliverymanPhotoProfile"
+      component={DeliverymanPhotoProfile}
+      options={{
+        title: "",
+        headerBackTitle: "Voltar",
+      }}
+    />
+    <Stack.Screen 
+      name="DeliverymanSetPassword"
+      component={DeliverymanSetPassword}
+      options={{
+        title: "Defina sua senha",
+        headerBackTitle: "Voltar",
+      }}
+    />
+    <Stack.Screen 
+      name="DeliverymanSetRegister"
+      component={DeliverymanSetRegister}
+      options={{
+        title: "Cadastro",
+        headerBackTitle: "Voltar",
+      }}
+    />
+    <Stack.Screen 
+     name="EnterDeliverymanCode"
+     component={EnterDeliverymanCode}
+     options={{
+       title: "Digite o código do entregador",
+       headerBackTitle: "Voltar",
       }}
     />
   </Stack.Navigator>
 );
- 
 export default Routes;

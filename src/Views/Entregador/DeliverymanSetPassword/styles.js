@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 const screenWidth = Dimensions.get('screen').width;
 
-const styles = StyleSheet.create({ 
+const styles = StyleSheet.create({
 
     container: {
         backgroundColor: "#FFF",
@@ -11,32 +11,28 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         paddingTop: 20,
         
-      },
+    },
 
-      iconAlert: {
-        marginHorizontal: 10
-      },
-
-      btnSecondary: {
-        flexDirection: "row",
+    inputs: {
         width: screenWidth * 0.9,
-        alignItems: "center",
-        paddingVertical: 18,
-        paddingHorizontal: 40,
-        borderRadius: 5,
+        paddingVertical: 15,
+        paddingHorizontal: 15,
+        borderColor: "#8898A6",
         borderWidth: 1,
-        borderColor: "#00000029",
-        marginTop: 20,
+        borderRadius: 5,
+        marginVertical: 10,
+        flexDirection: "row",
+        alignItems: "center",
+        fontSize: 16,
       },
 
-      btnSecondaryText: {
-        color: "#2B2D2E",
-        marginHorizontal: 0,
-        fontSize: 12
-      },
+    observer: {
+        fontSize: 10,
+        color: "#787B7D"
+    }, 
 
-      btnPrimary: {
-        justifyContent: "flex-end",  
+    btnPrimary: {
+        justifyContent: "center",  
         backgroundColor: "#0095DA",
         width: screenWidth * 0.9,
         alignItems: "center",
@@ -48,10 +44,13 @@ const styles = StyleSheet.create({
       btnPrimaryText: {
         color: "#FFF",
         fontWeight: "bold",
-      },
+      }
 
 
 
-});
 
-export default styles;
+
+
+ });
+
+ export default styles;
