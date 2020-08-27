@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, Image } from 'react-native';
+import Moment  from 'moment';
 
 import styles from './styles';
 
@@ -35,7 +36,7 @@ const OrderDetails = ({ route: { params } }) => {
     <View style={styles.container}>
       <View style={styles.info}>
         <Text style={styles.text}>Nº #{ params.item.numeroPedido }</Text>
-        <Text style={styles.label}>Realizado em { params.item.dataPedido}</Text>
+        <Text style={styles.label}>Realizado em {Moment(params.item.dataPedido).format('MM/DD/YYYY HH:mm')}</Text>
         <Text style={styles.label}>Origem</Text>
         <Text style={styles.text}>Loja -</Text>
         <Text style={styles.label}>Cliente</Text>

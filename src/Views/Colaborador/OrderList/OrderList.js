@@ -46,8 +46,10 @@ const OrderList = ({ navigation: { navigate } }) => {
         ${item.endereco.bairro.toUpperCase()}
         `;      
       const textData = text.toUpperCase();
+      
       return itemData.indexOf(textData) > -1;    
     });
+    
     setListItems(newData);
   };
   
@@ -68,7 +70,8 @@ const OrderList = ({ navigation: { navigate } }) => {
       <View style={styles.orderList}>
         <Text style={styles.title}>Pedidos disponíveis</Text>
         <View>
-          <FlatList 
+          <FlatList
+            style={styles.flatListEstilo}
             data={listItems}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this.renderItem}
