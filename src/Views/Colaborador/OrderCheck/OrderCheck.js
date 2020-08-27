@@ -16,7 +16,7 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
     if (selectedOrders.length !== orders.length) 
       console.warn('Você precisa conferir todos os pedidos.')
     else
-      navigate('DeliveryInformation');
+      navigate('GenerateQrCode');
   };
 
   loadSelectedOrders = item => {
@@ -29,7 +29,7 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
     }
   };
 
-  renderItem = ({ item }) => (
+  let renderItem = ({ item }) => (
     <OrderCheckItem data={item} />
   );
   
@@ -41,7 +41,7 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
           <FlatList 
             data={orders}
             keyExtractor={(item, index) => index.toString()}
-            renderItem={this.renderItem}
+            renderItem={renderItem}
           />
         </View>
       </View>
@@ -50,7 +50,7 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
           onPress={() => checkSelectedOrders()}
           style={styles.button}>
           <Text style={styles.buttonText}>
-            Confirmar
+            Gerar QrCode
           </Text>
         </TouchableOpacity>
       </View>

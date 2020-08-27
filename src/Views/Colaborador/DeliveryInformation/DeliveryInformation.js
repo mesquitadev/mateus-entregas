@@ -25,10 +25,11 @@ const DeliveryInformation = ({ route: { params }, navigation: { navigate } }) =>
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigate('GenerateQrCode', params)}
+        
+          onPress={() => navigate('OrderCheck', params)}
           style={styles.buttonNext}>
           <Text style={styles.buttonNextText}>
-            Gerar QrCode
+           Confirmar
           </Text>
         </TouchableOpacity>
       </View>
