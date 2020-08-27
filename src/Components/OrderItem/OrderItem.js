@@ -7,13 +7,18 @@ import styles from './styles';
 const OrderItem = ({ data, navigate, showCheckBox }) => {
   const [ toggleCheckBox, setToggleCheckBox ] = useState(false);
   const [ checkBox, setCheckBox ] = useState(true);
-  
+
+//   if (typeof typeof data.cliente.pessoaFisica.nome === "undefined") {
+//     alert("data.cliente.pessoaFisica.nome é undefined");  // Será mostrado
+// } else {
+//     alert("O valor de data.cliente.pessoaFisica.nome é " + data.cliente.pessoaFisica.nome); // Não será mostrado
+//}
+  //var nome = typeof data.cliente.pessoaFisica.nome === "undefined" ? data.cliente.pessoaJuridica.nome : data.cliente.pessoaFisica.nome
   return (
     <View style={[styles.orderItem, toggleCheckBox ? styles.active : styles.inactive]}>
       <Text style={styles.text}>Nº #{data.numeroPedido}</Text>
       <Text style={styles.label}>Realizado em {data.dataPedido}</Text>
       <Text style={styles.label}>Cliente</Text>
-      <Text style={styles.text}>{data.cliente.pessoaFisica.nome}</Text>
       <Text style={styles.label}>Endereço de entrega</Text>
       <Text style={styles.text}>{data.endereco.bairro}</Text>
       <View style={styles.horizontalRule} />
