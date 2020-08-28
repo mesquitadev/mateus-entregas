@@ -3,7 +3,6 @@ import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 
 import OrderCheckItem from '../../../Components/OrderCheckItem/OrderCheckItem';
 import styles from './styles';
-import { ScrollView } from 'react-native-gesture-handler';
 
 const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
   const [ orders, setOrders ] = useState([]);
@@ -36,7 +35,6 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
   
   return (
     <>
-    <ScrollView>
       <View style={styles.container}>
         <Text style={styles.title}>Pedidos</Text>
         <View style={styles.list}>
@@ -44,12 +42,11 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
             data={orders}
             keyExtractor={(item, index) => index.toString()}
             renderItem={renderItem}
+            nestedScrollEnabled
           />
         </View>
       </View>
-      </ScrollView>
 
-      
       <View style={styles.buttonBar}>
         <TouchableOpacity
           onPress={() => checkSelectedOrders()}

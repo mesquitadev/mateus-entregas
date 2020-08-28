@@ -5,10 +5,10 @@ import styles from './styles';
 
 const pathIlustracaoEntregaCancelada = require('../../../res/img/entrega-cancelada.png');
 const pathIlustracaoEntregaAdiada = require('../../../res/img/entrega-adiada.png');
+const pathCancelIcon = require('../../../res/img/cancel.png');
 
 const DelineOrdersInformation = ({route: {params}, navigation: {navigate}}) => (
   <>
-    {console.log(params.message)}
     <View style={styles.container}>
       <Image
         source={
@@ -21,12 +21,8 @@ const DelineOrdersInformation = ({route: {params}, navigation: {navigate}}) => (
         style={[
           styles.text,
           {
-            color: params.status === 'adiada' ? '#D98016' : null,
+            color: params.status === 'adiada' ? '#D98016' : '#F92121',
           },
-          {
-            color: params.status === 'cancelada' ? '#F92121' : null,
-          },
-          
         ]}>
         {params.message}
       </Text>

@@ -25,19 +25,23 @@ const Profile = ( { navigation })=> {
     getUserData();
   }, []);
 
-  // Criar o useEffect para carregar os pedidos da api
-  // setListItems com a resposta do endpoint
+  const doLogout = async () => {
+    await AsyncStorage.setItem('entregas_user_data', '');
+    setUser('');
+    navigation.navigate('Login');
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.info}>
         <Ionicons name={'person-circle'} size={146} color={"#777"}/>
-        <Text style={styles.text}>{user.username}</Text>
-        <Text style={styles.text}>Separador</Text>
-        <Text style={styles.text}>CPF: 000000000-00</Text>
+        <Text style={styles.text}>{user.nome}</Text>
+        <Text style={styles.text}>{user.perfil.descricao}</Text>
+        <Text style={styles.text}>CPF: {user.username}</Text>
       </View>
       <View style={styles.button}>
         <Button
-        onPress={() => navigation.navigate('Login')}
+        onPress={() => doLogout()}
         title="Sair" />
       </View>
     </View>
