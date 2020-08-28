@@ -126,7 +126,7 @@ const Routes = () => (
       name="DeclineOrders"
       component={DeclineOrders}
       options={{
-        title: 'Qual o motivo?',
+        title: 'Motivo',
         headerTitleAlign: 'center',
       }}
     />

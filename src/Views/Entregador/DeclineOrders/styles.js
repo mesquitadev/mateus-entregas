@@ -5,34 +5,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#fff',
     paddingVertical: 24,
     paddingHorizontal: 16,
   },
 
-  box: {
+  card: {
     alignItems: 'center',
     borderRadius: 6,
     borderWidth: 1,
     borderColor: '#B0BEC5',
     paddingVertical: 16,
     paddingHorizontal: 16,
-    width: '100%',
+    justifyContent: 'space-between',
     flexDirection: 'row',
-    justifyContent: 'center',
     marginBottom: 16,
   },
 
   circleCheckBox: {
     borderWidth: 1,
     borderColor: '#B0BEC5',
-    borderRadius: 100,
-    width: 34,
-    height: 34,
-  },
-
-  circleCheckBoxRed: {
-    backgroundColor: '#F92121',
     borderRadius: 100,
     width: 34,
     height: 34,
@@ -52,7 +44,6 @@ const styles = StyleSheet.create({
   },
 
   buttonsContainer: {
-    alignContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
     height: 80,
