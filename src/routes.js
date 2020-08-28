@@ -126,7 +126,7 @@ const Routes = () => (
       name="DeclineOrders"
       component={DeclineOrders}
       options={{
-        title: 'Cancelar',
+        title: 'Qual o motivo?',
         headerTitleAlign: 'center',
       }}
     />
@@ -213,7 +213,7 @@ const Routes = () => (
        headerBackTitle: "Voltar",
       }}
     />
-    <Stack.Screen 
+    <Stack.Screen
      name="StartDelivery"
      component={StartDelivery}
      options={{
