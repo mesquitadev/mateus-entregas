@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, Image, Linking } from 'react-native';
+import { View, Text, Image, Linking, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const StartDelivery = ({ route: {params}, navigation }) => {
   const [ startDelivery, setStartDelivery ] = useState(false);
@@ -38,19 +37,23 @@ const StartDelivery = ({ route: {params}, navigation }) => {
             <Text style={styles.contactTouchableText}>Localização</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.receipt}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('DeliveryReceipt', params)}
+          style={startDelivery ? styles.receipt : styles.hideTouchable}>
           <Image style={styles.receiptImg} source={require('../../../res/img/caixa.png')} />
           <Text style={styles.receiptText}>Comprovante de entrega</Text>
         </TouchableOpacity>
       </View>
       
-      <TouchableOpacity style={styles.startTouchable}>
+      <TouchableOpacity
+        style={!startDelivery ? styles.startTouchable : styles.hideTouchable}
+        onPress={() => setStartDelivery(true)}>
         <Text style={styles.startTouchableText}>
           Iniciar entrega
         </Text>
       </TouchableOpacity>
 
-      <View style={styles.actions}>
+      <View style={startDelivery ? styles.actions : styles.hideTouchable}>
         <TouchableOpacity style={styles.actionsTouchableLight}>
           <Text style={styles.actionsTouchableLightText}>
             Cancelar

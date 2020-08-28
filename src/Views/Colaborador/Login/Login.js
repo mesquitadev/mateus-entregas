@@ -20,35 +20,48 @@ const Login = ({navigation}) => {
   const [buttonEnabled, setButtonEnabled] = useState(true);
 
   const doLogin = async () => {
-    const CPF = require('cpf');
-    //if(!CPF.isValid(user)) { // DEVELOP -- RETIRAR
+    // const CPF = require('cpf');
+    // if(!CPF.isValid(user)) { // DEVELOP -- RETIRAR
     //  Alert.alert('App Entregas', 'CPF inválido, verifique o número digitado e tente novamente.');
     //  return;
-    //}
-
-    if (pass.length < 6) {
-      Alert.alert(
-        'App Entregas',
-        'Verifique a senha digitada e tente novamente.',
-      );
-      return;
-    }
+    // }
+    // 
+    // if (pass.length < 6) {
+    //   Alert.alert(
+    //     'App Entregas',
+    //     'Verifique a senha digitada e tente novamente.',
+    //   );
+    //   return;
+    // }
 
     try {
       setButtonEnabled(false);
       const response =  await login(user, pass);
+
       AsyncStorage.setItem('entregas_user_data', JSON.stringify(response.data));
 
-      if(response.data.situacao == 0) {
-        navigation.navigate('DeliverymanSetRegister');
-      }
+      switch(response.data.situacao) {
+        case 0: //pendente
+          navigation.navigate('DeliverymanSetRegister');
+          break;
 
-      if(response.data.perfil.descricao.toLowerCase() == 'colaborador') {
-        navigation.navigate('OrderList');
-      }
+        case 1: //ativo
+          if(response.data.perfil.descricao.toLowerCase() == 'colaborador')
+            navigation.navigate('OrderList');
 
-      if(response.data.perfil.descricao.toLowerCase() == 'entregador') {
-        navigation.navigate('AcceptOrders');
+          if(response.data.perfil.descricao.toLowerCase() == 'entregador')
+            navigation.navigate('AcceptOrders');
+
+          break;
+
+        case 2: //rejeitado
+          //navigation.navigate('')
+          alert('Cadastro rejeitado');
+          break;
+          
+        case 3: //analise -- enviar nova documentação
+          navigation.navigate('DeliverymanPhotos');
+          break;
       }
 
       setUser('');
