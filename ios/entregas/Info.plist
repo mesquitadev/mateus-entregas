@@ -54,7 +54,7 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 
 	<key>NSCameraUsageDescription</key>
-	<string>Your message to user when the camera is accessed for the first time</string>
+	<string>Precisamos acessar sua câmera</string>
 
 	<!-- Include this only if you are planning to use the camera roll -->
 	<key>NSPhotoLibraryUsageDescription</key>

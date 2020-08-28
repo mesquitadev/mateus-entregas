@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     width: screenWidth * 0.9,
     alignSelf: "center",
     marginVertical: 15,
+    marginBottom: 100
   },
 
   title: {

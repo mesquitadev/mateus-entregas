@@ -41,6 +41,7 @@ const DeliverymanRegister = ({ navigation }) => {
           onChangeText={text => setDataNascimento(text)}
           style={styles.inputs}
           placeholder="Data de Nascimento"
+          maxLength={10}
         />
         <TextInputMask
           type={'cel-phone'}
@@ -53,6 +54,7 @@ const DeliverymanRegister = ({ navigation }) => {
           onChangeText={text => setTel(text)}
           style={styles.inputs}
           placeholder="Telefone"
+          maxLength={14}
         />
         <TextInput 
           style={styles.inputs}

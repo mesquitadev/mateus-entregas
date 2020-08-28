@@ -42,9 +42,11 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
             data={orders}
             keyExtractor={(item, index) => index.toString()}
             renderItem={renderItem}
+            nestedScrollEnabled
           />
         </View>
       </View>
+
       <View style={styles.buttonBar}>
         <TouchableOpacity
           onPress={() => checkSelectedOrders()}
@@ -54,6 +56,7 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
           </Text>
         </TouchableOpacity>
       </View>
+      
     </>
   );
 };
