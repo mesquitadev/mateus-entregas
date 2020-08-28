@@ -36,6 +36,7 @@ const DeliverymanPhotoProfile = ({navigation}) => {
         validatePhoto={validatePhoto}
         route={'DeliverymanPhotoValidation'}
         photoType={'perfil'}
+        frontCamera={true}
       />
     </View>
   );
