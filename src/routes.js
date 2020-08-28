@@ -22,11 +22,12 @@ import EnterDeliverymanCode from './Views/Entregador/EnterDeliverymanCode/EnterD
 import ReceiveOrder from './Views/Entregador/ReceiveOrder/ReceiveOrder';
 import DeliveryOrders from './Views/Entregador/DeliveryOrders/DeliveryOrders';
 import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
+import StartDelivery from './Views/Entregador/StartDelivery/StartDelivery';
 
 const Stack = createStackNavigator();
 
 const Routes = () => (
-  <Stack.Navigator initialRouteName="Login">
+  <Stack.Navigator initialRouteName="AcceptOrders">
 
     <Stack.Screen
       name="Login"
@@ -200,6 +201,14 @@ const Routes = () => (
      component={GenerateQrCode}
      options={{
        title: "Confirmação",
+       headerBackTitle: "Voltar",
+      }}
+    />
+    <Stack.Screen 
+     name="StartDelivery"
+     component={StartDelivery}
+     options={{
+       title: "Iniciar entrega",
        headerBackTitle: "Voltar",
       }}
     />

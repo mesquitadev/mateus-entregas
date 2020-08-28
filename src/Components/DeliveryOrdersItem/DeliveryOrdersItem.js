@@ -16,7 +16,7 @@ const DeliveryOrdersItem = ({ data, navigate }) => {
   // }
   
   return (
-    <View style={styles.orderItem}>
+    <TouchableOpacity style={styles.orderItem} onPress={() => navigate('StartDelivery', data.pedido)}>
       <Text style={styles.text}>Nº #{data.pedido.numeroPedido}</Text>
       <Text style={styles.label}>Realizado em {data.pedido.dataPedido}</Text>
       <Text style={styles.label}>Cliente</Text>
@@ -29,12 +29,12 @@ const DeliveryOrdersItem = ({ data, navigate }) => {
         <View style={styles.status}>
           <Text style={styles.barText}>Aguardando entrega</Text>
         </View>
-        <TouchableOpacity 
+        <View 
           style={styles.more}>
           <Text style={styles.barText}>Ver mais</Text>
-        </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
