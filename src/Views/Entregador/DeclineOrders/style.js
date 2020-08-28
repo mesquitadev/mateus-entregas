@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
   },
 
   buttonCancelar: {
-    borderWidth: 1,
     borderRadius: 8,
   },
 
@@ -86,7 +85,7 @@ const styles = StyleSheet.create({
   buttonAdiar: {
     borderRadius: 8,
   },
-  
+
   textAdiar: {
     fontWeight: 'bold',
   },

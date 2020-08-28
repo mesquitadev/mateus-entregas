@@ -12,7 +12,7 @@ const Camera = ({
   onCloseCamera,
   route,
   photoType,
-  frontCamera
+  frontCamera,
 }) => {
   const [camera, setCamera] = useState();
 
@@ -38,7 +38,11 @@ const Camera = ({
       <RNCamera
         ref={(ref) => setCamera(ref)}
         style={{flex: 1}}
-        type={frontCamera ? RNCamera.Constants.Type.front : RNCamera.Constants.Type.back}
+        type={
+          frontCamera
+            ? RNCamera.Constants.Type.front
+            : RNCamera.Constants.Type.back
+        }
         autoFocus={RNCamera.Constants.AutoFocus.on}
         flashMode={RNCamera.Constants.FlashMode.off}
         androidCameraPermissionOptions={{
@@ -50,14 +54,14 @@ const Camera = ({
         captureAudio={false}>
         {/* <View style={styles.containerCinza}>
           <View style={styles.containerBranco}> */}
-            <Icon
-              style={styles.iconClose}
-              name="close"
-              size={50}
-              color={'#fff'}
-              onPress={onCloseCamera}
-            />
-          {/* </View>
+        <Icon
+          style={styles.iconClose}
+          name="close"
+          size={50}
+          color={'#fff'}
+          onPress={onCloseCamera}
+        />
+        {/* </View>
           <View style={styles.textContainer}>
             <Text style={styles.text}>Use a área marcada como guia</Text>
           </View>
@@ -66,7 +70,7 @@ const Camera = ({
           <View style={styles.buttonAround} />
         </View>
 
-{/* 
+        {/*
         <TouchableOpacity style={styles.buttonSwitchCamera} onPress={() => (
             frontCamera === true ? false : true
         )}>
@@ -76,7 +80,6 @@ const Camera = ({
                 size={50}
             />
         </TouchableOpacity> */}
-
       </RNCamera>
     </Modal>
   );
