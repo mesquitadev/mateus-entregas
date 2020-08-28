@@ -93,15 +93,15 @@ const DeclineOrders = ({navigation}) => {
             styles.button,
             styles.buttonCancelar,
             {
-              borderColor: buttonVisibility ? '#0095DA' : '#DAE0E3',
+              backgroundColor: buttonVisibility ? '#F92121' : '#DAE0E3',
             },
           ]}>
           <Text
             style={[
               styles.textCancelar,
-              {color: buttonVisibility ? '#0095DA' : '#787B7D'},
+              {color: buttonVisibility ? '#fff' : '#787B7D'},
             ]}>
-            Cancelar
+            Desistir
           </Text>
         </TouchableOpacity>
 
@@ -116,7 +116,7 @@ const DeclineOrders = ({navigation}) => {
           style={[
             styles.button,
             styles.buttonAdiar,
-            {backgroundColor: buttonVisibility ? '#0095DA' : '#DAE0E3'},
+            {backgroundColor: buttonVisibility ? '#D98016' : '#DAE0E3'},
           ]}>
           <Text
             style={[

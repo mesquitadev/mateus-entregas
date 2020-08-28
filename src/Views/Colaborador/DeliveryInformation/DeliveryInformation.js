@@ -24,7 +24,7 @@ const DeliveryInformation = ({ route: { params }, navigation: { navigate } }) =>
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-        
+
           onPress={() => navigate('OrderCheck', params)}
           style={styles.buttonNext}>
           <Text style={styles.buttonNextText}>

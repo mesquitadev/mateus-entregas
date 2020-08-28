@@ -6,6 +6,7 @@ import SearchFilter from '../../../Components/SearchFilter/SearchFilter';
 import OrderItem from '../../../Components/OrderItem/OrderItem';
 import styles from './styles';
 import api from '../../../services/api';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const OrderList = ({ navigation: { navigate } }) => {
   const [ listItems, setListItems ] = useState([]);
@@ -67,12 +68,31 @@ const OrderList = ({ navigation: { navigate } }) => {
     setListItems(newData);
   };
   
+  const FlatListHeader = () => {
+    return (
+      <View>
+        <Text style={styles.title}>Pedidos disponíveis</Text>
+      </View>
+    );
+  }
+
   return (
     <View>
-      <UserHeader />
+      {/* <UserHeader /> */}
 
       <SearchFilter onChangeText={this.startSearchFilter} />
 
+      <View style={styles.orderList}>
+          <FlatList
+            style={styles.flatListEstilo}
+            data={listItems}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={this.renderItem}
+             nestedScrollEnabled
+            ListHeaderComponent={FlatListHeader}
+          />
+      </View>
+    
       <TouchableOpacity
         style={[ styles.selectedItemsButton, count > 0 ? styles.active : styles.inactive ]}
         onPress={() => navigate('SelectedItems', selectedItems)}>
@@ -80,19 +100,6 @@ const OrderList = ({ navigation: { navigate } }) => {
           {`Ver pedidos selecionados  ${count}`}
         </Text>
       </TouchableOpacity>
-
-      <View style={styles.orderList}>
-        <Text style={styles.title}>Pedidos disponíveis</Text>
-        <View>
-          <FlatList
-            style={styles.flatListEstilo}
-            data={listItems}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={this.renderItem}
-            nestedScrollEnabled
-          />
-        </View>
-      </View>
     </View>
   );
 }
