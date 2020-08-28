@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import {Text, TextInput, TouchableOpacity, View, ScrollView} from 'react-native';
+import {Text, TextInput, TouchableOpacity, View, ScrollView, Alert} from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
 
+import deliverymanRegister from '../../../services/deliverymanRegister' 
 import styles from './styles';
 
 
@@ -14,7 +15,58 @@ const DeliverymanRegister = ({ navigation }) => {
     const [ datanascimento, setDataNascimento ] = useState('');
     const [ tel, setTel ] = useState('');
     const [ email, setEmail] = useState('');
-  
+
+
+    const doRegister = async () => {
+      //DEPOIS REFATORAMOS..
+      if(name.length == ''){
+        Alert.alert('App Entregas', 'Preencha os dados corretamente');
+        return
+      }else if (user.length == ''){
+        Alert.alert('App Entregas', 'Preencha os dados corretamente');
+        return
+      }else if (cnh.length == ''){
+        Alert.alert('App Entregas', 'Preencha os dados corretamente');
+        return
+      }else if (datanascimento.length == '') {
+        Alert.alert('App Entregas', 'Preencha os dados corretamente');
+        return
+      }else if (tel.length == ''){
+        Alert.alert('App Entregas', 'Preencha os dados corretamente');
+        return
+      }else if (email.length == '') {
+        Alert.alert('App Entregas', 'Preencha os dados corretamente');
+        return;
+      }
+
+      try {
+        
+        const response =  await deliverymanRegister(name, user, cnh, datanascimento, tel, email );      
+        
+        if(response.data.situacao == 0) {
+          navigation.navigate('DeliverymanPhotos');
+        }
+
+        console.warn(response.data);
+
+        setName('');
+        setUser('');
+        setCnh('');
+        setDataNascimento('');
+        setTel('');
+        setEmail('');
+
+        
+
+      } catch(error) {
+        if(error.response) {
+          if(error.response.status == 404) Alert.alert('App Entregas', 'Impossível fazer o cadastro');
+          if(error.response.status.toString().startsWith('50')) Alert.alert('App Entregas', 'Erro no serviço, tente novamente mais tarde.');
+         
+          return;
+        }
+      }
+    }
 
     return (
       <ScrollView>
@@ -43,9 +95,6 @@ const DeliverymanRegister = ({ navigation }) => {
         />
         <TextInputMask
           type={'datetime'}
-          options={{
-            format: 'DD/MM/YYYY'
-          }}
           value={datanascimento}
           onChangeText={text => setDataNascimento(text)}
           style={styles.inputs}
@@ -57,7 +106,6 @@ const DeliverymanRegister = ({ navigation }) => {
           options={{
             maskType: 'BRL',
             withDDD: true,
-            dddMask: '(99)'
           }}
           value={tel}
           onChangeText={text => setTel(text)}
@@ -73,7 +121,7 @@ const DeliverymanRegister = ({ navigation }) => {
           onChangeText={text => setEmail(text)}
         />
         <TouchableOpacity
-          onPress={() => navigation.navigate('DeliverymanPhotos')}
+          onPress={() => doRegister()}
           style={styles.btnPrimary}>
           <Text style={styles.btnPrimaryText}>
             Confirmar
