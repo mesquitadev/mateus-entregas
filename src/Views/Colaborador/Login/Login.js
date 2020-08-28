@@ -28,16 +28,28 @@ const Login = ({ navigation }) => {
       const response =  await login(user, pass);      
       AsyncStorage.setItem('entregas_user_data', JSON.stringify(response.data));
 
-      if(response.data.situacao == 0) {
-        navigation.navigate('DeliverymanSetRegister');
-      }
+      switch(response.data.situacao) {
+        case 0: //pendente
+          navigation.navigate('DeliverymanSetRegister');
+          break;
 
-      if(response.data.perfil.descricao.toLowerCase() == 'colaborador') {
-        navigation.navigate('OrderList');
-      }
+        case 1: //ativo
+          if(response.data.perfil.descricao.toLowerCase() == 'colaborador')
+            navigation.navigate('OrderList');
 
-      if(response.data.perfil.descricao.toLowerCase() == 'entregador') {
-        navigation.navigate('AcceptOrders');
+          if(response.data.perfil.descricao.toLowerCase() == 'entregador')
+            navigation.navigate('AcceptOrders');
+
+          break;
+
+        case 2: //rejeitado
+          //navigation.navigate('')
+          alert('Cadastro rejeitado');
+          break;
+          
+        case 3: //analise -- enviar nova documentação
+          navigation.navigate('DeliverymanPhotos');
+          break;
       }
 
       setUser('');
