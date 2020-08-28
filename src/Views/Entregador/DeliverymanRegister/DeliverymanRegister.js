@@ -10,6 +10,7 @@ const DeliverymanRegister = ({ navigation }) => {
 
     const [ name, setName ] = useState('');
     const [ user, setUser ] = useState('');
+    const [ cnh, setCnh] = useState('');
     const [ datanascimento, setDataNascimento ] = useState('');
     const [ tel, setTel ] = useState('');
     const [ email, setEmail] = useState('');
@@ -31,6 +32,14 @@ const DeliverymanRegister = ({ navigation }) => {
           onChangeText={text => setUser(text.replace(/[^\d]+/g,''))}
           style={styles.inputs}
           maxLength={14}
+        />
+        <TextInput
+          placeholder="CNH"
+          value={cnh}
+          onChangeText={text => setCnh(text)}
+          keyboardType='numeric'
+          style={styles.inputs}
+          maxLength={11}
         />
         <TextInputMask
           type={'datetime'}
@@ -59,7 +68,7 @@ const DeliverymanRegister = ({ navigation }) => {
         <TextInput 
           style={styles.inputs}
           placeholder="E-mail"
-          type={"email"}
+          keyboardType='email-address'
           value={email}
           onChangeText={text => setEmail(text)}
         />
