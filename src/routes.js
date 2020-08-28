@@ -29,7 +29,7 @@ import DeliveryReceipt from './Views/Entregador/DeliveryReceipt/DeliveryReceipt'
 const Stack = createStackNavigator();
 
 const Routes = () => (
-  <Stack.Navigator initialRouteName="AcceptOrders">
+  <Stack.Navigator initialRouteName="Login">
 
     <Stack.Screen
       name="Login"
