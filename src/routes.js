@@ -27,7 +27,7 @@ import StartDelivery from './Views/Entregador/StartDelivery/StartDelivery';
 const Stack = createStackNavigator();
 
 const Routes = () => (
-  <Stack.Navigator initialRouteName="AcceptOrders">
+  <Stack.Navigator initialRouteName="Login">
 
     <Stack.Screen
       name="Login"
