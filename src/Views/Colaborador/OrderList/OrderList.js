@@ -89,6 +89,7 @@ const OrderList = ({ navigation: { navigate } }) => {
             data={listItems}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this.renderItem}
+            nestedScrollEnabled
           />
         </View>
       </View>
