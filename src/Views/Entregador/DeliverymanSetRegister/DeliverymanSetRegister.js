@@ -35,7 +35,7 @@ const DeliverymanSetRegister = ({navigation}) => {
             <View style={styles.wrapper}>  
                 <View style={styles.result}>
                     <Text style={styles.approved}>Pré cadastro</Text>
-                    <Text style={styles.resultConfirm}>Aprovado</Text>
+                    <Text style={styles.resultConfirm}>Realizado</Text>
                 </View>
                 <View>
                     <Ionicons name="checkmark-circle" size={28} color={'#00A349'} />
@@ -45,7 +45,7 @@ const DeliverymanSetRegister = ({navigation}) => {
             <View style={styles.wrapper}>  
                 <View style={styles.result}>
                     <Text style={styles.approved}>Foto da CNH</Text>
-                    <Text style={styles.resultConfirm}>Aprovado</Text>
+                    <Text style={styles.resultConfirm}>Enviada</Text>
                 </View>
                 <View>
                     <Ionicons name="checkmark-circle" size={28} color={'#00A349'} />
@@ -55,7 +55,7 @@ const DeliverymanSetRegister = ({navigation}) => {
             <View style={styles.wrapper}>  
                 <View style={styles.result}>
                     <Text style={styles.approved}>Foto do Perfil</Text>
-                    <Text style={styles.resultConfirm}>Aprovado</Text>
+                    <Text style={styles.resultConfirm}>Enviada</Text>
                 </View>
                 <View>
                     <Ionicons name="checkmark-circle" size={28} color={'#00A349'} />
@@ -65,7 +65,7 @@ const DeliverymanSetRegister = ({navigation}) => {
             <View style={styles.wrapper}>  
                 <View style={styles.result}>
                     <Text style={styles.approved}>Definição de senha</Text>
-                    <Text style={styles.resultConfirm}>Aprovado</Text>
+                    <Text style={styles.resultConfirm}>Realizada</Text>
                 </View>
                 <View>
                     <Ionicons name="checkmark-circle" size={28} color={'#00A349'} />
