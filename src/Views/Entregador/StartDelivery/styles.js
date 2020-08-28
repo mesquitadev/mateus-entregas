@@ -153,6 +153,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#FFF"
   },
+
+  hideTouchable: {
+    display: "none"
+  }
 });
 
 export default styles;
