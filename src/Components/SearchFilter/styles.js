@@ -8,22 +8,23 @@ const styles = StyleSheet.create({
   },
 
   searchFilter: {
+    width: screenWidth,
     padding: 0,
     borderColor: "#DDD",
     borderWidth: 1,
-    borderRadius: 6,
-    marginVertical: 10,
+    borderRadius: 0,
+    marginVertical: 0,
     flexDirection: "row",
     alignItems: "center",
   },
 
   inputSearch: {
-    width: screenWidth * 0.9,
+    width: screenWidth * 0.83,
     paddingVertical: 15,
     paddingHorizontal: 15,
     borderColor: "#8898A6",
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 7,
     marginVertical: 10,
     flexDirection: "row",
     alignItems: "center",
@@ -33,10 +34,10 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    width: 20,
-    height: 20,
-    marginRight: 5,
-    marginLeft: 10
+    width: 21,
+    height: 21,
+    marginRight: 15,
+    marginLeft: 13
   }
 });
 
