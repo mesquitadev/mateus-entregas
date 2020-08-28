@@ -20,24 +20,23 @@ const Login = ({navigation}) => {
   const [buttonEnabled, setButtonEnabled] = useState(true);
 
   const doLogin = async () => {
-    const CPF = require('cpf');
-    //if(!CPF.isValid(user)) { // DEVELOP -- RETIRAR
+    // const CPF = require('cpf');
+    // if(!CPF.isValid(user)) { // DEVELOP -- RETIRAR
     //  Alert.alert('App Entregas', 'CPF inválido, verifique o número digitado e tente novamente.');
     //  return;
-    //}
-
-    if (pass.length < 6) {
-      Alert.alert(
-        'App Entregas',
-        'Verifique a senha digitada e tente novamente.',
-      );
-      return;
-    }
+    // }
+    // 
+    // if (pass.length < 6) {
+    //   Alert.alert(
+    //     'App Entregas',
+    //     'Verifique a senha digitada e tente novamente.',
+    //   );
+    //   return;
+    // }
 
     try {
       setButtonEnabled(false);
-      //const response =  await login(user, pass);
-      const response = await login("00000000000", "123456"); // -- DEVELOP (REMOVER)
+      const response =  await login(user, pass);
 
       AsyncStorage.setItem('entregas_user_data', JSON.stringify(response.data));
 
