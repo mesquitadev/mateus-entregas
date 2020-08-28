@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     alignItems: 'center',
     paddingVertical: 0,
-    left: screenWidth / 8
+    left: screenWidth / 8,
+    height: screenWidth * 0.30,
   },
 
   inputs: {
