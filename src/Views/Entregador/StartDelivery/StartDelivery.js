@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, Linking } from 'react-native';
 
 import styles from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const StartDelivery = ({ route: {params}, navigation }) => {
+  const [ startDelivery, setStartDelivery ] = useState(false);
+  const [ delivered, setDelivered ] = useState(false);
+  
   return(
     <View style={styles.container}>
 
@@ -41,11 +44,24 @@ const StartDelivery = ({ route: {params}, navigation }) => {
         </TouchableOpacity>
       </View>
       
-      <TouchableOpacity style={styles.btnAction}>
-        <Text style={styles.btnActionText}>
+      <TouchableOpacity style={styles.startTouchable}>
+        <Text style={styles.startTouchableText}>
           Iniciar entrega
         </Text>
       </TouchableOpacity>
+
+      <View style={styles.actions}>
+        <TouchableOpacity style={styles.actionsTouchableLight}>
+          <Text style={styles.actionsTouchableLightText}>
+            Cancelar
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.actionsTouchable}>
+          <Text style={styles.actionsTouchableText}>
+            Entregue
+          </Text>
+        </TouchableOpacity>
+      </View>
 
     </View>
       
