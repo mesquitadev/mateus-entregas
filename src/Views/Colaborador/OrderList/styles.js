@@ -7,13 +7,13 @@ const styles = StyleSheet.create({
   },
   
   flatListEstilo:{
-    marginTop: 30,
-    marginVertical:200
+    marginTop: 0,
   },
 
   title: {
     width: screenWidth * 0.9,
-    marginVertical: 15,
+    height: 25,
+    marginVertical: 5,
     fontSize: 14,
     fontWeight: "bold",
     color: "#2B2D2E",
