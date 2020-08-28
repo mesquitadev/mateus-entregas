@@ -50,7 +50,7 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
           onPress={() => checkSelectedOrders()}
           style={styles.button}>
           <Text style={styles.buttonText}>
-            Gerar QrCode
+            Confirmar
           </Text>
         </TouchableOpacity>
       </View>
