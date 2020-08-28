@@ -47,19 +47,6 @@ const styles = StyleSheet.create({
     color: "#0095DA"
   },
 
-  btnAction: {
-    backgroundColor: "#0095DA",
-    width: screenWidth * 0.9,
-    alignItems: "center",
-    borderRadius: 5,
-    marginBottom: 15,
-  },
-
-  btnActionText: {
-    color: "#FFF",
-    padding: 15
-  },
-
   contact: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -101,7 +88,71 @@ const styles = StyleSheet.create({
 
   receiptText: {
     fontWeight: "bold"
-  }
+  },
+
+  startTouchable: {
+    backgroundColor: "#0095DA",
+    width: screenWidth * 0.9,
+    alignItems: "center",
+    borderRadius: 5,
+    marginBottom: 15,
+  },
+
+  startTouchableText: {
+    color: "#FFF",
+    padding: 15
+  },
+
+  actions: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: screenWidth * 0.9,
+    marginBottom: 15
+  },
+
+  actionsTouchableLight: {
+    alignItems: "center",
+    borderColor: "#0095DA",
+    borderWidth: 1,
+    padding: 15,
+    borderRadius: 5,
+    width: screenWidth * 0.42,
+  },
+
+  actionsTouchableLightText: {
+    fontWeight: "bold",
+    color: "#0095DA"
+  },
+
+  actionsTouchable: {
+    alignItems: "center",
+    backgroundColor: "#DAE0E3",
+    borderColor: "#DAE0E3",
+    borderWidth: 1,
+    padding: 15,
+    borderRadius: 5,
+    width: screenWidth * 0.42,
+  },
+
+  actionsTouchableText: {
+    fontWeight: "bold",
+    color: "#787B7D"
+  },
+
+  actionsTouchableActive: {
+    alignItems: "center",
+    backgroundColor: "#0095DA",
+    borderColor: "#0095DA",
+    borderWidth: 1,
+    padding: 15,
+    borderRadius: 5,
+    width: screenWidth * 0.42,
+  },
+
+  actionsTouchableActiveText: {
+    fontWeight: "bold",
+    color: "#FFF"
+  },
 });
 
 export default styles;

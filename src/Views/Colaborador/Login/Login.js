@@ -13,10 +13,10 @@ const Login = ({ navigation }) => {
 
   const doLogin = async () => {
     const CPF = require('cpf');
-    if(!CPF.isValid(user) && user != '00000000000') { // DEVELOP -- RETIRAR
-      Alert.alert('App Entregas', 'CPF inválido, verifique o número digitado e tente novamente.');
-      return;
-    }
+    //if(!CPF.isValid(user)) { // DEVELOP -- RETIRAR
+    //  Alert.alert('App Entregas', 'CPF inválido, verifique o número digitado e tente novamente.');
+    //  return;
+    //}
 
     if(pass.length < 6) {
       Alert.alert('App Entregas','Verifique a senha digitada e tente novamente.');
@@ -26,24 +26,29 @@ const Login = ({ navigation }) => {
     try {
       setButtonEnabled(false);
       const response =  await login(user, pass);      
-      await AsyncStorage.setItem('entregas_user_data', JSON.stringify(response.data));
+      AsyncStorage.setItem('entregas_user_data', JSON.stringify(response.data));
+
+      if(response.data.situacao == 0) {
+        navigation.navigate('DeliverymanSetRegister');
+      }
+
+      if(response.data.perfil.descricao.toLowerCase() == 'colaborador') {
+        navigation.navigate('OrderList');
+      }
+
+      if(response.data.perfil.descricao.toLowerCase() == 'entregador') {
+        navigation.navigate('AcceptOrders');
+      }
 
       setUser('');
       setPass('');
       setButtonEnabled(true);
-      
-      // usuario/senha ok, mas cadastro inativo --> alterar para tela de cadastro em analise
-      if(response.situacao == 0) {
-        navigation.navigate('DeliverymanRegister');
-      }
-
-      // se for perfil colaborador, vai pra tela dele
-      if(response.perfil == 'Colaborador') {
-        navigation.navigate('OrderList');
-      }
     } catch(error) {
       if(error.response) {
         if(error.response.status == 404) Alert.alert('App Entregas', 'Usuário ou senha inválidos.');
+        if(error.response.status.toString().startsWith('50')) Alert.alert('App Entregas', 'Erro no serviço, tente novamente mais tarde.');
+
+        setPass('');
         setButtonEnabled(true);
         return;
       }
@@ -71,7 +76,7 @@ const Login = ({ navigation }) => {
         style={styles.inputs} 
         placeholder="Senha" 
         onChangeText={text => setPass(text)}
-        secureTextEntry
+        secureTextEntry={true}
       />
 
       <TouchableOpacity
@@ -85,7 +90,7 @@ const Login = ({ navigation }) => {
       </TouchableOpacity>
       
       <TouchableOpacity
-        onPress={() => navigation.navigate('DeliverymanPhotos')}
+        onPress={() => navigation.navigate('DeliverymanRegister')}
         style={styles.btnSecondary}>
         <Text style={styles.btnSecondaryText}>
           Cadastrar Entregador
