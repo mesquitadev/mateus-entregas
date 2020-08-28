@@ -59,5 +59,13 @@ const styles = StyleSheet.create({
     bottom: 3,
     position: 'absolute',
   },
+
+  buttonSwitchCamera: {
+    width: 56,
+    height: 56,
+    bottom: 35,
+    position: 'absolute',
+    right: 50,
+  },
 });
 export default styles;

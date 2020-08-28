@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {Modal, View, Text, Alert} from 'react-native';
+import {Modal, View, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {RNCamera} from 'react-native-camera';
+//import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import styles from './styles';
 
@@ -11,6 +12,7 @@ const Camera = ({
   onCloseCamera,
   route,
   photoType,
+  frontCamera
 }) => {
   const [camera, setCamera] = useState();
 
@@ -18,7 +20,7 @@ const Camera = ({
     try {
       const photo = await camera.takePictureAsync({
         quality: 0.5,
-        // base64: true,
+        base64: true,
         forceUpOrientation: true,
         fixOrientation: true,
         skipProcessing: true,
@@ -36,7 +38,7 @@ const Camera = ({
       <RNCamera
         ref={(ref) => setCamera(ref)}
         style={{flex: 1}}
-        type={RNCamera.Constants.Type.back}
+        type={frontCamera ? RNCamera.Constants.Type.front : RNCamera.Constants.Type.back}
         autoFocus={RNCamera.Constants.AutoFocus.on}
         flashMode={RNCamera.Constants.FlashMode.off}
         androidCameraPermissionOptions={{
@@ -63,6 +65,18 @@ const Camera = ({
         <View style={styles.borderButton} onTouchEnd={onTakePicture}>
           <View style={styles.buttonAround} />
         </View>
+
+{/* 
+        <TouchableOpacity style={styles.buttonSwitchCamera} onPress={() => (
+            frontCamera === true ? false : true
+        )}>
+            <Ionicons
+                name="camera-reverse-outline"
+                color="white"
+                size={50}
+            />
+        </TouchableOpacity> */}
+
       </RNCamera>
     </Modal>
   );
