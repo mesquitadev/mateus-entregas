@@ -17,7 +17,7 @@ const deliverymanRegister = async (name, user, cnh, datanascimento, tel, email) 
   };
 
 
-  const response = await api.post(`/cadastro`, bodyHTTP);
+  const response = await api.post(`/entregador`, bodyHTTP);
   return response;
 };
 
