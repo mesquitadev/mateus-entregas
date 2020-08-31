@@ -180,7 +180,7 @@ const Routes = () => (
       component={DeliverymanSetRegister}
       options={{
         title: 'Cadastro',
-        headerBackTitle: 'Voltar',
+        headerTitleAlign: 'center'
       }}
     />
     <Stack.Screen
