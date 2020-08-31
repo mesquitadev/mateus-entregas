@@ -61,7 +61,19 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "bold",
     color: "#2B2D2E",
-  },  
+  },
+
+  listProducts: {
+    marginLeft: 15
+  },
+
+  labelItems: {
+    fontSize: 14,
+    color: "#787B7D",
+    marginBottom: 10,
+    marginTop: 10,
+    marginLeft: 17
+  },
 });
 
 export default styles;
