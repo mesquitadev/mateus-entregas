@@ -1,34 +1,61 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const screenWidth = Dimensions.get('screen').width;
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FFF"
-  },
 
-  touchable: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderColor: "#CCC",
-    width: screenWidth * 0.9,
-    borderWidth: 1,
-    borderRadius: 5,
-    padding: 20,
-    marginBottom: 20
-  },
+    container: {
+        backgroundColor: "#FFF",
+        flex: 1,
+        alignItems: "center",
+     
 
-  touchableImg: {
-    width: 28,
-    height: 28,
-    marginRight: 10
-  },
+    },
+    wrapper: {
+        flex: 1,
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingTop: 50,
+        width: screenWidth * 0.5,
+    },
+    status: {
+        color: "#00A349",
+        fontSize: 18,
+        textAlign: "center",
+        paddingVertical: 30
 
-  touchableText: {
-    fontWeight: "bold"
-  },
-});
+    },
+    btnPrimary: {
+        backgroundColor: "#0095DA",
+        width: screenWidth * 0.9,
+        alignItems: "center",
+        paddingVertical: 18,
+        borderRadius: 5,
+        marginTop: 15,
+        marginBottom:15
+        
+    },
+    
+    btnPrimaryText: {
+        color: "#FFF",
+        fontWeight: "400",
+    },
 
-export default styles;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ });
+
+ export default styles;
