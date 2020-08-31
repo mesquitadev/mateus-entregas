@@ -26,6 +26,7 @@ import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
 import StartDelivery from './Views/Entregador/StartDelivery/StartDelivery';
 import DeliveryReceipt from './Views/Entregador/DeliveryReceipt/DeliveryReceipt';
 import ReceiptByAnotherPerson from './Views/Entregador/ReceiptByAnotherPerson/ReceiptByAnotherPerson';
+import DeliverymanRegisterDenied from './Views/Entregador/DeliverymanRegisterDenied/DeliverymanRegisterDenied';
 
 const Stack = createStackNavigator();
 
@@ -128,7 +129,7 @@ const Routes = () => (
       name="DeclineOrders"
       component={DeclineOrders}
       options={{
-        title: 'Qual o motivo?',
+        title: 'Motivo',
         headerTitleAlign: 'center',
       }}
     />
@@ -136,12 +137,7 @@ const Routes = () => (
       name="DeclineOrdersInformation"
       component={DeclineOrdersInformation}
       options={{
-        title: 'Entrega cancelada',
-        headerTitleAlign: 'center',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-          fontSize: 16,
-        },
+        headerShown: false
       }}
     />
     <Stack.Screen
@@ -181,7 +177,7 @@ const Routes = () => (
       component={DeliverymanSetRegister}
       options={{
         title: 'Cadastro',
-        headerBackTitle: 'Voltar',
+        headerTitleAlign: 'center'
       }}
     />
     <Stack.Screen
@@ -223,7 +219,7 @@ const Routes = () => (
        headerBackTitle: "Voltar",
       }}
     />
-    <Stack.Screen 
+    <Stack.Screen
      name="DeliveryReceipt"
      component={DeliveryReceipt}
      options={{
@@ -233,10 +229,17 @@ const Routes = () => (
       }}
     />
     <Stack.Screen 
-     name="ReceiptByAnotherPerson"
-     component={ReceiptByAnotherPerson}
+      name="ReceiptByAnotherPerson"
+      component={ReceiptByAnotherPerson}
+      options={{
+        title: "Recebimento terceiros"
+      }}
+    />
+    <Stack.Screen
+     name="DeliverymanRegisterDenied"
+     component={DeliverymanRegisterDenied}
      options={{
-       title: "Recebimento terceiros",
+       title: "Cadastro",
        headerBackTitle: "Voltar",
        headerTitleAlign: 'center',
       }}

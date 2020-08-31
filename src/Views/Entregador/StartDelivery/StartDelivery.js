@@ -10,6 +10,9 @@ const StartDelivery = ({ route: {params}, navigation }) => {
   const [ receiptCpf, setReceiptCpf ] = useState('');
   const [ delivered, setDelivered ] = useState('');
 
+  const _data = params.data;
+  const _pedido = params.data.pedido;
+
   useEffect(() => {
     if (params?.post) {
       setReceiptName(params.post.name);
@@ -39,19 +42,21 @@ const StartDelivery = ({ route: {params}, navigation }) => {
           <Text style={styles.label}>Cliente</Text>
           <Text style={styles.text}>Sem nome</Text>
           <Text style={styles.label}>Endereço de entrega</Text>
-          <Text style={styles.text}>{params.endereco.bairro}</Text>
-          <Text style={styles.text}>{params.endereco.endereco}</Text>
-          <Text style={styles.text}>{params.endereco.estado}, {params.endereco.cep}</Text>
+          <Text style={styles.text}>{_pedido.endereco.bairro}</Text>
+          <Text style={styles.text}>{_pedido.endereco.endereco}</Text>
+          <Text style={styles.text}>
+            {_pedido.endereco.estado}, {_pedido.endereco.cep}
+          </Text>
           <Text style={styles.status}>Aguardando entrega</Text>
         </View>
-
-        <TouchableOpacity onPress={() => navigation.navigate('OrderDetails', {item: params})}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('OrderDetails', {item: _pedido})}>
           <Text style={styles.btnViewMoreText}>Ver mais</Text>
         </TouchableOpacity>
 
         <View style={styles.contact}>
-          <TouchableOpacity 
-            onPress={() => Linking.openURL(`tel:${params.cliente.telefone}`)} 
+          <TouchableOpacity
+            onPress={() => Linking.openURL(`tel:${_pedido.cliente.telefone}`)}
             style={styles.contactTouchable}>
             <Image source={require('../../../res/img/ligar.png')} />
             <Text style={styles.contactTouchableText}>Ligar</Text>
@@ -78,7 +83,7 @@ const StartDelivery = ({ route: {params}, navigation }) => {
           <Text style={styles.receiptText}>Comprovante de entrega</Text>
         </TouchableOpacity>
       </View>
-      
+
       <TouchableOpacity
         style={!startDelivery ? styles.startTouchable : styles.hide}
         onPress={handleStartDelivery}>
@@ -87,26 +92,33 @@ const StartDelivery = ({ route: {params}, navigation }) => {
         </Text>
       </TouchableOpacity>
 
-      <View style={startDelivery ? styles.actions : styles.hide}>
-        <TouchableOpacity style={styles.actionsTouchableLight}>
-          <Text style={styles.actionsTouchableLightText}>
-            Cancelar
-          </Text>
+      <View style={startDelivery ? styles.actions : styles.hideTouchable}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('DeclineOrders', {
+              data: _data,
+            })
+          }
+          style={styles.actionsTouchableLight}>
+          <Text style={styles.actionsTouchableLightText}>Suspender</Text>
         </TouchableOpacity>
-        <TouchableOpacity 
+        <TouchableOpacity
+          // onPress={() =>
+          //   navigation.navigate('AcceptOrders', {
+          //     data: _data,
+          //   })
+          // }
           style={delivered ? 
             styles.actionsTouchableActive : 
             styles.actionsTouchable}>
-          <Text 
-            style={delivered ? 
+          <Text style={delivered ? 
               styles.actionsTouchableActiveText :
               styles.actionsTouchableText}>
-            Entregar
+            Entreguar
           </Text>
         </TouchableOpacity>
       </View>
     </View>
-      
   );
 };
 

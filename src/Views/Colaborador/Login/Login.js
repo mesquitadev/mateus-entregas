@@ -33,6 +33,9 @@ const Login = ({navigation}) => {
     //   );
     //   return;
     // }
+    //
+    // if(pass.length < 6)
+    //   alert('Verifique os dados digitados e tente novamente.')
 
     try {
       setButtonEnabled(false);

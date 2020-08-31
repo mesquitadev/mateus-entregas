@@ -11,16 +11,17 @@ const SearchFilter = ({ onChangeText }) => {
   
   return (
     <View style={styles.container}>
-      <View style={styles.searchFilter}>
-        <Image 
+      <View style={styles.SectionStyle}>
+        <Image
           source={require("../../res/img/search.png")} 
-          style={styles.image}
+          style={styles.ImageStyle}
         />
-        <TextInput 
-          onChangeText={text => this.handleChangeText(text)}
+
+        <TextInput
+          style={styles.InputStyle}
           placeholder="Pesquisar"
-          style={styles.inputSearch}
-          
+          underlineColorAndroid="transparent"
+          onChangeText={text => this.handleChangeText(text)}
         />
       </View>
     </View>
