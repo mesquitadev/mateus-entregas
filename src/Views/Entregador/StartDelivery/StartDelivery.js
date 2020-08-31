@@ -1,15 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, Linking, TouchableOpacity } from 'react-native';
 
+import onStartDelivery from '../../../services/onStartDelivery';
 import styles from './styles';
 
 const StartDelivery = ({ route: {params}, navigation }) => {
-  const [ startDelivery, setStartDelivery ] = useState(false);
-  const [ delivered, setDelivered ] = useState(false);
+  const [ startDelivery, setStartDelivery ] = useState('');
+  const [ receiptName, setReceiptName ] = useState('');
+  const [ receiptCpf, setReceiptCpf ] = useState('');
+  const [ delivered, setDelivered ] = useState('');
+
+  useEffect(() => {
+    if (params?.post) {
+      setReceiptName(params.post.name);
+      setReceiptCpf(params.post.cpf);
+      setDelivered(true);
+    } else {
+      setDelivered(false);
+    }
+  }, [params?.post]);
+
+  const handleStartDelivery = async () => {
+    try {
+      // const response = onStartDelivery(params.id);
+
+      setStartDelivery(true);
+    } catch(error) {
+      alert('Não foi possível iniciar a entrega.')
+    }
+  };
   
   return(
     <View style={styles.container}>
-
       <View style={styles.body}>
         <View style={styles.info}>
           <Text style={styles.label}>Origem</Text>
@@ -22,9 +44,11 @@ const StartDelivery = ({ route: {params}, navigation }) => {
           <Text style={styles.text}>{params.endereco.estado}, {params.endereco.cep}</Text>
           <Text style={styles.status}>Aguardando entrega</Text>
         </View>
+
         <TouchableOpacity onPress={() => navigation.navigate('OrderDetails', {item: params})}>
           <Text style={styles.btnViewMoreText}>Ver mais</Text>
         </TouchableOpacity>
+
         <View style={styles.contact}>
           <TouchableOpacity 
             onPress={() => Linking.openURL(`tel:${params.cliente.telefone}`)} 
@@ -37,35 +61,50 @@ const StartDelivery = ({ route: {params}, navigation }) => {
             <Text style={styles.contactTouchableText}>Localização</Text>
           </TouchableOpacity>
         </View>
+
         <TouchableOpacity
           onPress={() => navigation.navigate('DeliveryReceipt', params)}
-          style={startDelivery ? styles.receipt : styles.hideTouchable}>
-          <Image style={styles.receiptImg} source={require('../../../res/img/caixa.png')} />
+          style={
+            [startDelivery ? styles.receipt : styles.hide,
+            !delivered ? styles.receipt : styles.receiptActive]}>
+          <Image 
+            style={!delivered ? styles.receiptImg : styles.hide} 
+            source={require('../../../res/img/caixa.png')} 
+          />
+          <Image 
+            style={delivered ? styles.receiptImg : styles.hide} 
+            source={require('../../../res/img/icon-check.png')} 
+          />
           <Text style={styles.receiptText}>Comprovante de entrega</Text>
         </TouchableOpacity>
       </View>
       
       <TouchableOpacity
-        style={!startDelivery ? styles.startTouchable : styles.hideTouchable}
-        onPress={() => setStartDelivery(true)}>
+        style={!startDelivery ? styles.startTouchable : styles.hide}
+        onPress={handleStartDelivery}>
         <Text style={styles.startTouchableText}>
           Iniciar entrega
         </Text>
       </TouchableOpacity>
 
-      <View style={startDelivery ? styles.actions : styles.hideTouchable}>
+      <View style={startDelivery ? styles.actions : styles.hide}>
         <TouchableOpacity style={styles.actionsTouchableLight}>
           <Text style={styles.actionsTouchableLightText}>
             Cancelar
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.actionsTouchable}>
-          <Text style={styles.actionsTouchableText}>
-            Entregue
+        <TouchableOpacity 
+          style={delivered ? 
+            styles.actionsTouchableActive : 
+            styles.actionsTouchable}>
+          <Text 
+            style={delivered ? 
+              styles.actionsTouchableActiveText :
+              styles.actionsTouchableText}>
+            Entregar
           </Text>
         </TouchableOpacity>
       </View>
-
     </View>
       
   );
