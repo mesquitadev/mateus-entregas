@@ -5,9 +5,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import styles from './styles';
 
-const DeliverymanPhotos = ({navigation, route: {params}}) => {
+const DeliverymanPhotos = ({ navigation, route: {params}}) => {
   const [statusCheckCNH, setStatusCheckCNH] = useState(false);
-  const [statuCheckProfile, setStatuCheckProfile] = useState(false);
+  const [statusCheckProfile, setstatusCheckProfile] = useState(false);
   const [confirmationVisibility, setConfirmationVisibility] = useState(false);
 
   const types = {
@@ -16,24 +16,35 @@ const DeliverymanPhotos = ({navigation, route: {params}}) => {
   };
 
   useEffect(() => {
-    const getStatusChecks = async () => {
-      try {
-        const checkCNH = await AsyncStorage.getItem(types.cnh);
-        const checkPerfil = await AsyncStorage.getItem(types.perfil);
-        console.log('cnhhhhh', checkCNH);
-        console.log('perfilll', checkPerfil)
-        setStatusCheckCNH(checkCNH);
-        setStatuCheckProfile(checkPerfil);
-      } catch (e) {}
-    };
-    getStatusChecks();
-  }, []);
+    const unsubscribe = navigation.addListener('focus', () => {
+      const getStatusChecks = async () => {
+        try {
+          const checkCNH = await AsyncStorage.getItem(types.cnh);
+          const checkPerfil = await AsyncStorage.getItem(types.perfil);
+
+          setStatusCheckCNH(checkCNH);
+          setstatusCheckProfile(checkPerfil);
+        } catch (e) {
+          return;
+        }
+      };
+      getStatusChecks();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  useEffect(() => {
+    if (statusCheckCNH && statusCheckProfile)
+      return setConfirmationVisibility(true);
+  }, [statusCheckCNH, statusCheckProfile]);
 
   return (
     <View style={styles.container}>
       <View>
         <TouchableOpacity
-          onPress={() => navigation.replace('DeliverymanPhotoCnh')}
+          disabled={statusCheckCNH ? true : false}
+          onPress={() => navigation.navigate('DeliverymanPhotoCnh')}
           style={styles.btnSecondary}>
           <Ionicons
             name={statusCheckCNH ? 'checkmark-circle' : 'information-circle'}
@@ -45,12 +56,15 @@ const DeliverymanPhotos = ({navigation, route: {params}}) => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => navigation.replace('DeliverymanPhotoProfile')}
+          disabled={statusCheckProfile ? true : false}
+          onPress={() => navigation.navigate('DeliverymanPhotoProfile')}
           style={styles.btnSecondary}>
           <Ionicons
-            name={statuCheckProfile ? 'checkmark-circle' : 'information-circle'}
+            name={
+              statusCheckProfile ? 'checkmark-circle' : 'information-circle'
+            }
             size={28}
-            color={statuCheckProfile ? '#00A349' : 'red'}
+            color={statusCheckProfile ? '#00A349' : 'red'}
             style={styles.iconAlert}
           />
           <Text style={styles.btnSecondaryText}>Foto do Perfil</Text>
@@ -59,7 +73,9 @@ const DeliverymanPhotos = ({navigation, route: {params}}) => {
 
       <TouchableOpacity
         disabled={!confirmationVisibility}
-        onPress={() => navigation.navigate('DeliverymanSetPassword')}
+        onPress={() => {
+          navigation.navigate('DeliverymanSetPassword');
+        }}
         style={[
           styles.btnPrimary,
           {

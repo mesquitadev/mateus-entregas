@@ -24,6 +24,7 @@ import DeliverymanPhotoValidation from './Views/Entregador/DeliverymanPhotoValid
 import DeliveryOrders from './Views/Entregador/DeliveryOrders/DeliveryOrders';
 import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
 import StartDelivery from './Views/Entregador/StartDelivery/StartDelivery';
+import DeliveryReceipt from './Views/Entregador/DeliveryReceipt/DeliveryReceipt';
 
 const Stack = createStackNavigator();
 
@@ -126,7 +127,7 @@ const Routes = () => (
       name="DeclineOrders"
       component={DeclineOrders}
       options={{
-        title: 'Cancelar',
+        title: 'Motivo',
         headerTitleAlign: 'center',
       }}
     />
@@ -179,7 +180,7 @@ const Routes = () => (
       component={DeliverymanSetRegister}
       options={{
         title: 'Cadastro',
-        headerBackTitle: 'Voltar',
+        headerTitleAlign: 'center'
       }}
     />
     <Stack.Screen
@@ -213,12 +214,21 @@ const Routes = () => (
        headerBackTitle: "Voltar",
       }}
     />
-    <Stack.Screen 
+    <Stack.Screen
      name="StartDelivery"
      component={StartDelivery}
      options={{
        title: "Iniciar entrega",
        headerBackTitle: "Voltar",
+      }}
+    />
+    <Stack.Screen 
+     name="DeliveryReceipt"
+     component={DeliveryReceipt}
+     options={{
+       title: "Comprovante de entrega",
+       headerBackTitle: "Voltar",
+       headerTitleAlign: 'center',
       }}
     />
 

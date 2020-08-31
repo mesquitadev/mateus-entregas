@@ -83,7 +83,22 @@ const styles = StyleSheet.create({
     resultConfirm: {
         fontSize: 12,
         color: "#787B7D"
-    }
+    },
+
+    btnPrimary: {
+        backgroundColor: "#0095DA",
+        width: screenWidth * 0.9,
+        alignItems: "center",
+        paddingVertical: 18,
+        borderRadius: 5,
+        marginTop: 15,
+        marginBottom: 15
+      },
+    
+    btnPrimaryText: {
+        color: "#FFF",
+        fontWeight: "bold",
+      },
 
  });
 

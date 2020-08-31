@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, Image, ScrollView, SafeAreaView} from 'react-native';
+import {Text, View, Image, ScrollView, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import styles from './styles';
@@ -80,6 +80,15 @@ const DeliverymanSetRegister = ({navigation}) => {
                 <View>
                     <Ionicons name="time" size={28} color={'#D98016'} />
                 </View>
+            </View>
+            <View>
+                <TouchableOpacity
+                    onPress={() => {navigation.navigate('Login')}}
+                    style={styles.btnPrimary}>
+                    <Text style={styles.btnPrimaryText}>
+                        Iniciar
+                    </Text>
+                </TouchableOpacity>
             </View>
  
         </View>
