@@ -26,6 +26,7 @@ import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
 import StartDelivery from './Views/Entregador/StartDelivery/StartDelivery';
 import DeliveryReceipt from './Views/Entregador/DeliveryReceipt/DeliveryReceipt';
 import DeliverymanRegisterDenied from './Views/Entregador/DeliverymanRegisterDenied/DeliverymanRegisterDenied';
+import OrderConfirmed from './Views/Colaborador/OrderConfirmed/OrderConfirmed';
 
 const Stack = createStackNavigator();
 
@@ -87,6 +88,14 @@ const Routes = () => (
       options={{
         title: 'Conferência de pedido',
         headerBackTitle: 'Voltar',
+      }}
+    />
+    <Stack.Screen
+      name="OrderConfirmed"
+      component={OrderConfirmed}
+      options={{
+        title: 'Pedido Retirado',
+        headerTitleAlign: 'center',
       }}
     />
 
