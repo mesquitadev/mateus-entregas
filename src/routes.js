@@ -136,12 +136,7 @@ const Routes = () => (
       name="DeclineOrdersInformation"
       component={DeclineOrdersInformation}
       options={{
-        title: 'Entrega cancelada',
-        headerTitleAlign: 'center',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-          fontSize: 16,
-        },
+        headerShown: false
       }}
     />
     <Stack.Screen
@@ -223,7 +218,7 @@ const Routes = () => (
        headerBackTitle: "Voltar",
       }}
     />
-    <Stack.Screen 
+    <Stack.Screen
      name="DeliveryReceipt"
      component={DeliveryReceipt}
      options={{
@@ -232,7 +227,7 @@ const Routes = () => (
        headerTitleAlign: 'center',
       }}
     />
-    <Stack.Screen 
+    <Stack.Screen
      name="DeliverymanRegisterDenied"
      component={DeliverymanRegisterDenied}
      options={{
