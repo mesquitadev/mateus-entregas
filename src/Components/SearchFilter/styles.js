@@ -4,7 +4,9 @@ const screenWidth = Dimensions.get('screen').width;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#FFF",
-    alignItems: "center"
+    alignItems: "center",
+    borderBottomColor: "#ccc",
+    borderBottomWidth: 1,
   },
 
   SectionStyle: {
