@@ -23,44 +23,46 @@ import api from '../../../services/api';
       getUserData();
     }, []);   
 
-    console.log(user)
-    console.log(params)
-    
+    const numeroPedidoList = params.orders.map((ordem, index) => {
+      //console.log(ordem.numeroPedido)
+      return ({numeroPedido: ordem.numeroPedido})
+    });
+
     useEffect(() => {
-      const fetchData = async (params,user) => {
+    const fetchData = async () => {
         const bodyParam ={
-          "colaborador": {
-            "id" : "1",
-            "username":"03754879308"
-          },
-          "entregador": {
-            "id" : "35",
-            "username":"00022233344",
-          },  
-          "pedidos": [
-            {
-              "numeroPedido":"3000000839"
+            colaborador: {
+              id : user.id,
+              username:user.username
+            },
+            entregador: {
+              id : params.person.usuario.id,
+              username:params.person.usuario.username,
+            },  
+            pedidos: numeroPedidoList,
+            // pedidos: [
+            //   {
+            //     "numeroPedido":"3000000839"
+            //   }
+            // ],
+            log: {
+              ip: "127.0.0.1",
+              dispositivo: "Asus Zenfone 4",
+              localizacao: "-41.2866400;174.7755700"
             }
-          ],
-          "log": {
-            "ip": "127.0.0.1",
-            "dispositivo": "Asus Zenfone 4",
-            "localizacao": "-41.2866400;174.7755700"
           }
-        };
+        
         console.log(bodyParam)
         const response = await api.post(`/entrega`, bodyParam);
+        console.log(response.data)
         setcodQrCode(response.data)
-      };
-      fetchData();
-    }, []);
-
-    console.log(codQrCode)
+        }
+        fetchData();
+      }, []);
     
     // var timer = setInterval(() => {
     //   console.log('I do not leak!');
-    // }, 5000);
-
+    // }, 5000)
 
   return(
 
@@ -70,8 +72,9 @@ import api from '../../../services/api';
             size = {300} 
             bgColor = '#000000' 
             fgColor = '#FFFFFF'
-            value={codQrCode.identificador}
-          />
+             value={codQrCode.identificador}
+            // value="123456"
+            />
       <Text style={styles.identificador}>{codQrCode.identificador}</Text>
       <Text style={styles.text}>{params.person.cnh}</Text>
       <Text style={styles.text}>{user.username}</Text>
