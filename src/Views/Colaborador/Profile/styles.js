@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 15,
+    marginBottom: 5,
     color: "#2B2D2E",
   },
 
