@@ -111,7 +111,7 @@ const DeliverymanRegister = ({ navigation }) => {
           onChangeText={text => setTel(text)}
           style={styles.inputs}
           placeholder="Telefone"
-          maxLength={14}
+          maxLength={15}
         />
         <TextInput 
           style={styles.inputs}
