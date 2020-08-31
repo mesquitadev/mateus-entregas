@@ -13,7 +13,6 @@ const DeliveryInformation = ({ route: { params }, navigation: { navigate } }) =>
         <Ionicons name={'person-circle'} size={146} color={"#777"}/>
         <Text style={styles.userName}>{params.person.name}</Text>
         <Text style={styles.text}>CPF: {params.person.cpf}</Text>
-        {console.log(params.person)}
         <Text style={styles.text}>Código: {params.person.identificador}</Text>
       </View>
       <View style={styles.buttonBar}>
@@ -25,7 +24,7 @@ const DeliveryInformation = ({ route: { params }, navigation: { navigate } }) =>
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-        
+
           onPress={() => navigate('OrderCheck', params)}
           style={styles.buttonNext}>
           <Text style={styles.buttonNextText}>

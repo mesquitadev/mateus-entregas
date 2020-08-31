@@ -48,14 +48,16 @@ const OrderDetails = ({ route: { params } }) => {
       
       <View style={styles.divider} />
 
-      <View style={styles.list}>
+      <View style={styles.list, {flex: 1}}>
         <Text style={styles.label}>Itens</Text>
         <FlatList 
           data={listItems}
           keyExtractor={(item, index) => index.toString()}
           renderItem={this.renderItem}
+          nestedScrollEnabled
         />
       </View>
+      
     </View>
   );
 };

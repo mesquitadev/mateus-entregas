@@ -20,20 +20,29 @@ import DeliverymanSetPassword from './Views/Entregador/DeliverymanSetPassword/De
 import DeliverymanSetRegister from './Views/Entregador/DeliverymanSetRegister/DeliverymanSetRegister';
 import EnterDeliverymanCode from './Views/Entregador/EnterDeliverymanCode/EnterDeliverymanCode';
 import ReceiveOrder from './Views/Entregador/ReceiveOrder/ReceiveOrder';
+<<<<<<< HEAD
 //import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
 
 
+=======
+import DeliverymanPhotoValidation from './Views/Entregador/DeliverymanPhotoValidation/DeliverymanPhotoValidation';
+import DeliveryOrders from './Views/Entregador/DeliveryOrders/DeliveryOrders';
+import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
+import StartDelivery from './Views/Entregador/StartDelivery/StartDelivery';
+import DeliveryReceipt from './Views/Entregador/DeliveryReceipt/DeliveryReceipt';
+>>>>>>> ff0d9079dee44c30a23f1021d2124a8b6e2c4bb1
 
 const Stack = createStackNavigator();
 
 const Routes = () => (
   <Stack.Navigator initialRouteName="Login">
+
     <Stack.Screen
       name="Login"
       component={Login}
       options={{
         title: 'Acesse a sua conta',
-        headerTitleAlign: 'center'
+        headerTitleAlign: 'center',
       }}
     />
     <Stack.Screen
@@ -42,7 +51,7 @@ const Routes = () => (
       options={{
         title: 'Pedidos',
         headerShown: false,
-        headerTitleAlign: 'center'
+        headerTitleAlign: 'center',
       }}
     />
     <Stack.Screen
@@ -124,7 +133,7 @@ const Routes = () => (
       name="DeclineOrders"
       component={DeclineOrders}
       options={{
-        title: 'Cancelar',
+        title: 'Motivo',
         headerTitleAlign: 'center',
       }}
     />
@@ -140,55 +149,98 @@ const Routes = () => (
         },
       }}
     />
-    <Stack.Screen 
+    <Stack.Screen
       name="DeliverymanPhotoCnh"
       component={DeliverymanPhotoCnh}
       options={{
-        title: "",
-        headerBackTitle: "Voltar",
+        title: '',
+        headerBackTitle: 'Voltar',
       }}
     />
-    <Stack.Screen 
+    <Stack.Screen
       name="DeliverymanPhotoProfile"
       component={DeliverymanPhotoProfile}
       options={{
-        title: "",
-        headerBackTitle: "Voltar",
+        title: '',
+        headerBackTitle: 'Voltar',
       }}
     />
-    <Stack.Screen 
+    <Stack.Screen
       name="ReceiveOrder"
       component={ReceiveOrder}
       options={{
-        title: "Receber pedido",
-        headerBackTitle: "Voltar",
+        title: 'Receber pedido',
+        headerBackTitle: 'Voltar',
       }}
     />
     <Stack.Screen
       name="DeliverymanSetPassword"
       component={DeliverymanSetPassword}
       options={{
-        title: "Defina sua senha",
-        headerBackTitle: "Voltar",
+        title: 'Defina sua senha',
+        headerBackTitle: 'Voltar',
       }}
     />
-    <Stack.Screen 
+    <Stack.Screen
       name="DeliverymanSetRegister"
       component={DeliverymanSetRegister}
       options={{
-        title: "Cadastro",
-        headerBackTitle: "Voltar",
+        title: 'Cadastro',
+        headerTitleAlign: 'center'
       }}
     />
-    <Stack.Screen 
-     name="EnterDeliverymanCode"
-     component={EnterDeliverymanCode}
+    <Stack.Screen
+      name="EnterDeliverymanCode"
+      component={EnterDeliverymanCode}
+      options={{
+        title: 'Digite o código do entregador',
+        headerBackTitle: 'Voltar',
+      }}
+    />
+    <Stack.Screen
+      name="DeliverymanPhotoValidation"
+      component={DeliverymanPhotoValidation}
+      options={{
+        title: '',
+        headerBackTitle: 'Voltar',
+      }}
+    />
+    <Stack.Screen
+     name="DeliveryOrders"
+     component={DeliveryOrders}
      options={{
-       title: "Digite o código do entregador",
+       headerShown: false
+      }}
+    />
+<<<<<<< HEAD
+
+=======
+    <Stack.Screen
+     name="GenerateQrCode"
+     component={GenerateQrCode}
+     options={{
+       title: "Confirmação",
        headerBackTitle: "Voltar",
       }}
     />
-
+    <Stack.Screen
+     name="StartDelivery"
+     component={StartDelivery}
+     options={{
+       title: "Iniciar entrega",
+       headerBackTitle: "Voltar",
+      }}
+    />
+    <Stack.Screen 
+     name="DeliveryReceipt"
+     component={DeliveryReceipt}
+     options={{
+       title: "Comprovante de entrega",
+       headerBackTitle: "Voltar",
+       headerTitleAlign: 'center',
+      }}
+    />
+>>>>>>> ff0d9079dee44c30a23f1021d2124a8b6e2c4bb1
 
   </Stack.Navigator>
 );

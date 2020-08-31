@@ -16,7 +16,7 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
     if (selectedOrders.length !== orders.length) 
       console.warn('Você precisa conferir todos os pedidos.')
     else
-      navigate('GenerateQrCode');
+      navigate('GenerateQrCode', params);
   };
 
   loadSelectedOrders = item => {
@@ -42,18 +42,21 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
             data={orders}
             keyExtractor={(item, index) => index.toString()}
             renderItem={renderItem}
+            nestedScrollEnabled
           />
         </View>
       </View>
+
       <View style={styles.buttonBar}>
         <TouchableOpacity
           onPress={() => checkSelectedOrders()}
           style={styles.button}>
           <Text style={styles.buttonText}>
-            Gerar QrCode
+            Confirmar
           </Text>
         </TouchableOpacity>
       </View>
+      
     </>
   );
 };

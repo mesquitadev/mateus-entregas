@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { Image, TextInput, View, Text, FlatList, TouchableOpacity } from 'react-native';
 
 import UserHeader from '../../../Components/UserHeader/UserHeader';
 import SearchFilter from '../../../Components/SearchFilter/SearchFilter';
@@ -40,9 +40,23 @@ const OrderList = ({ navigation: { navigate } }) => {
     <OrderItem data={item} navigate={navigate} showCheckBox={true} />
   );
 
+  tipoPessoa = (objeto) => {
+    if(objeto.cliente.pessoaJuridica == null) {
+      return objeto.cliente.pessoaFisica.nome;
+    } else {
+      if(objeto.cliente.pessoaJuridica.razaoSocial == null) {
+        return objeto.cliente.pessoaJuridica.cnpj;
+      } else {
+        return objeto.cliente.pessoaJuridica.razaoSocial;
+      }
+    }
+  }
+
   startSearchFilter = text => {
     const newData = listItemsFilter.filter(item => {
       const itemData = `
+        ${tipoPessoa(item)}
+        ${item.numeroPedido} 
         ${item.endereco.bairro.toUpperCase()}
         `;      
       const textData = text.toUpperCase();
@@ -53,12 +67,31 @@ const OrderList = ({ navigation: { navigate } }) => {
     setListItems(newData);
   };
   
+  const FlatListHeader = () => {
+    return (
+      <View>
+        <Text style={styles.title}>Pedidos disponíveis</Text>
+      </View>
+    );
+  }
+
   return (
     <View>
       <UserHeader />
 
       <SearchFilter onChangeText={this.startSearchFilter} />
 
+      <View style={styles.orderList}>
+          <FlatList
+            style={styles.flatListEstilo}
+            data={listItems}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={this.renderItem}
+             nestedScrollEnabled    
+            ListHeaderComponent={FlatListHeader}
+          />
+      </View>
+    
       <TouchableOpacity
         style={[ styles.selectedItemsButton, count > 0 ? styles.active : styles.inactive ]}
         onPress={() => navigate('SelectedItems', selectedItems)}>
@@ -66,18 +99,6 @@ const OrderList = ({ navigation: { navigate } }) => {
           {`Ver pedidos selecionados  ${count}`}
         </Text>
       </TouchableOpacity>
-
-      <View style={styles.orderList}>
-        <Text style={styles.title}>Pedidos disponíveis</Text>
-        <View>
-          <FlatList
-            style={styles.flatListEstilo}
-            data={listItems}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={this.renderItem}
-          />
-        </View>
-      </View>
     </View>
   );
 }
