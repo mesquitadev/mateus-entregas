@@ -53,15 +53,6 @@ const Routes = () => (
         headerTitleAlign: 'center',
       }}
     />
-    <Stack.Screen
-      name="OrderConfirmed"
-      component={OrderConfirmed}
-      options={{
-        title: 'OrderConfirmed',
-        headerShown: false,
-        headerTitleAlign: 'center',
-      }}
-    />
 
     <Stack.Screen
       name="OrderDetails"
