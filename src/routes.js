@@ -25,6 +25,7 @@ import DeliveryOrders from './Views/Entregador/DeliveryOrders/DeliveryOrders';
 import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
 import StartDelivery from './Views/Entregador/StartDelivery/StartDelivery';
 import DeliveryReceipt from './Views/Entregador/DeliveryReceipt/DeliveryReceipt';
+import ReceiptByAnotherPerson from './Views/Entregador/ReceiptByAnotherPerson/ReceiptByAnotherPerson';
 import DeliverymanRegisterDenied from './Views/Entregador/DeliverymanRegisterDenied/DeliverymanRegisterDenied';
 import OrderConfirmed from './Views/Colaborador/OrderConfirmed/OrderConfirmed';
 
@@ -145,12 +146,7 @@ const Routes = () => (
       name="DeclineOrdersInformation"
       component={DeclineOrdersInformation}
       options={{
-        title: 'Entrega cancelada',
-        headerTitleAlign: 'center',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-          fontSize: 16,
-        },
+        headerShown: false
       }}
     />
     <Stack.Screen
@@ -232,7 +228,7 @@ const Routes = () => (
        headerBackTitle: "Voltar",
       }}
     />
-    <Stack.Screen 
+    <Stack.Screen
      name="DeliveryReceipt"
      component={DeliveryReceipt}
      options={{
@@ -242,6 +238,13 @@ const Routes = () => (
       }}
     />
     <Stack.Screen 
+      name="ReceiptByAnotherPerson"
+      component={ReceiptByAnotherPerson}
+      options={{
+        title: "Recebimento terceiros"
+      }}
+    />
+    <Stack.Screen
      name="DeliverymanRegisterDenied"
      component={DeliverymanRegisterDenied}
      options={{

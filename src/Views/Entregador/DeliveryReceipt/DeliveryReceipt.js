@@ -12,7 +12,9 @@ const DeliveryReceipt = ({ route: {params}, navigation }) => {
           QR Code
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.touchable}>
+      <TouchableOpacity
+        style={styles.touchable}
+        onPress={() => navigation.navigate('ReceiptByAnotherPerson', params)}>
         <Image style={styles.touchableImg} source={require('../../../res/img/ligar.png')} />
         <Text style={styles.touchableText}>
           Recebimento terceiros

@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 
 import styles from './styles';
 
-const DeliveryOrdersItem = ({ data, navigate }) => {
-
+const DeliveryOrdersItem = ({data, navigate}) => {
   // if (data.pedido.cliente.pessoaJuridica == null) {
   //   setClientName(data.pedido.cliente.pessoaFisica.nome);
   // } else {
@@ -14,9 +13,14 @@ const DeliveryOrdersItem = ({ data, navigate }) => {
   //     setClientName(data.pedido.cliente.pessoaJuridica.razaoSocial);
   //   }
   // }
-  
   return (
-    <TouchableOpacity style={styles.orderItem} onPress={() => navigate('StartDelivery', data.pedido)}>
+    <TouchableOpacity
+      style={styles.orderItem}
+      onPress={() =>
+        navigate('StartDelivery', {
+          data: data
+        })
+      }>
       <Text style={styles.text}>Nº #{data.pedido.numeroPedido}</Text>
       <Text style={styles.label}>Realizado em {data.pedido.dataPedido}</Text>
       <Text style={styles.label}>Cliente</Text>
@@ -29,7 +33,7 @@ const DeliveryOrdersItem = ({ data, navigate }) => {
         <View style={styles.status}>
           <Text style={styles.barText}>Aguardando entrega</Text>
         </View>
-        <View 
+        <View
           style={styles.more}>
           <Text style={styles.barText}>Ver mais</Text>
         </View>
