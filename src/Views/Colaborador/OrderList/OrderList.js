@@ -14,7 +14,7 @@ const OrderList = ({ navigation: { navigate } }) => {
   const [ selectedItems, setSelectedItems ] = useState([]);
   const [ count, setCount ] = useState(0);
   const [ loading, setLoading ] = useState(true)
-
+  
   useEffect(() => {
     const fetchData = async () => {
       const response = await api.get(`/pedidos-pronta-entrega`);

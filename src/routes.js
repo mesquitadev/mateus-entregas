@@ -229,6 +229,7 @@ const Routes = () => (
      options={{
        title: "Iniciar entrega",
        headerBackTitle: "Voltar",
+       headerTitleAlign: 'center',
       }}
     />
     <Stack.Screen

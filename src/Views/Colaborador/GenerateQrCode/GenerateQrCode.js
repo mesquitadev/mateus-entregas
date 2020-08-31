@@ -6,25 +6,25 @@ import api from '../../../services/api';
 
 
   const GenerateQrCode =  ({ route: { params }, navigation: { navigate } }) => {
-//console.log(params.user_logged);
-      // useEffect(() => {
-      //   const id = setInterval(() => {
-      //     setCount(c => c + 1); // ✅ This doesn't depend on `count` variable outside
-      //   }, 1000);
-      //   return () => clearInterval(id);
-      // }, []);
-
+    const [loop, setLoop] = useState()
 
       useEffect(() => {
-    var timer = setInterval(async() => {
-        const response =  await api.get('/entrega/'+params.identificador);
-        if( response.data.id>0 && isNaN(response.data.id) === false){
-          console.log(params +" - "+params.identificador + " --=>" + response.data.id);
-          navigate('OrderConfirmed', params);
-
+        setLoop(setInterval(async() => {
+        const response =  await api.get('/entregas/'+params.identificador_id);
+         if( response.data.situacao=="2"){
+          //clearInterval(loop)
+         navigate('OrderConfirmed', params.identificador_id);
+        }else{
+          console.log("/SITUACAO: "+response.data.situacao)
         }
-      }, 10000)
+       }, 10000)
+      )
+      return function cleanup() {
+        console.log('cleaning up')
+        clearInterval(loop)
+    }
     }, []);
+
   return(
 
     <View style={styles.container}>
