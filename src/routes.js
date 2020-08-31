@@ -8,6 +8,8 @@ import SelectedItems from './Views/Colaborador/SelectedItems/SelectedItems';
 import SelectDeliveryPerson from './Views/Colaborador/SelectDeliveryPerson/SelectDeliveryPerson';
 import DeliveryInformation from './Views/Colaborador/DeliveryInformation/DeliveryInformation';
 import OrderCheck from './Views/Colaborador/OrderCheck/OrderCheck';
+import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
+
 import DeliverymanRegister from './Views/Entregador/DeliverymanRegister/DeliverymanRegister';
 import DeliverymanPhotos from './Views/Entregador/DeliverymanPhotos/DeliverymanPhotos';
 import DeclineOrders from './Views/Entregador/DeclineOrders/DeclineOrders';
@@ -22,7 +24,6 @@ import EnterDeliverymanCode from './Views/Entregador/EnterDeliverymanCode/EnterD
 import ReceiveOrder from './Views/Entregador/ReceiveOrder/ReceiveOrder';
 import DeliverymanPhotoValidation from './Views/Entregador/DeliverymanPhotoValidation/DeliverymanPhotoValidation';
 import DeliveryOrders from './Views/Entregador/DeliveryOrders/DeliveryOrders';
-import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
 import StartDelivery from './Views/Entregador/StartDelivery/StartDelivery';
 import DeliveryReceipt from './Views/Entregador/DeliveryReceipt/DeliveryReceipt';
 import ReceiptByAnotherPerson from './Views/Entregador/ReceiptByAnotherPerson/ReceiptByAnotherPerson';
@@ -42,6 +43,7 @@ const Routes = () => (
         headerTitleAlign: 'center',
       }}
     />
+    
     <Stack.Screen
       name="OrderList"
       component={BottomTabNavigator}
@@ -51,6 +53,7 @@ const Routes = () => (
         headerTitleAlign: 'center',
       }}
     />
+
     <Stack.Screen
       name="OrderDetails"
       component={OrderDetails}

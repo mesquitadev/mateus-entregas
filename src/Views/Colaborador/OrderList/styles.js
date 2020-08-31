@@ -6,6 +6,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: 150,
+  },
+
   flatListEstilo:{
     marginTop: 0,
   },

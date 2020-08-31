@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Image, TextInput, View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+
+import {
+  BallIndicator,
+  BarIndicator,
+  DotIndicator,
+  MaterialIndicator,
+  PacmanIndicator,
+  PulseIndicator,
+  SkypeIndicator,
+  UIActivityIndicator,
+  WaveIndicator,
+} from 'react-native-indicators';
 
 import UserHeader from '../../../Components/UserHeader/UserHeader';
 import SearchFilter from '../../../Components/SearchFilter/SearchFilter';
@@ -12,6 +24,7 @@ const OrderList = ({ navigation: { navigate } }) => {
   const [ listItemsFilter, setListItemsFilter ] = useState([]);
   const [ selectedItems, setSelectedItems ] = useState([]);
   const [ count, setCount ] = useState(0);
+  const [ loading, setLoading ] = useState(true)
   
   useEffect(() => {
     const fetchData = async () => {
@@ -19,6 +32,8 @@ const OrderList = ({ navigation: { navigate } }) => {
       
       setListItemsFilter(response.data);
       setListItems(response.data);
+
+      setLoading(false);
     };
 
     fetchData();
@@ -91,7 +106,13 @@ const OrderList = ({ navigation: { navigate } }) => {
             ListHeaderComponent={FlatListHeader}
           />
       </View>
-    
+
+      <PacmanIndicator
+      style={styles.loading}
+      animating={loading}
+      hidesWhenStopped={true}
+      color='rgb(0, 149, 218)' />
+
       <TouchableOpacity
         style={[ styles.selectedItemsButton, count > 0 ? styles.active : styles.inactive ]}
         onPress={() => navigate('SelectedItems', selectedItems)}>

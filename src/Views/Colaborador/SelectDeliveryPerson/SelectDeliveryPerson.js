@@ -22,7 +22,7 @@ const SelectDeliveryPerson = ({ route: { params }, navigation: { navigate } }) =
 
   startSearchFilter = text => {
     const newData = deliveryPersonFilter.filter(item => {
-      const itemData = `${item.name.toUpperCase()} ${item.cpf.toUpperCase()}`;
+      const itemData = `${item.nome.toUpperCase()} ${item.cpf.toUpperCase()}`;
       const textData = text.toUpperCase();
       
       return itemData.indexOf(textData) > -1;    
