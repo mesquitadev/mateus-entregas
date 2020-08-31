@@ -28,16 +28,20 @@ import api from '../../../services/api';
       return ({numeroPedido: ordem.numeroPedido})
     });
 
-    useEffect(() => {
+    //console.log(params)
+    //console.log(user)
+
+
+ useEffect(() => {
     const fetchData = async () => {
         const bodyParam ={
             colaborador: {
               id : user.id,
-              username:user.username
+              username: user.username
             },
             entregador: {
               id : params.person.usuario.id,
-              username:params.person.usuario.username,
+              username: params.person.usuario.username,
             },  
             pedidos: numeroPedidoList,
             // pedidos: [
@@ -51,18 +55,31 @@ import api from '../../../services/api';
               localizacao: "-41.2866400;174.7755700"
             }
           }
-        
-        console.log(bodyParam)
+        //console.log(bodyParam)
+    
         const response = await api.post(`/entrega`, bodyParam);
-        console.log(response.data)
+        //console.log(response.data)
         setcodQrCode(response.data)
         }
         fetchData();
       }, []);
     
-    // var timer = setInterval(() => {
-    //   console.log('I do not leak!');
-    // }, 5000)
+      
+
+
+      // useEffect(() => {
+      //   const id = setInterval(() => {
+      //     setCount(c => c + 1); // ✅ This doesn't depend on `count` variable outside
+      //   }, 1000);
+      //   return () => clearInterval(id);
+      // }, []);
+
+    // var timer = setInterval(async() => {
+      
+    //     const response =  await api.get('/entrega/'+codQrCode.identificador);
+    //     console.log("id" + +codQrCode.identificador + "===>"+response.data);
+
+    //   }, 5000)
 
   return(
 
