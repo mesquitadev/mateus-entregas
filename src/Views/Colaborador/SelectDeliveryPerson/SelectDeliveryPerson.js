@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
+import { PacmanIndicator } from 'react-native-indicators';
 
 import SearchFilter from '../../../Components/SearchFilter/SearchFilter';
 import styles from './styles';
@@ -8,6 +9,7 @@ import api from '../../../services/api';
 const SelectDeliveryPerson = ({ route: { params }, navigation: { navigate } }) => {
   const [ deliveryPerson, setDeliveryPerson ] = useState('');
   const [ deliveryPersonFilter, setDeliveryPersonFilter ] = useState('');
+  const [ loading, setLoading ] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,6 +17,8 @@ const SelectDeliveryPerson = ({ route: { params }, navigation: { navigate } }) =
       
       setDeliveryPersonFilter(response.data);
       setDeliveryPerson(response.data);
+
+      setLoading(false);
     };
 
     fetchData();
@@ -41,6 +45,8 @@ const SelectDeliveryPerson = ({ route: { params }, navigation: { navigate } }) =
     </TouchableOpacity>
   );
   
+
+  console.disableYellowBox = true;
   return (
     <View>
       <SearchFilter onChangeText={this.startSearchFilter} />
@@ -51,6 +57,12 @@ const SelectDeliveryPerson = ({ route: { params }, navigation: { navigate } }) =
           renderItem={this.renderItem}
         />
       </View>
+
+      <PacmanIndicator
+      style={styles.loading}
+      animating={loading}
+      hidesWhenStopped={true}
+      color='rgb(0, 149, 218)' />
     </View>
   );
 };
