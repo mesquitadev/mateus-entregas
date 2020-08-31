@@ -75,7 +75,6 @@ const DeliverymanPhotos = ({ navigation, route: {params}}) => {
         disabled={!confirmationVisibility}
         onPress={() => {
           navigation.navigate('DeliverymanSetPassword');
-          clearStatusCheckInStore();
         }}
         style={[
           styles.btnPrimary,
