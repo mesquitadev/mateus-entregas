@@ -92,7 +92,7 @@ const StartDelivery = ({ route: {params}, navigation }) => {
         </Text>
       </TouchableOpacity>
 
-      <View style={startDelivery ? styles.actions : styles.hideTouchable}>
+      <View style={startDelivery ? styles.actions : styles.hide}>
         <TouchableOpacity
           onPress={() =>
             navigation.navigate('DeclineOrders', {
@@ -114,7 +114,7 @@ const StartDelivery = ({ route: {params}, navigation }) => {
           <Text style={delivered ? 
               styles.actionsTouchableActiveText :
               styles.actionsTouchableText}>
-            Entreguar
+            Entregar
           </Text>
         </TouchableOpacity>
       </View>
