@@ -14,17 +14,27 @@ import api from '../../../services/api';
       //   return () => clearInterval(id);
       // }, []);
 
-
       useEffect(() => {
     var timer = setInterval(async() => {
-        const response =  await api.get('/entrega/'+params.identificador);
-        if( response.data.id>0 && isNaN(response.data.id) === false){
-          console.log(params +" - "+params.identificador + " --=>" + response.data.id);
-          navigate('OrderConfirmed', params);
 
+        const response =  await api.get('/entregas/'+params.identificador_id);
+        
+        //console.log("/SITUACAO: "+response.data.situacao)
+       // console.log("/entrega/"+params.identificador)
+
+
+      // if( response.data.id>0 && isNaN(response.data.id) === false && response.data.situacao==2){
+        if( response.data.situacao=="2"){
+          //console.log(params +" - "+params.identificador + " --=>" + response.data.id);
+         // console.log("/SITUACAO PARA ENTREGAR: "+response.data)
+          navigate('OrderConfirmed', params);
+        }else{
+          console.log("/SITUACAO: "+response.data.situacao)
         }
+
       }, 10000)
     }, []);
+
   return(
 
     <View style={styles.container}>
