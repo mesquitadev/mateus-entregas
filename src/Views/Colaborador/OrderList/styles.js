@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     width: screenWidth,
     alignSelf: "center",
     borderRadius: 0,
-    bottom: 57,
+    bottom: 120,
   },
 
   active: {

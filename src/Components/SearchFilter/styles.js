@@ -7,37 +7,37 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
 
-  searchFilter: {
-    width: screenWidth,
-    padding: 0,
-    borderColor: "#DDD",
-    borderWidth: 1,
-    borderRadius: 0,
-    marginVertical: 0,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-
-  inputSearch: {
-    width: screenWidth * 0.83,
-    paddingVertical: 15,
-    paddingHorizontal: 15,
-    borderColor: "#8898A6",
-    borderWidth: 1,
+  SectionStyle: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderWidth: 0.5,
+    borderColor: '#8898A6',
+    height: 40,
     borderRadius: 7,
-    marginVertical: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    fontSize: 14,
-    marginRight: 10,
-    height: 45
+    margin: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 1,
+    elevation: 6,
   },
 
-  image: {
-    width: 21,
-    height: 21,
-    marginRight: 15,
-    marginLeft: 13
+  ImageStyle: {
+    padding: 10,
+    margin: 12,
+    height: 20,
+    width: 20,
+    resizeMode: 'stretch',
+    alignItems: 'center',
+  },
+
+  InputStyle: {
+    flex: 1,
   }
 });
 

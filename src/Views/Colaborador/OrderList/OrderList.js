@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { Image, TextInput, View, Text, FlatList, TouchableOpacity } from 'react-native';
 
 import UserHeader from '../../../Components/UserHeader/UserHeader';
 import SearchFilter from '../../../Components/SearchFilter/SearchFilter';
 import OrderItem from '../../../Components/OrderItem/OrderItem';
 import styles from './styles';
 import api from '../../../services/api';
-import { ScrollView } from 'react-native-gesture-handler';
 
 const OrderList = ({ navigation: { navigate } }) => {
   const [ listItems, setListItems ] = useState([]);
@@ -78,7 +77,7 @@ const OrderList = ({ navigation: { navigate } }) => {
 
   return (
     <View>
-      {/* <UserHeader /> */}
+      <UserHeader />
 
       <SearchFilter onChangeText={this.startSearchFilter} />
 
@@ -88,7 +87,7 @@ const OrderList = ({ navigation: { navigate } }) => {
             data={listItems}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this.renderItem}
-             nestedScrollEnabled
+             nestedScrollEnabled    
             ListHeaderComponent={FlatListHeader}
           />
       </View>
