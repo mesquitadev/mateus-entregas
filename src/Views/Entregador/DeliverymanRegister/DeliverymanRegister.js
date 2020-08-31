@@ -47,7 +47,7 @@ const DeliverymanRegister = ({ navigation }) => {
           navigation.navigate('DeliverymanPhotos');
         }
 
-        console.warn(response.data);
+        //console.warn(response.data);
 
         setName('');
         setUser('');
