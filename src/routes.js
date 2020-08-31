@@ -96,7 +96,7 @@ const Routes = () => (
       component={OrderConfirmed}
       options={{
         title: 'Pedido Retirado',
-        headerTitleAlign: 'center',
+        headerShown: false
       }}
     />
 
