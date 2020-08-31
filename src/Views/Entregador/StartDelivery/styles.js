@@ -80,6 +80,17 @@ const styles = StyleSheet.create({
     padding: 20
   },
 
+  receiptActive: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "#00A349",
+    width: screenWidth * 0.9,
+    borderWidth: 2,
+    borderRadius: 5,
+    padding: 20
+  },
+
   receiptImg: {
     width: 28,
     height: 28,
@@ -154,7 +165,7 @@ const styles = StyleSheet.create({
     color: "#FFF"
   },
 
-  hideTouchable: {
+  hide: {
     display: "none"
   }
 });
