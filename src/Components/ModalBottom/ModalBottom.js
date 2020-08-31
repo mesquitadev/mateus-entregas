@@ -5,11 +5,11 @@ import styles from './styles';
 
 const pathIconClose = require('../../res/img/cancel.png');
 
-const Camera = ({
+const ModalButtom = ({
   text,
   buttonValue,
   closeBottonModal,
-  goToConfirmation
+  event
 }) => {
   return (
     <View style={styles.modalContainer}>
@@ -20,7 +20,7 @@ const Camera = ({
           <Image source={pathIconClose} />
         </TouchableOpacity>
         <Text style={styles.text}>{text}</Text>
-        <TouchableOpacity style={styles.buttonConfirmar} onPress={goToConfirmation}>
+        <TouchableOpacity style={styles.buttonConfirmar} onPress={event}>
           <Text style={styles.textButtonConfirmar}>{buttonValue}</Text>
         </TouchableOpacity>
       </View>
@@ -28,4 +28,4 @@ const Camera = ({
   );
 };
 
-export default Camera;
+export default ModalButtom;
