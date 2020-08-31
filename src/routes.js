@@ -9,7 +9,6 @@ import SelectDeliveryPerson from './Views/Colaborador/SelectDeliveryPerson/Selec
 import DeliveryInformation from './Views/Colaborador/DeliveryInformation/DeliveryInformation';
 import OrderCheck from './Views/Colaborador/OrderCheck/OrderCheck';
 import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
-import OrderConfirmed from './Views/Colaborador/OrderConfirmed/OrderConfirmed';
 
 import DeliverymanRegister from './Views/Entregador/DeliverymanRegister/DeliverymanRegister';
 import DeliverymanPhotos from './Views/Entregador/DeliverymanPhotos/DeliverymanPhotos';
