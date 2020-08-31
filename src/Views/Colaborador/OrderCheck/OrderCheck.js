@@ -1,23 +1,80 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
-
+import AsyncStorage from '@react-native-community/async-storage';
+import api from '../../../services/api';
 import OrderCheckItem from '../../../Components/OrderCheckItem/OrderCheckItem';
 import styles from './styles';
 
 const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
   const [ orders, setOrders ] = useState([]);
   const [ selectedOrders, setSelectedOrders ] = useState([]);
+  const [ user, setUser ] = useState('');
+  const [ identificador, setIdentificador ] = useState('');
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const data = await AsyncStorage.getItem('entregas_user_data');
+        const userData = JSON.parse(data);
+        setUser(userData);
+      } catch(err) {
+        console.warn(err);
+      }
+    };
+    getUserData();
+  }, []); 
 
   useEffect(() => {
     setOrders(params.orders);
   }, []);
 
-  checkSelectedOrders = () => {
-    if (selectedOrders.length !== orders.length) 
+  const numeroPedidoList = params.orders.map((ordem, index) => {
+    //console.log(ordem.numeroPedido)
+    return ({numeroPedido: ordem.numeroPedido})
+  });
+
+  checkSelectedOrders = async () => {
+     if (selectedOrders.length !== orders.length){
       console.warn('Você precisa conferir todos os pedidos.')
-    else
-      navigate('GenerateQrCode', params);
+     } 
+     else{
+      // console.log(params)
+      // console.log(user)
+        const bodyParam ={
+            colaborador: {
+              id : user.id,
+              username: user.username
+            },
+            entregador: {
+              id : params.person.usuario.id,
+              username: params.person.usuario.username,
+            },  
+            //pedidos: numeroPedidoList,
+            pedidos: [
+              {
+                "numeroPedido":"3000000839"
+              }
+            ],
+            log: {
+              ip: "127.0.0.1",
+              dispositivo: "Asus Zenfone 4",
+              localizacao: "-41.2866400;174.7755700"
+            }
+          }
+         //console.log(bodyParam)
+         const response = await api.post(`/entrega`, bodyParam);
+         console.log(response.data.identificador)
+         params.identificador = response.data.identificador
+         params.user_logged = user
+        
+         navigate('GenerateQrCode', params);
+        
+
+         //setIdentificador(response.data.identificador)
+        console.log(params)
+        }
   };
+  //console.log(identificador)
 
   loadSelectedOrders = item => {
     if (selectedOrders.includes(item)) {
