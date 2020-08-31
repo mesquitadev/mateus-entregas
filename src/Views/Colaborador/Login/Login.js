@@ -39,8 +39,7 @@ const Login = ({navigation}) => {
 
     try {
       setButtonEnabled(false);
-      //const response =  await login(user, pass);
-      const response =  await login('00000000000', '123456');
+      const response =  await login(user, pass);
 
       AsyncStorage.setItem('entregas_user_data', JSON.stringify(response.data));
 
