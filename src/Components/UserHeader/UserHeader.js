@@ -14,8 +14,7 @@ const UserHeader = () => {
       try {
         const data = await AsyncStorage.getItem('entregas_user_data');
         const userData = JSON.parse(data);
-        
-        setUserData(userData);
+
         setUserName(userData.nome);
         setUserMail(userData.email)
       } catch(err) {
