@@ -33,8 +33,26 @@ const Login = ({navigation}) => {
     //   );
     //   return;
     // }
+    //
+    // if(pass.length < 6)
+    //   alert('Verifique os dados digitados e tente novamente.')
 
     try {
+
+        useEffect(() => {
+            const fetchData = async () => {
+                const response =
+                    await api_auth_gmcore.post(`/`, {
+                        codigo: CPF
+                    });
+
+                response.data;
+            };
+
+            fetchData();
+        }, []);
+
+      //const response =  await login(user, pass);
       setButtonEnabled(false);
       const response =  await login(user, pass);
 
