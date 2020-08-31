@@ -20,17 +20,11 @@ import DeliverymanSetPassword from './Views/Entregador/DeliverymanSetPassword/De
 import DeliverymanSetRegister from './Views/Entregador/DeliverymanSetRegister/DeliverymanSetRegister';
 import EnterDeliverymanCode from './Views/Entregador/EnterDeliverymanCode/EnterDeliverymanCode';
 import ReceiveOrder from './Views/Entregador/ReceiveOrder/ReceiveOrder';
-<<<<<<< HEAD
-//import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
-
-
-=======
 import DeliverymanPhotoValidation from './Views/Entregador/DeliverymanPhotoValidation/DeliverymanPhotoValidation';
 import DeliveryOrders from './Views/Entregador/DeliveryOrders/DeliveryOrders';
 import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
 import StartDelivery from './Views/Entregador/StartDelivery/StartDelivery';
 import DeliveryReceipt from './Views/Entregador/DeliveryReceipt/DeliveryReceipt';
->>>>>>> ff0d9079dee44c30a23f1021d2124a8b6e2c4bb1
 
 const Stack = createStackNavigator();
 
@@ -212,9 +206,6 @@ const Routes = () => (
        headerShown: false
       }}
     />
-<<<<<<< HEAD
-
-=======
     <Stack.Screen
      name="GenerateQrCode"
      component={GenerateQrCode}
@@ -240,7 +231,6 @@ const Routes = () => (
        headerTitleAlign: 'center',
       }}
     />
->>>>>>> ff0d9079dee44c30a23f1021d2124a8b6e2c4bb1
 
   </Stack.Navigator>
 );
