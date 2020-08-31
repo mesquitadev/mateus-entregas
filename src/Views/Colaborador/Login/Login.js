@@ -19,10 +19,24 @@ const Login = ({ navigation }) => {
     //   return;
     // }
     //
-    // if(pass.length < 6) 
+    // if(pass.length < 6)
     //   alert('Verifique os dados digitados e tente novamente.')
 
     try {
+
+        useEffect(() => {
+            const fetchData = async () => {
+                const response =
+                    await api_auth_gmcore.post(`/`, {
+                        codigo: CPF
+                    });
+
+                response.data;
+            };
+
+            fetchData();
+        }, []);
+
       //const response =  await login(user, pass);
       setButtonEnabled(false);
       const response = await login("00000000000", "123456"); // passando direto -- develop
@@ -49,7 +63,7 @@ const Login = ({ navigation }) => {
         style={styles.logo}
       />
 
-      <TextInputMask 
+      <TextInputMask
         type={"cpf"}
         placeholder="CPF"
         value={user}
@@ -58,9 +72,9 @@ const Login = ({ navigation }) => {
         maxLength={14}
       />
 
-      <TextInput 
-        style={styles.inputs} 
-        placeholder="Senha" 
+      <TextInput
+        style={styles.inputs}
+        placeholder="Senha"
         onChangeText={text => setPass(text)}
         secureTextEntry
       />
@@ -68,13 +82,13 @@ const Login = ({ navigation }) => {
       <TouchableOpacity
         onPress={() => doLogin()}
         style={
-          buttonEnabled ? 
+          buttonEnabled ?
           styles.btnPrimary : styles.btnPrimaryDisabled}>
         <Text style={styles.btnPrimaryText}>
           Entrar
         </Text>
       </TouchableOpacity>
-      
+
       <TouchableOpacity
         onPress={() => navigation.navigate('DeclineOrders')}
         style={styles.btnSecondary}>

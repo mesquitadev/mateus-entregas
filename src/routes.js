@@ -20,7 +20,7 @@ import DeliverymanSetPassword from './Views/Entregador/DeliverymanSetPassword/De
 import DeliverymanSetRegister from './Views/Entregador/DeliverymanSetRegister/DeliverymanSetRegister';
 import EnterDeliverymanCode from './Views/Entregador/EnterDeliverymanCode/EnterDeliverymanCode';
 import ReceiveOrder from './Views/Entregador/ReceiveOrder/ReceiveOrder';
-import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
+//import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
 
 
 
@@ -185,14 +185,6 @@ const Routes = () => (
      component={EnterDeliverymanCode}
      options={{
        title: "Digite o código do entregador",
-       headerBackTitle: "Voltar",
-      }}
-    />
-    <Stack.Screen 
-     name="GenerateQrCode"
-     component={GenerateQrCode}
-     options={{
-       title: "GenerateQrCode",
        headerBackTitle: "Voltar",
       }}
     />
