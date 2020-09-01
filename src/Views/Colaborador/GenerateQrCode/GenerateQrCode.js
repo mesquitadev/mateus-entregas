@@ -8,21 +8,18 @@ import api from '../../../services/api';
   const GenerateQrCode =  ({ route: { params }, navigation: { navigate } }) => {
     const [loop, setLoop] = useState()
 
-      useEffect(() => {
-        setLoop(setInterval(async() => {
+    useEffect(() => {
+      const interval = setInterval(async() => {
         const response =  await api.get('/entregas/'+params.identificador_id);
-         if( response.data.situacao=="2"){
-          //clearInterval(loop)
+        if( response.data.situacao=="2"){
+          console.log('cleaning up não funciona')
          navigate('OrderConfirmed', params.identificador_id);
         }else{
           console.log("/SITUACAO: "+response.data.situacao)
         }
-       }, 10000)
-      )
-      return function cleanup() {
-        console.log('cleaning up')
-        clearInterval(loop)
-    }
+
+      }, 1000);
+      return () => clearInterval(interval);
     }, []);
 
   return(

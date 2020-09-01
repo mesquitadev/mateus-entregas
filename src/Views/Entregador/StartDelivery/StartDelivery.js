@@ -12,7 +12,7 @@ const StartDelivery = ({ route: {params}, navigation }) => {
 
   const _data = params.data;
   const _pedido = params.data.pedido;
-
+console.log(_data)
   useEffect(() => {
     if (params?.post) {
       setReceiptName(params.post.name);
