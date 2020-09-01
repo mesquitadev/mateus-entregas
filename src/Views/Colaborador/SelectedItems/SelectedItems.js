@@ -12,7 +12,7 @@ const SelectedItems = ({ route: { params }, navigation: { navigate } }) => {
   }, []);
 
   renderItem = ({ item }) => (
-    <OrderItem data={item} navigate={navigate} showCheckBox={false} />
+    <OrderItem data={item} navigate={navigate} showCheckBox={true} />
   );
   
   return(
