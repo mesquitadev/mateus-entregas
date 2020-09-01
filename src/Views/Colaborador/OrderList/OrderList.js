@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
-import { PacmanIndicator } from 'react-native-indicators';
+
+import {
+  BallIndicator,
+  BarIndicator,
+  DotIndicator,
+  MaterialIndicator,
+  PacmanIndicator,
+  PulseIndicator,
+  SkypeIndicator,
+  UIActivityIndicator,
+  WaveIndicator,
+} from 'react-native-indicators';
 
 import UserHeader from '../../../Components/UserHeader/UserHeader';
 import SearchFilter from '../../../Components/SearchFilter/SearchFilter';
@@ -14,19 +25,18 @@ const OrderList = ({ navigation: { navigate } }) => {
   const [ selectedItems, setSelectedItems ] = useState([]);
   const [ count, setCount ] = useState(0);
   const [ loading, setLoading ] = useState(true)
-  
   useEffect(() => {
     const fetchData = async () => {
-      
       const response = await api.get(`/pedidos-pronta-entrega`);
-      console.log("tchau")
+      
       setListItemsFilter(response.data);
       setListItems(response.data);
-    };
-    fetchData()
-    return () => fetchData();
-  }, []);
 
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
   
   loadSelectedItems = data => {
     if (selectedItems.includes(data)) {
@@ -79,8 +89,6 @@ const OrderList = ({ navigation: { navigate } }) => {
     );
   }
 
-  console.disableYellowBox = true;
-
   return (
     <View>
       <UserHeader />
@@ -93,11 +101,17 @@ const OrderList = ({ navigation: { navigate } }) => {
             data={listItems}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this.renderItem}
-             nestedScrollEnabled    
+            nestedScrollEnabled    
             ListHeaderComponent={FlatListHeader}
           />
       </View>
-    
+
+      <PacmanIndicator
+      style={styles.loading}
+      animating={loading}
+      hidesWhenStopped={true}
+      color='rgb(0, 149, 218)' />
+
       <TouchableOpacity
         style={[ styles.selectedItemsButton, count > 0 ? styles.active : styles.inactive ]}
         onPress={() => navigate('SelectedItems', selectedItems)}>
