@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Image, TextInput, View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { PacmanIndicator } from 'react-native-indicators';
 
 import UserHeader from '../../../Components/UserHeader/UserHeader';
 import SearchFilter from '../../../Components/SearchFilter/SearchFilter';
@@ -12,9 +13,9 @@ const OrderList = ({ navigation: { navigate } }) => {
   const [ listItemsFilter, setListItemsFilter ] = useState([]);
   const [ selectedItems, setSelectedItems ] = useState([]);
   const [ count, setCount ] = useState(0);
+  const [ loading, setLoading ] = useState(true)
   
-
-    useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       
       const response = await api.get(`/pedidos-pronta-entrega`);
@@ -77,6 +78,8 @@ const OrderList = ({ navigation: { navigate } }) => {
       </View>
     );
   }
+
+  console.disableYellowBox = true;
 
   return (
     <View>

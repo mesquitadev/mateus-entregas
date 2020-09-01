@@ -11,6 +11,8 @@ import {
 import {TextInputMask} from 'react-native-masked-text';
 import AsyncStorage from '@react-native-community/async-storage';
 
+import {KEYS_CLEANNER} from '../../../Utils/keys';
+
 import login from '../../../services/login';
 import styles from './styles';
 
@@ -25,7 +27,7 @@ const Login = ({navigation}) => {
     //  Alert.alert('App Entregas', 'CPF inválido, verifique o número digitado e tente novamente.');
     //  return;
     // }
-    // 
+    //
     // if (pass.length < 6) {
     //   Alert.alert(
     //     'App Entregas',
@@ -39,21 +41,20 @@ const Login = ({navigation}) => {
 
     try {
       setButtonEnabled(false);
-      //const response =  await login(user, pass);
-      const response =  await login("95901957334", "liviowebp@ssw0rd");
+      const response = await login(user, pass);
 
       AsyncStorage.setItem('entregas_user_data', JSON.stringify(response.data));
 
-      switch(response.data.situacao) {
+      switch (response.data.situacao) {
         case 0: //pendente
           navigation.navigate('DeliverymanSetRegister');
           break;
 
         case 1: //ativo
-          if(response.data.perfil.descricao.toLowerCase() == 'colaborador')
+          if (response.data.perfil.descricao.toLowerCase() == 'colaborador')
             navigation.navigate('OrderList');
 
-          if(response.data.perfil.descricao.toLowerCase() == 'entregador')
+          if (response.data.perfil.descricao.toLowerCase() == 'entregador')
             navigation.navigate('AcceptOrders');
 
           break;
@@ -62,7 +63,7 @@ const Login = ({navigation}) => {
           //navigation.navigate('')
           alert('Cadastro rejeitado');
           break;
-          
+
         case 3: //analise -- enviar nova documentação
           navigation.navigate('DeliverymanPhotos');
           break;
@@ -71,11 +72,15 @@ const Login = ({navigation}) => {
       setUser('');
       setPass('');
       setButtonEnabled(true);
-    } catch(error) {
-      if(error.response) {
-        if(error.response.status == 404) Alert.alert('App Entregas', 'Usuário ou senha inválidos.');
-        if(error.response.status.toString().startsWith('50')) Alert.alert('App Entregas', 'Erro no serviço, tente novamente mais tarde.');
-
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status == 404)
+          Alert.alert('App Entregas', 'Usuário ou senha inválidos.');
+        if (error.response.status.toString().startsWith('50'))
+          Alert.alert(
+            'App Entregas',
+            'Erro no serviço, tente novamente mais tarde.',
+          );
         setPass('');
         setButtonEnabled(true);
         return;
@@ -86,8 +91,11 @@ const Login = ({navigation}) => {
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       const cleanSStorageStatusCheckRegister = async () => {
-        await AsyncStorage.removeItem('cnh');
-        await AsyncStorage.removeItem('perfil');
+        try {
+          await AsyncStorage.multiRemove(KEYS_CLEANNER);
+        } catch (error) {
+          throw new Error('Não conseguimos limpar o storage do App.');
+        }
       };
       cleanSStorageStatusCheckRegister();
     });
@@ -97,45 +105,40 @@ const Login = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
-      <Image
-        source={require('../../../res/img/logo_mateus.png')}
-        style={styles.logo}
-      />
+      <ScrollView
+        contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}>
+        <Image
+          source={require('../../../res/img/logo_mateus.png')}
+          style={styles.logo}
+        />
 
-      <TextInputMask
-        type={"cpf"}
-        placeholder="CPF"
-        value={user}
-        onChangeText={text => setUser(text.replace(/[^\d]+/g,''))}
-        style={styles.inputs}
-        maxLength={14}
-      />
+        <TextInputMask
+          type={'cpf'}
+          placeholder="CPF"
+          value={user}
+          onChangeText={(text) => setUser(text.replace(/[^\d]+/g, ''))}
+          style={styles.inputs}
+          maxLength={14}
+        />
 
-      <TextInput
-        style={styles.inputs}
-        placeholder="Senha"
-        onChangeText={text => setPass(text)}
-        secureTextEntry={true}
-      />
+        <TextInput
+          style={styles.inputs}
+          placeholder="Senha"
+          onChangeText={(text) => setPass(text)}
+          secureTextEntry={true}
+        />
 
-      <TouchableOpacity
-        onPress={() => doLogin()}
-        style={
-          buttonEnabled ?
-          styles.btnPrimary : styles.btnPrimaryDisabled}>
-        <Text style={styles.btnPrimaryText}>
-          Entrar
-        </Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => doLogin()}
+          style={buttonEnabled ? styles.btnPrimary : styles.btnPrimaryDisabled}>
+          <Text style={styles.btnPrimaryText}>Entrar</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        onPress={() => navigation.navigate('DeliverymanRegister')}
-        style={styles.btnSecondary}>
-        <Text style={styles.btnSecondaryText}>
-          Cadastrar Entregador
-        </Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('DeliverymanRegister')}
+          style={styles.btnSecondary}>
+          <Text style={styles.btnSecondaryText}>Cadastrar Entregador</Text>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );
