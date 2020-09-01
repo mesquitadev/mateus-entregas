@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   Alert,
   Image,
@@ -16,10 +16,17 @@ import {KEYS_CLEANNER} from '../../../Utils/keys';
 import login from '../../../services/login';
 import styles from './styles';
 
+const pathIconEyeOpen = require('../../../res/img/open-eye.png');
+const pathIconEyeClosed = require('../../../res/img/closed-eye.png');
+
 const Login = ({navigation}) => {
   const [user, setUser] = useState('');
   const [pass, setPass] = useState('');
   const [buttonEnabled, setButtonEnabled] = useState(true);
+  const [visibilityPassword, enableVisibilityPassword] = useState(true);
+
+  const textInputCPF = useRef(null);
+  const textInputSenha = useRef(null);
 
   const doLogin = async () => {
     const CPF = require('cpf');
@@ -27,7 +34,7 @@ const Login = ({navigation}) => {
      Alert.alert('App Entregas', 'CPF inválido, verifique o número digitado e tente novamente.');
      return;
     }
-    
+
     if (pass.length < 6) {
       Alert.alert(
         'App Entregas',
@@ -99,7 +106,6 @@ const Login = ({navigation}) => {
     return unsubscribe;
   }, [navigation]);
 
-
   return (
     <View style={styles.container}>
       <ScrollView
@@ -113,17 +119,39 @@ const Login = ({navigation}) => {
           type={'cpf'}
           placeholder="CPF"
           value={user}
-          onChangeText={(text) => setUser(text.replace(/[^\d]+/g, ''))}
+          onChangeText={(text) => {
+            if (text.length == 14) {
+              textInputSenha.current.focus();
+            }
+            setUser(text.replace(/[^\d]+/g, ''));
+          }}
           style={styles.inputs}
           maxLength={14}
+          ref={textInputCPF}
         />
 
-        <TextInput
-          style={styles.inputs}
-          placeholder="Senha"
-          onChangeText={(text) => setPass(text)}
-          secureTextEntry={true}
-        />
+        <View>
+          <TextInput
+            style={styles.inputs}
+            placeholder="Senha"
+            onChangeText={(text) => setPass(text)}
+            secureTextEntry={visibilityPassword}
+            ref={textInputSenha}
+          />
+          {!visibilityPassword ? (
+            <TouchableOpacity
+              onPress={() => enableVisibilityPassword(true)}
+              style={styles.iconEye}>
+              <Image source={pathIconEyeOpen} width={24} height={24} />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={() => enableVisibilityPassword(false)}
+              style={styles.iconEye}>
+              <Image source={pathIconEyeClosed} width={24} height={24} />
+            </TouchableOpacity>
+          )}
+        </View>
 
         <TouchableOpacity
           onPress={() => doLogin()}
