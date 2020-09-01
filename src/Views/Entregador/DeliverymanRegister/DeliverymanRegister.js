@@ -61,7 +61,7 @@ const DeliverymanRegister = ({ navigation }) => {
       } catch(error) {
         if(error.response) {
           if(error.response.status == 404) Alert.alert('App Entregas', 'Impossível fazer o cadastro');
-          if(error.response.status.toString().startsWith('50')) Alert.alert('App Entregas', 'Erro no serviço, tente novamente mais tarde.');
+          if(error.response.status.toString().startsWith('50')) Alert.alert('App Entregas', 'Sistema em manutenção. Tente novamente mais tarde.');
          
           return;
         }
