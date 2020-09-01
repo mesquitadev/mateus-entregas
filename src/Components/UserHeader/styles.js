@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#2B2D2E",
     fontWeight: "bold",
-    marginBottom: 3,
     textTransform: 'capitalize',
+    paddingTop: 2
   },
 
   store: {
