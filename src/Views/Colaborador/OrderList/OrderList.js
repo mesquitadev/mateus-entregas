@@ -19,24 +19,50 @@ import OrderItem from '../../../Components/OrderItem/OrderItem';
 import styles from './styles';
 import api from '../../../services/api';
 
-const OrderList = ({ navigation: { navigate } }) => {
+const OrderList = ({ navigation }) => {
   const [ listItems, setListItems ] = useState([]);
   const [ listItemsFilter, setListItemsFilter ] = useState([]);
   const [ selectedItems, setSelectedItems ] = useState([]);
   const [ count, setCount ] = useState(0);
   const [ loading, setLoading ] = useState(true)
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await api.get(`/pedidos-pronta-entrega`);
+
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await api.get(`/pedidos-pronta-entrega`);
       
-      setListItemsFilter(response.data);
-      setListItems(response.data);
+  //     setListItemsFilter(response.data);
+  //     setListItems(response.data);
 
-      setLoading(false);
-    };
+  //     setLoading(false);
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
+
+
+  useEffect(() => {
+    //TODO - Verificar se vem da pagina de comfirmação de entregas
+    const unsubscribe = navigation.addListener('focus', () => {
+      setCount(0)
+      setListItemsFilter([]);
+      setListItems([]);
+      setSelectedItems([])
+      const fetchData = async () => {
+        const response = await api.get(`/pedidos-pronta-entrega`);
+        console.log("Carreguei: pedidos-pronta-entrega")
+        setListItemsFilter(response.data);
+        setListItems(response.data);
+        
+      };
+      fetchData()
+      return () => fetchData();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+
   
   loadSelectedItems = data => {
     if (selectedItems.includes(data)) {
@@ -51,7 +77,7 @@ const OrderList = ({ navigation: { navigate } }) => {
   };
   
   renderItem = ({ item }) => (
-    <OrderItem data={item} navigate={navigate} showCheckBox={true} />
+    <OrderItem data={item} navigate={navigation.navigate} showCheckBox={true} />
   );
 
   tipoPessoa = (objeto) => {
@@ -114,7 +140,7 @@ const OrderList = ({ navigation: { navigate } }) => {
 
       <TouchableOpacity
         style={[ styles.selectedItemsButton, count > 0 ? styles.active : styles.inactive ]}
-        onPress={() => navigate('SelectedItems', selectedItems)}>
+        onPress={() => navigation.navigate('SelectedItems', selectedItems)}>
         <Text style={styles.selectedItemsButtonText}>
           {`Ver pedidos selecionados  ${count}`}
         </Text>
