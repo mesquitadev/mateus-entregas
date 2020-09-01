@@ -55,6 +55,7 @@ const SelectDeliveryPerson = ({ route: { params }, navigation: { navigate } }) =
           data={deliveryPerson}
           keyExtractor={(item, index) => index.toString()}
           renderItem={this.renderItem}
+          nestedScrollEnabled
         />
       </View>
 

@@ -108,60 +108,62 @@ const DeliverymanRegister = ({navigation}) => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <TextInput
-          style={styles.inputs}
-          placeholder="Nome completo"
-          value={name}
-          onChangeText={(text) => setName(text)}
-        />
-        <TextInputMask
-          type={'cpf'}
-          placeholder="CPF"
-          value={user}
-          onChangeText={(text) => setUser(text.replace(/[^\d]+/g, ''))}
-          style={styles.inputs}
-          maxLength={14}
-        />
-        <TextInput
-          placeholder="CNH"
-          value={cnh}
-          onChangeText={(text) => setCnh(text)}
-          keyboardType="numeric"
-          style={styles.inputs}
-          maxLength={11}
-        />
-        <TextInputMask
-          type={'datetime'}
-          value={datanascimento}
-          onChangeText={(text) => setDataNascimento(text)}
-          style={styles.inputs}
-          placeholder="Data de Nascimento"
-          maxLength={10}
-        />
-        <TextInputMask
-          type={'cel-phone'}
-          options={{
-            maskType: 'BRL',
-            withDDD: true,
-          }}
-          value={tel}
-          onChangeText={(text) => setTel(text)}
-          style={styles.inputs}
-          placeholder="Telefone"
-          maxLength={15}
-        />
-        <TextInput
-          style={styles.inputs}
-          placeholder="E-mail"
-          keyboardType="email-address"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-        />
-        <TouchableOpacity
-          onPress={() => doRegister()}
-          style={styles.btnPrimary}>
-          <Text style={styles.btnPrimaryText}>Confirmar</Text>
-        </TouchableOpacity>
+        <View style={styles.wrapper}>
+          <TextInput
+            style={styles.inputs}
+            placeholder="Nome completo"
+            value={name}
+            onChangeText={(text) => setName(text)}
+          />
+          <TextInputMask
+            type={'cpf'}
+            placeholder="CPF"
+            value={user}
+            onChangeText={(text) => setUser(text.replace(/[^\d]+/g, ''))}
+            style={styles.inputs}
+            maxLength={14}
+          />
+          <TextInput
+            placeholder="CNH"
+            value={cnh}
+            onChangeText={(text) => setCnh(text)}
+            keyboardType="numeric"
+            style={styles.inputs}
+            maxLength={11}
+          />
+          <TextInputMask
+            type={'datetime'}
+            value={datanascimento}
+            onChangeText={(text) => setDataNascimento(text)}
+            style={styles.inputs}
+            placeholder="Data de Nascimento"
+            maxLength={10}
+          />
+          <TextInputMask
+            type={'cel-phone'}
+            options={{
+              maskType: 'BRL',
+              withDDD: true,
+            }}
+            value={tel}
+            onChangeText={(text) => setTel(text)}
+            style={styles.inputs}
+            placeholder="Telefone"
+            maxLength={15}
+          />
+          <TextInput
+            style={styles.inputs}
+            placeholder="E-mail"
+            keyboardType="email-address"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+          />
+          <TouchableOpacity
+            onPress={() => doRegister()}
+            style={styles.btnPrimary}>
+            <Text style={styles.btnPrimaryText}>Confirmar</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );

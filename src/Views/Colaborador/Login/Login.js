@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  BackHandler
 } from 'react-native';
 import {TextInputMask} from 'react-native-masked-text';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -22,22 +23,19 @@ const Login = ({navigation}) => {
   const [buttonEnabled, setButtonEnabled] = useState(true);
 
   const doLogin = async () => {
-    // const CPF = require('cpf');
-    // if(!CPF.isValid(user)) { // DEVELOP -- RETIRAR
-    //  Alert.alert('App Entregas', 'CPF inválido, verifique o número digitado e tente novamente.');
-    //  return;
-    // }
-    //
-    // if (pass.length < 6) {
-    //   Alert.alert(
-    //     'App Entregas',
-    //     'Verifique a senha digitada e tente novamente.',
-    //   );
-    //   return;
-    // }
-    //
-    // if(pass.length < 6)
-    //   alert('Verifique os dados digitados e tente novamente.')
+    const CPF = require('cpf');
+    if(!CPF.isValid(user)) {
+     Alert.alert('App Entregas', 'CPF inválido, verifique o número digitado e tente novamente.');
+     return;
+    }
+    
+    if (pass.length < 6) {
+      Alert.alert(
+        'App Entregas',
+        'Verifique a senha digitada e tente novamente.',
+      );
+      return;
+    }
 
     try {
       setButtonEnabled(false);
@@ -60,8 +58,7 @@ const Login = ({navigation}) => {
           break;
 
         case 2: //rejeitado
-          //navigation.navigate('')
-          alert('Cadastro rejeitado');
+          navigation.navigate('DeliverymanRegisterDenied')
           break;
 
         case 3: //analise -- enviar nova documentação
@@ -102,6 +99,27 @@ const Login = ({navigation}) => {
 
     return unsubscribe;
   }, [navigation]);
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert('App Entregas', 
+      'Tem certeza que deseja voltar?', [
+        {
+          text: "Cancelar",
+          onPress: () => null,
+          style: "cancel"
+        },
+        {text: "SIM", onPress: () => BackHandler.exitApp() }
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener (
+      "hardwareBackPress",
+      backAction
+    );
+    return () => backHandler.remove();
+  }, []);
 
   return (
     <View style={styles.container}>

@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
-import { PacmanIndicator } from 'react-native-indicators';
+
+import {
+  BallIndicator,
+  BarIndicator,
+  DotIndicator,
+  MaterialIndicator,
+  PacmanIndicator,
+  PulseIndicator,
+  SkypeIndicator,
+  UIActivityIndicator,
+  WaveIndicator,
+} from 'react-native-indicators';
 
 import UserHeader from '../../../Components/UserHeader/UserHeader';
 import SearchFilter from '../../../Components/SearchFilter/SearchFilter';
@@ -8,24 +19,49 @@ import OrderItem from '../../../Components/OrderItem/OrderItem';
 import styles from './styles';
 import api from '../../../services/api';
 
-const OrderList = ({ navigation: { navigate } }) => {
+const OrderList = ({ navigation }) => {
   const [ listItems, setListItems ] = useState([]);
   const [ listItemsFilter, setListItemsFilter ] = useState([]);
   const [ selectedItems, setSelectedItems ] = useState([]);
   const [ count, setCount ] = useState(0);
   const [ loading, setLoading ] = useState(true)
-  
-  useEffect(() => {
-    const fetchData = async () => {
+
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await api.get(`/pedidos-pronta-entrega`);
       
-      const response = await api.get(`/pedidos-pronta-entrega`);
-      console.log("tchau")
-      setListItemsFilter(response.data);
-      setListItems(response.data);
-    };
-    fetchData()
-    return () => fetchData();
-  }, []);
+  //     setListItemsFilter(response.data);
+  //     setListItems(response.data);
+
+  //     setLoading(false);
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+
+  useEffect(() => {
+    //TODO - Verificar se vem da pagina de comfirmação de entregas
+    const unsubscribe = navigation.addListener('focus', () => {
+      setCount(0)
+      setListItemsFilter([]);
+      setListItems([]);
+      setSelectedItems([])
+      const fetchData = async () => {
+        const response = await api.get(`/pedidos-pronta-entrega`);
+        console.log("Carreguei: pedidos-pronta-entrega")
+        setListItemsFilter(response.data);
+        setListItems(response.data);
+        
+      };
+      fetchData()
+      return () => fetchData();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
 
   
   loadSelectedItems = data => {
@@ -41,7 +77,7 @@ const OrderList = ({ navigation: { navigate } }) => {
   };
   
   renderItem = ({ item }) => (
-    <OrderItem data={item} navigate={navigate} showCheckBox={true} />
+    <OrderItem data={item} navigate={navigation.navigate} showCheckBox={true} />
   );
 
   tipoPessoa = (objeto) => {
@@ -79,8 +115,6 @@ const OrderList = ({ navigation: { navigate } }) => {
     );
   }
 
-  console.disableYellowBox = true;
-
   return (
     <View>
       <UserHeader />
@@ -93,14 +127,20 @@ const OrderList = ({ navigation: { navigate } }) => {
             data={listItems}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this.renderItem}
-             nestedScrollEnabled    
+            nestedScrollEnabled    
             ListHeaderComponent={FlatListHeader}
           />
       </View>
-    
+
+      <PacmanIndicator
+      style={styles.loading}
+      animating={loading}
+      hidesWhenStopped={true}
+      color='rgb(0, 149, 218)' />
+
       <TouchableOpacity
         style={[ styles.selectedItemsButton, count > 0 ? styles.active : styles.inactive ]}
-        onPress={() => navigate('SelectedItems', selectedItems)}>
+        onPress={() => navigation.navigate('SelectedItems', selectedItems)}>
         <Text style={styles.selectedItemsButtonText}>
           {`Ver pedidos selecionados  ${count}`}
         </Text>

@@ -5,27 +5,22 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#FFF",
     flex: 1,
+    justifyContent: "center",
     alignItems: "center",
-    paddingTop: 0,
   },
 
-  logo: {
-    width: screenWidth * 0.6,
-    resizeMode: 'contain',
-    alignItems: 'center',
-    paddingVertical: 0
+  wrapper: {
+    paddingTop: 50
   },
 
   inputs: {
     width: screenWidth * 0.9,
-    paddingVertical: 15,
+    paddingVertical: 10,
     paddingHorizontal: 15,
     borderColor: "#8898A6",
     borderWidth: 1,
     borderRadius: 5,
     marginVertical: 10,
-    flexDirection: "row",
-    alignItems: "center",
     fontSize: 16,
   },
 
