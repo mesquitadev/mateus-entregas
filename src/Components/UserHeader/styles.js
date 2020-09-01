@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     alignItems: "center",
     borderBottomWidth: 1,
-    borderBottomColor: "#EEE"
+    borderBottomColor: "#EEE",
   },  
 
   container: {
@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#2B2D2E",
     fontWeight: "bold",
-    marginBottom: 3
+    marginBottom: 3,
+    textTransform: 'capitalize',
   },
 
   store: {

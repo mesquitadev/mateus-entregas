@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 5,
     color: "#2B2D2E",
+    textTransform: 'capitalize',
   },
 
   text: {
