@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
-  BackHandler
 } from 'react-native';
 import {TextInputMask} from 'react-native-masked-text';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -100,26 +99,6 @@ const Login = ({navigation}) => {
     return unsubscribe;
   }, [navigation]);
 
-  useEffect(() => {
-    const backAction = () => {
-      Alert.alert('App Entregas', 
-      'Tem certeza que deseja voltar?', [
-        {
-          text: "Cancelar",
-          onPress: () => null,
-          style: "cancel"
-        },
-        {text: "SIM", onPress: () => BackHandler.exitApp() }
-      ]);
-      return true;
-    };
-
-    const backHandler = BackHandler.addEventListener (
-      "hardwareBackPress",
-      backAction
-    );
-    return () => backHandler.remove();
-  }, []);
 
   return (
     <View style={styles.container}>
