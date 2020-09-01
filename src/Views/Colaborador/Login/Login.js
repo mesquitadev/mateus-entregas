@@ -23,22 +23,19 @@ const Login = ({navigation}) => {
   const [buttonEnabled, setButtonEnabled] = useState(true);
 
   const doLogin = async () => {
-    // const CPF = require('cpf');
-    // if(!CPF.isValid(user)) { // DEVELOP -- RETIRAR
-    //  Alert.alert('App Entregas', 'CPF inválido, verifique o número digitado e tente novamente.');
-    //  return;
-    // }
-    //
-    // if (pass.length < 6) {
-    //   Alert.alert(
-    //     'App Entregas',
-    //     'Verifique a senha digitada e tente novamente.',
-    //   );
-    //   return;
-    // }
-    //
-    // if(pass.length < 6)
-    //   alert('Verifique os dados digitados e tente novamente.')
+    const CPF = require('cpf');
+    if(!CPF.isValid(user)) {
+     Alert.alert('App Entregas', 'CPF inválido, verifique o número digitado e tente novamente.');
+     return;
+    }
+    
+    if (pass.length < 6) {
+      Alert.alert(
+        'App Entregas',
+        'Verifique a senha digitada e tente novamente.',
+      );
+      return;
+    }
 
     try {
       setButtonEnabled(false);
@@ -61,8 +58,7 @@ const Login = ({navigation}) => {
           break;
 
         case 2: //rejeitado
-          //navigation.navigate('')
-          alert('Cadastro rejeitado');
+          navigation.navigate('DeliverymanRegisterDenied')
           break;
 
         case 3: //analise -- enviar nova documentação
