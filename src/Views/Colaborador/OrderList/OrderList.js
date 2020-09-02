@@ -37,7 +37,7 @@ const OrderList = ({ navigation }) => {
         console.log("Carreguei: pedidos-pronta-entrega")
         setListItemsFilter(response.data);
         setListItems(response.data);
-        
+        setLoading(false);
       };
       fetchData()
       return () => fetchData();
@@ -46,8 +46,6 @@ const OrderList = ({ navigation }) => {
     return unsubscribe;
   }, [navigation]);
 
-
-  
   loadSelectedItems = data => {
     if (selectedItems.includes(data)) {
       const index = selectedItems.indexOf(data);
