@@ -1,24 +1,32 @@
 import api from './api';
 
-
-const deliverymanRegister = async (name, user, cnh, datanascimento, tel, email) => {  
+const deliverymanRegister = async (
+  name,
+  formatedCPF,
+  cnh,
+  formatedDataNascimento,
+  formatedTelefone,
+  email,
+) => {
   const bodyHTTP = {
     nome: name,
-    cpf: user,
+    cpf: formatedCPF,
     cnh: cnh,
-    dataNascimento: datanascimento.substr(6,4) + "-" + datanascimento.substr(3,2) + "-" + datanascimento.substr(0,2),
-    telefone: tel,
+    dataNascimento: formatedDataNascimento,
     email: email,
+    telefone: formatedTelefone,
     log: {
-        ip: "",
-        dispositivo: "",
-        localizacao: ""
-    }
+      ip: '',
+      dispositivo: '',
+      localizacao: '',
+    },
   };
-
-
-  const response = await api.post(`/entregador`, bodyHTTP);
-  return response;
+  try {
+    const response = await api.post(`/entregador`, bodyHTTP);
+    return response;
+  } catch (error) {
+    throw new Error('Erro ao chamar o serviço de cadastro.')
+  }
 };
 
 export default deliverymanRegister;

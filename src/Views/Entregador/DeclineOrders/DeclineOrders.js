@@ -19,19 +19,19 @@ const DeclineOrders = ({route: {params}, navigation}) => {
   const boxes = [
     {
       id: 1,
-      idMotivo: 21,
+      valor: 1,
       message: 'Não foi possível encontrar o endereço de entrega',
       selected: false,
     },
     {
       id: 2,
-      idMotivo: 22,
+      valor: 2,
       message: 'Cliente ausente',
       selected: false,
     },
     {
       id: 3,
-      idMotivo: 23,
+      valor: 3,
       message: 'Itens danificados, cliente não quis receber',
       selected: false,
     },
@@ -65,7 +65,7 @@ const DeclineOrders = ({route: {params}, navigation}) => {
   const confirmCancelDelivery = async () => {
     const payload = {
       idEntregaPedido: _data.id,
-      idMotivo: boxes[idCard].idMotivo,
+      valor: boxes[idCard].valor,
     };
     try {
       await ServiceCancelDelivery(payload);
@@ -87,7 +87,7 @@ const DeclineOrders = ({route: {params}, navigation}) => {
   const confirmPutOffDelivery = async () => {
     const payload = {
       idEntregaPedido: _data.id,
-      idMotivo: boxes[idCard].idMotivo,
+      valor: boxes[idCard].valor,
     };
     try {
       await ServicePuttOffDelivery(payload);

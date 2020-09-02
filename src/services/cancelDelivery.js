@@ -2,7 +2,7 @@ import api from './api';
 
 const cancelDelivery = async (data) => {
   const bodyHTTP = {
-    motivoCancelamento: data.idMotivo,
+    motivoCancelamento: data.valor,
     log: {
       ip: '',
       dispositivo: '',
