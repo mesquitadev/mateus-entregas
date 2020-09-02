@@ -1,26 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList } from 'react-native';
 
+import myDelivery from '../../../services/myDelivery';
 import UserHeader from '../../../Components/UserHeader/UserHeader';
 import SearchFilter from '../../../Components/SearchFilter/SearchFilter';
 import DeliveryOrdersItem from '../../../Components/DeliveryOrdersItem/DeliveryOrdersItem';
 import styles from './styles';
 
-const DeliveryOrders = ({ route: { params }, navigation: { navigate } }) => {
-  const [ listItems, setListItems ] = useState([]);
+const DeliveryOrders = ({ route, navigation }) => {
   const [ listItemsFilter, setListItemsFilter ] = useState([]);
+  const [ listItems, setListItems ] = useState([]);
   
   useEffect(() => {
-    const fetchData = () => {
-      setListItemsFilter(params.entregaPedidos);
-      setListItems(params.entregaPedidos);
-    };
+    const unsubscribe = navigation.addListener('focus', () => {
+      setListItemsFilter([]);
+      setListItems([]);
 
-    fetchData();
-  }, []);
+      const fetchData = async () => {
+        try {
+          const response = await myDelivery(route.params);
+  
+          setListItemsFilter(response.data.entregaPedidos);
+          setListItems(response.data.entregaPedidos);
+        } catch(error) {
+          alert('Não foi possível trazer os pedidos.')
+        }
+      };
+
+      fetchData();
+      return () => fetchData();
+    });
+
+    return unsubscribe;
+  }, [ navigation ]);
   
   const renderItem = ({ item }) => (
-    <DeliveryOrdersItem data={item} navigate={navigate} />
+    <DeliveryOrdersItem data={item} navigate={navigation.navigate} />
   );
 
   const startSearchFilter = text => {
