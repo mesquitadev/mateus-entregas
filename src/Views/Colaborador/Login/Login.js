@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {TextInputMask} from 'react-native-masked-text';
 import AsyncStorage from '@react-native-community/async-storage';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {KEYS_CLEANNER} from '../../../Utils/keys';
 
@@ -204,6 +205,18 @@ const Login = ({navigation}) => {
           onPress={() => navigation.navigate('DeliverymanRegister')}
           style={styles.btnSecondary}>
           <Text style={styles.btnSecondaryText}>Cadastrar Entregador</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate('DeliverymanHelp')}
+          style={styles.btnHelp}>
+          <Ionicons
+            name={"help-circle-outline"}
+            size={28}
+            color={"#0095DA"}
+            style={styles.iconHelp}
+          />
+          <Text style={styles.btnSecondaryText}>Ajuda</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>
