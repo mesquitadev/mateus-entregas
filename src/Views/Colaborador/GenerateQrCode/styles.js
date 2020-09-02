@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexGrow: 2,
+    top: 40
   },
 
   userName: {
