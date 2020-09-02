@@ -30,6 +30,8 @@ import ReceiptByAnotherPerson from './Views/Entregador/ReceiptByAnotherPerson/Re
 import DeliverymanRegisterDenied from './Views/Entregador/DeliverymanRegisterDenied/DeliverymanRegisterDenied';
 import OrderConfirmed from './Views/Colaborador/OrderConfirmed/OrderConfirmed';
 import DeliveryInProgress from './Views/Entregador/DeliveryInProgress/DeliveryInProgress';
+import ReceiptByQrCode from './Views/Entregador/ReceiptByQrcode/ReceiptByQrCode';
+import DeliveryReceiptSuccess from './Views/Entregador/DeliveryReceiptSuccess/DeliveryReceiptSuccess';
 
 const Stack = createStackNavigator();
 
@@ -261,6 +263,20 @@ const Routes = () => (
     <Stack.Screen
       name="DeliveryInProgress"
       component={DeliveryInProgress}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <Stack.Screen
+      name="ReceiptByQrCode"
+      component={ReceiptByQrCode}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <Stack.Screen
+      name="DeliveryReceiptSuccess"
+      component={DeliveryReceiptSuccess}
       options={{
         headerShown: false,
       }}
