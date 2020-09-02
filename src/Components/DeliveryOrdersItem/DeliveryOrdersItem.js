@@ -31,7 +31,11 @@ const DeliveryOrdersItem = ({data, navigate}) => {
       <View style={styles.horizontalRule} />
       <View style={styles.bar}>
         <View style={styles.status}>
-          <Text style={styles.barText}>Aguardando entrega</Text>
+          <Text style={styles.barText}>
+            {
+              data.pedido.situacao
+            }
+          </Text>
         </View>
         <View
           style={styles.more}>

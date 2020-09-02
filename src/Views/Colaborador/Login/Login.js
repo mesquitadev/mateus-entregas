@@ -46,11 +46,11 @@ const Login = ({navigation}) => {
     }
   };
 
-  const checkMyDelivery = async (id) => {
+  const checkMyDelivery = async id => {
     try {
       const myDeliveryResponse = await myDelivery(id);
 
-      navigation.navigate('DeliveryInProgress', myDeliveryResponse.data);
+      navigation.navigate('DeliveryInProgress', id);
     } catch (error) {
       navigation.navigate('AcceptOrders');
     }
