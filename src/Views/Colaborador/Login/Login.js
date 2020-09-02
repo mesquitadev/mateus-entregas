@@ -14,20 +14,50 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import {KEYS_CLEANNER} from '../../../Utils/keys';
 
+import myDelivery from '../../../services/myDelivery';
 import login from '../../../services/login';
 import styles from './styles';
 
-const Login = ({navigation}) => {
+import api from '../../../services/api'; // Temporário
+
+const Login = ({ navigation }) => {
   const [user, setUser] = useState('');
   const [pass, setPass] = useState('');
   const [buttonEnabled, setButtonEnabled] = useState(true);
 
-  const doLogin = async () => {
-    const CPF = require('cpf');
-    if(!CPF.isValid(user)) {
-     Alert.alert('App Entregas', 'CPF inválido, verifique o número digitado e tente novamente.');
-     return;
+  // Temporário até que o response do login venha com um payload mais detalhado
+  const getEntregadorId = async id => {
+    try {
+      const response = await api.get('/entregadores');
+
+      const find = response.data.find(item => {
+        return item.usuario.id === id;
+      });
+
+      checkMyDelivery(find.id);
+    } catch(error) {
+      alert(error);
     }
+  };
+
+  const checkMyDelivery = async id => {
+    try {
+      const myDeliveryResponse = await myDelivery(id);
+
+      if (!myDeliveryResponse.data) navigation.navigate('AcceptOrders');
+      else navigation.navigate('DeliveryInProgress', myDeliveryResponse.data);
+    } catch(error) {
+      Alert.alert('App Entregas', 'Encontramos um problema no acesso de entregador.');
+    }
+  };
+  
+  const doLogin = async () => {
+    // Comentando validacao de cpf para teste
+    // const CPF = require('cpf');
+    // if(!CPF.isValid(user)) {
+    //  Alert.alert('App Entregas', 'CPF inválido, verifique o número digitado e tente novamente.');
+    //  return;
+    // }
     
     if (pass.length < 6) {
       Alert.alert(
@@ -53,7 +83,8 @@ const Login = ({navigation}) => {
             navigation.navigate('OrderList');
 
           if (response.data.perfil.descricao.toLowerCase() == 'entregador')
-            navigation.navigate('AcceptOrders');
+            // checkMyDelivery(response.data.id);
+            getEntregadorId(response.data.id);
 
           break;
 

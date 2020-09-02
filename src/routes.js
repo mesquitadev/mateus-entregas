@@ -30,6 +30,7 @@ import DeliveryReceipt from './Views/Entregador/DeliveryReceipt/DeliveryReceipt'
 import ReceiptByAnotherPerson from './Views/Entregador/ReceiptByAnotherPerson/ReceiptByAnotherPerson';
 import DeliverymanRegisterDenied from './Views/Entregador/DeliverymanRegisterDenied/DeliverymanRegisterDenied';
 import OrderConfirmed from './Views/Colaborador/OrderConfirmed/OrderConfirmed';
+import DeliveryInProgress from './Views/Entregador/DeliveryInProgress/DeliveryInProgress';
 
 const Stack = createStackNavigator();
 
@@ -244,12 +245,12 @@ const Routes = () => (
       }}
     />
     <Stack.Screen
-     name="DeliveryReceipt"
-     component={DeliveryReceipt}
-     options={{
-       title: "Comprovante de entrega",
-       headerBackTitle: "Voltar",
-       headerTitleAlign: 'center',
+      name="DeliveryReceipt"
+      component={DeliveryReceipt}
+      options={{
+        title: "Comprovante de entrega",
+        headerBackTitle: "Voltar",
+        headerTitleAlign: 'center',
       }}
     />
     <Stack.Screen 
@@ -260,12 +261,19 @@ const Routes = () => (
       }}
     />
     <Stack.Screen
-     name="DeliverymanRegisterDenied"
-     component={DeliverymanRegisterDenied}
-     options={{
-       title: "Cadastro",
-       headerBackTitle: "Voltar",
-       headerTitleAlign: 'center',
+      name="DeliverymanRegisterDenied"
+      component={DeliverymanRegisterDenied}
+      options={{
+        title: "Cadastro",
+        headerBackTitle: "Voltar",
+        headerTitleAlign: 'center',
+      }}
+    />
+    <Stack.Screen
+      name="DeliveryInProgress"
+      component={DeliveryInProgress}
+      options={{
+        headerShown: false,
       }}
     />
 

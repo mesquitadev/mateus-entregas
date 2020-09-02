@@ -6,11 +6,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#FFF"
   },
   
   card: {
     alignItems: "center",
-    backgroundColor: "#FFF",
     borderRadius: 5,
     shadowColor: '#00000033',
     shadowOffset: { width: 0, height: 2 },
@@ -23,17 +23,24 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    width: 100,
-    height: 100
+    width: 200,
+    height: 140,
+    marginBottom: 30
+
   },
 
   textStrong: {
     fontWeight: "bold",
-    color: "#787B7D"
+    color: "#787B7D",
+    fontSize: 16,
+    marginBottom: 5
   },
 
   text: {
-    color: "#787B7D"
+    color: "#787B7D",
+    width: screenWidth * 0.5,
+    textAlign: "center",
+    marginBottom: 20
   },
 
   button: {
