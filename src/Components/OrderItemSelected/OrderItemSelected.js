@@ -25,7 +25,7 @@ if(data.cliente.pessoaJuridica == null) {
 
   return (
     <View style={[styles.orderItem, toggleCheckBox ? styles.active : styles.inactive]}>
-      <Text style={styles.text}>Novoº #{data.numeroPedido}</Text>
+      <Text style={styles.text}>#{data.numeroPedido}</Text>
       <Text style={styles.label}>Realizado em {Moment(data.dataPedido).format('MM/DD/YYYY HH:mm')}</Text>
       <Text style={styles.label}>Cliente</Text>
       <Text style={styles.text}>{nome}</Text>
