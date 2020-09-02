@@ -32,12 +32,20 @@ import OrderConfirmed from './Views/Colaborador/OrderConfirmed/OrderConfirmed';
 import DeliveryInProgress from './Views/Entregador/DeliveryInProgress/DeliveryInProgress';
 import ReceiptByQrCode from './Views/Entregador/ReceiptByQrcode/ReceiptByQrCode';
 import DeliveryReceiptSuccess from './Views/Entregador/DeliveryReceiptSuccess/DeliveryReceiptSuccess';
+import Preloader from './Views/Colaborador/Preloader/Preloader';
 
 const Stack = createStackNavigator();
 
 const Routes = () => (
-  <Stack.Navigator initialRouteName="Login">
+  <Stack.Navigator initialRouteName="Preloader">
 
+    <Stack.Screen
+      name="Preloader"
+      component={Preloader}
+      options={{
+        headerShown: false
+      }}
+    />
     <Stack.Screen
       name="Login"
       component={Login}
