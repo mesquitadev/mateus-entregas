@@ -110,7 +110,6 @@ const Login = ({navigation}) => {
       if (error.response) {
         if (error.response.status == 404) {
           Alert.alert('App Entregas', 'Usuário ou senha inválidos.');
-          return;
         }
         
         if(error.response.status == 401) {
