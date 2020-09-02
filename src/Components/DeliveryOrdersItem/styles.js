@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     padding: 15,
     width: screenWidth * 0.9,
+    borderWidth: 2
   },
 
   text: {
@@ -40,13 +41,12 @@ const styles = StyleSheet.create({
   },
 
   status: {
-    backgroundColor: "#B8E8FF",
     padding: 7,
     borderRadius: 30,
   },
   
   barText: {
-    color: "#0070A3",
+    color: "#fff",
     fontSize: 12,
   },
 

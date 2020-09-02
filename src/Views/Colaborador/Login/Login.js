@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {TextInputMask} from 'react-native-masked-text';
 import AsyncStorage from '@react-native-community/async-storage';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {KEYS_CLEANNER} from '../../../Utils/keys';
 
@@ -107,13 +108,22 @@ const Login = ({navigation}) => {
       setButtonEnabled(true);
     } catch (error) {
       if (error.response) {
-        if (error.response.status == 404)
+        if (error.response.status == 404) {
           Alert.alert('App Entregas', 'Usuário ou senha inválidos.');
-        if (error.response.status.toString().startsWith('50'))
+          return;
+        }
+        
+        if(error.response.status == 401) {
+          Alert.alert('App Entregas', 'Acesso não autorizado, entre em contato com o SAC.');
+        }
+
+        if (error.response.status.toString().startsWith('50')) {
           Alert.alert(
             'App Entregas',
             'Erro no serviço, tente novamente mais tarde.',
           );
+        }
+
         setPass('');
         setButtonEnabled(true);
         return;
@@ -195,6 +205,18 @@ const Login = ({navigation}) => {
           onPress={() => navigation.navigate('DeliverymanRegister')}
           style={styles.btnSecondary}>
           <Text style={styles.btnSecondaryText}>Cadastrar Entregador</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate('DeliverymanHelp')}
+          style={styles.btnHelp}>
+          <Ionicons
+            name={"help-circle-outline"}
+            size={28}
+            color={"#0095DA"}
+            style={styles.iconHelp}
+          />
+          <Text style={styles.btnSecondaryText}>Ajuda</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>
