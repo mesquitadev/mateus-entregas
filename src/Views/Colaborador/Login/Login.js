@@ -126,7 +126,7 @@ const Login = ({navigation}) => {
       const cleanSStorageStatusCheckRegister = async () => {
         try {
           await AsyncStorage.multiRemove(
-            KEYS_CLEANNER.KEYS_CADASTRO_ENTRERGADOR,
+            KEYS_CLEANNER.KEYS_CADASTRO_ENTREGADOR,
           );
         } catch (error) {
           throw new Error('Não conseguimos limpar o storage do App.');
