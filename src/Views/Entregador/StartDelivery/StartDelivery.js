@@ -18,14 +18,12 @@ const StartDelivery = ({ route: {params}, navigation }) => {
       setReceiptName(params.post.name);
       setReceiptCpf(params.post.cpf);
       setDelivered(true);
-    } else {
-      setDelivered(false);
     }
   }, [params?.post]);
 
   const handleStartDelivery = async () => {
     try {
-      // const response = onStartDelivery(params.id);
+      const response = await onStartDelivery(_data.id);
 
       setStartDelivery(true);
     } catch(error) {
@@ -68,9 +66,9 @@ const StartDelivery = ({ route: {params}, navigation }) => {
         </View>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate('DeliveryReceipt', params)}
+          onPress={() => navigation.navigate('DeliveryReceipt')}
           style={
-            [startDelivery ? styles.receipt : styles.hide,
+            [(_data.situacao !== 3 && !startDelivery) ? styles.hide : styles.receipt,
             !delivered ? styles.receipt : styles.receiptActive]}>
           <Image 
             style={!delivered ? styles.receiptImg : styles.hide} 
@@ -85,14 +83,14 @@ const StartDelivery = ({ route: {params}, navigation }) => {
       </View>
 
       <TouchableOpacity
-        style={!startDelivery ? styles.startTouchable : styles.hide}
+        style={(_data.situacao !== 3 && !startDelivery ) ? styles.startTouchable : styles.hide}
         onPress={handleStartDelivery}>
         <Text style={styles.startTouchableText}>
           Iniciar entrega
         </Text>
       </TouchableOpacity>
 
-      <View style={startDelivery ? styles.actions : styles.hide}>
+      <View style={(_data.situacao !== 3 && !startDelivery) ? styles.hide : styles.actions}>
         <TouchableOpacity
           onPress={() =>
             navigation.navigate('DeclineOrders', {

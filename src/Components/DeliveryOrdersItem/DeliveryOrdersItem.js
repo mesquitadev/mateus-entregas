@@ -1,26 +1,62 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, Alert} from 'react-native';
 
 import styles from './styles';
 
-const DeliveryOrdersItem = ({data, navigate}) => {
-  // if (data.pedido.cliente.pessoaJuridica == null) {
-  //   setClientName(data.pedido.cliente.pessoaFisica.nome);
-  // } else {
-  //   if(data.pedido.cliente.pessoaJuridica.razaoSocial == null) {
-  //     setClientName(data.pedido.cliente.pessoaJuridica.cnpj);
-  //   } else {
-  //     setClientName(data.pedido.cliente.pessoaJuridica.razaoSocial);
-  //   }
-  // }
+const DeliveryOrdersItem = ({data, orderInProgress, navigate}) => {
+
+  const getStatusText = () => {
+    let situacao = data.situacao;
+
+    switch (situacao) {
+      case 2:
+        return 'Aguardando entrega'
+        break;
+      case 3:
+        return 'Saiu para entrega'
+        break;
+      case 4:
+        return 'Entregue'
+        break;
+      case 5:
+        return 'Entregue'
+        break;
+      default:
+        return 'Aguardando'
+        break;
+    }
+  };
+
+  const getItemColor = () => {
+    let situacao = data.situacao;
+
+    switch (situacao) {
+      case 2:
+        return '#DAE0E3'
+        break;
+      case 3:
+        return '#0095DA'
+        break;
+      case 4:
+        return '#00A349'
+        break;
+      case 5:
+        return '#00A349'
+        break;
+      default:
+        return '#DAE0E3'
+        break;
+    }
+  };
+  
   return (
     <TouchableOpacity
-      style={styles.orderItem}
-      onPress={() =>
-        navigate('StartDelivery', {
-          data: data
-        })
-      }>
+      style={[styles.orderItem, {borderColor: getItemColor()}]}
+      onPress={() => {
+        orderInProgress.length && data.situacao !== 3 ?
+        Alert.alert('Mateus Entregas', 'Você possui uma entrega em andamento') :
+        navigate('StartDelivery', {data: data})
+      }}>
       <Text style={styles.text}>Nº #{data.pedido.numeroPedido}</Text>
       <Text style={styles.label}>Realizado em {data.pedido.dataPedido}</Text>
       <Text style={styles.label}>Cliente</Text>
@@ -30,12 +66,8 @@ const DeliveryOrdersItem = ({data, navigate}) => {
       <Text style={styles.text}>{data.pedido.endereco.bairro}</Text>
       <View style={styles.horizontalRule} />
       <View style={styles.bar}>
-        <View style={styles.status}>
-          <Text style={styles.barText}>
-            {
-              data.pedido.situacao
-            }
-          </Text>
+        <View style={[styles.status, {backgroundColor: getItemColor()}]}>
+          <Text style={styles.barText}>{getStatusText()}</Text>
         </View>
         <View
           style={styles.more}>
