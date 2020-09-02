@@ -38,7 +38,7 @@ const StartDelivery = ({ route: {params}, navigation }) => {
     try {
       const response = await confirmOrderDelivery(_data.id, receiptName, receiptCpf, receiptSituation);
 
-      Alert.alert('Mateus Entregas', 'Pedido entregue.');
+      navigation.navigate('OrderDelivered');
     } catch (error) {
       Alert.alert('Mateus Entregas', 'Não foi possível finalizar a entrega do pedido.');
     }
