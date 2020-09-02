@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 18,
     borderRadius: 5,
-    marginTop: 10,
+    marginTop: 10
   },
 
   btnSecondaryText: {
@@ -78,7 +78,14 @@ const styles = StyleSheet.create({
     right: 0,
     width: 60,
     zIndex: 5
+  },
+  btnHelp: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 60
   }
+
 });
 
 export default styles;

@@ -33,6 +33,7 @@ import DeliveryInProgress from './Views/Entregador/DeliveryInProgress/DeliveryIn
 import ReceiptByQrCode from './Views/Entregador/ReceiptByQrcode/ReceiptByQrCode';
 import DeliveryReceiptSuccess from './Views/Entregador/DeliveryReceiptSuccess/DeliveryReceiptSuccess';
 import Preloader from './Views/Colaborador/Preloader/Preloader';
+import DeliverymanHelp from './Views/Entregador/DeliverymanHelp/DeliverymanHelp';
 
 const Stack = createStackNavigator();
 
@@ -287,6 +288,14 @@ const Routes = () => (
       component={DeliveryReceiptSuccess}
       options={{
         headerShown: false,
+      }}
+    />
+    <Stack.Screen
+      name="DeliverymanHelp"
+      component={DeliverymanHelp}
+      options={{
+        title: 'Ajuda',
+        headerTitleAlign: 'center'
       }}
     />
 
