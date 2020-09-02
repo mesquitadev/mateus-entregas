@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, Linking, TouchableOpacity } from 'react-native';
+import { View, Text, Image, Linking, TouchableOpacity, Alert } from 'react-native';
 
 import onStartDelivery from '../../../services/onStartDelivery';
+import confirmOrderDelivery from '../../../services/confirmOrderDelivery';
 import styles from './styles';
 
 const StartDelivery = ({ route: {params}, navigation }) => {
   const [ startDelivery, setStartDelivery ] = useState('');
   const [ receiptName, setReceiptName ] = useState('');
   const [ receiptCpf, setReceiptCpf ] = useState('');
+  const [ receiptSituation, setReceiptSituation ] = useState('');
   const [ delivered, setDelivered ] = useState('');
 
   const _data = params.data;
@@ -17,6 +19,7 @@ const StartDelivery = ({ route: {params}, navigation }) => {
     if (params?.post) {
       setReceiptName(params.post.name);
       setReceiptCpf(params.post.cpf);
+      setReceiptSituation(params.post.situacao);
       setDelivered(true);
     }
   }, [params?.post]);
@@ -28,6 +31,16 @@ const StartDelivery = ({ route: {params}, navigation }) => {
       setStartDelivery(true);
     } catch(error) {
       alert('Não foi possível iniciar a entrega.')
+    }
+  };
+
+  const confirmDelivery = async () => {
+    try {
+      const response = await confirmOrderDelivery(_data.id, receiptName, receiptCpf, receiptSituation);
+
+      Alert.alert('Mateus Entregas', 'Pedido entregue.');
+    } catch (error) {
+      Alert.alert('Mateus Entregas', 'Não foi possível finalizar a entrega do pedido.');
     }
   };
   
@@ -101,11 +114,8 @@ const StartDelivery = ({ route: {params}, navigation }) => {
           <Text style={styles.actionsTouchableLightText}>Suspender</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          // onPress={() =>
-          //   navigation.navigate('AcceptOrders', {
-          //     data: _data,
-          //   })
-          // }
+          disabled={!delivered}
+          onPress={confirmDelivery}
           style={delivered ? 
             styles.actionsTouchableActive : 
             styles.actionsTouchable}>
