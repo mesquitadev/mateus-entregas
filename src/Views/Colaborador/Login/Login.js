@@ -108,13 +108,22 @@ const Login = ({navigation}) => {
       setButtonEnabled(true);
     } catch (error) {
       if (error.response) {
-        if (error.response.status == 404)
+        if (error.response.status == 404) {
           Alert.alert('App Entregas', 'Usuário ou senha inválidos.');
-        if (error.response.status.toString().startsWith('50'))
+          return;
+        }
+        
+        if(error.response.status == 401) {
+          Alert.alert('App Entregas', 'Acesso não autorizado, entre em contato com o SAC.');
+        }
+
+        if (error.response.status.toString().startsWith('50')) {
           Alert.alert(
             'App Entregas',
             'Erro no serviço, tente novamente mais tarde.',
           );
+        }
+
         setPass('');
         setButtonEnabled(true);
         return;

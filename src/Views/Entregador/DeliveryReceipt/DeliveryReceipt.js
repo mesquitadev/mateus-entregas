@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 
-const DeliveryReceipt = ({ route: {params}, navigation }) => {
+const DeliveryReceipt = ({ navigation }) => {
   return(
     <View style={styles.container}>
       <TouchableOpacity 
@@ -16,7 +16,7 @@ const DeliveryReceipt = ({ route: {params}, navigation }) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.touchable}
-        onPress={() => navigation.navigate('ReceiptByAnotherPerson', params)}>
+        onPress={() => navigation.navigate('ReceiptByAnotherPerson')}>
         <Image style={styles.touchableImg} source={require('../../../res/img/ligar.png')} />
         <Text style={styles.touchableText}>
           Recebimento terceiros

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, Linking, TouchableOpacity } from 'react-native';
+import { View, Text, Image, Linking, TouchableOpacity, Alert } from 'react-native';
 
 import onStartDelivery from '../../../services/onStartDelivery';
+import confirmOrderDelivery from '../../../services/confirmOrderDelivery';
 import styles from './styles';
 
 const StartDelivery = ({ route: {params}, navigation }) => {
   const [ startDelivery, setStartDelivery ] = useState('');
   const [ receiptName, setReceiptName ] = useState('');
   const [ receiptCpf, setReceiptCpf ] = useState('');
+  const [ receiptSituation, setReceiptSituation ] = useState('');
   const [ delivered, setDelivered ] = useState('');
 
   const _data = params.data;
@@ -17,19 +19,28 @@ const StartDelivery = ({ route: {params}, navigation }) => {
     if (params?.post) {
       setReceiptName(params.post.name);
       setReceiptCpf(params.post.cpf);
+      setReceiptSituation(params.post.situacao);
       setDelivered(true);
-    } else {
-      setDelivered(false);
     }
   }, [params?.post]);
 
   const handleStartDelivery = async () => {
     try {
-      // const response = onStartDelivery(params.id);
+      const response = await onStartDelivery(_data.id);
 
       setStartDelivery(true);
     } catch(error) {
       alert('Não foi possível iniciar a entrega.')
+    }
+  };
+
+  const confirmDelivery = async () => {
+    try {
+      const response = await confirmOrderDelivery(_data.id, receiptName, receiptCpf, receiptSituation);
+
+      Alert.alert('Mateus Entregas', 'Pedido entregue.');
+    } catch (error) {
+      Alert.alert('Mateus Entregas', 'Não foi possível finalizar a entrega do pedido.');
     }
   };
   
@@ -68,9 +79,9 @@ const StartDelivery = ({ route: {params}, navigation }) => {
         </View>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate('DeliveryReceipt', params)}
+          onPress={() => navigation.navigate('DeliveryReceipt')}
           style={
-            [startDelivery ? styles.receipt : styles.hide,
+            [(_data.situacao !== 3 && !startDelivery) ? styles.hide : styles.receipt,
             !delivered ? styles.receipt : styles.receiptActive]}>
           <Image 
             style={!delivered ? styles.receiptImg : styles.hide} 
@@ -85,14 +96,14 @@ const StartDelivery = ({ route: {params}, navigation }) => {
       </View>
 
       <TouchableOpacity
-        style={!startDelivery ? styles.startTouchable : styles.hide}
+        style={(_data.situacao !== 3 && !startDelivery ) ? styles.startTouchable : styles.hide}
         onPress={handleStartDelivery}>
         <Text style={styles.startTouchableText}>
           Iniciar entrega
         </Text>
       </TouchableOpacity>
 
-      <View style={startDelivery ? styles.actions : styles.hide}>
+      <View style={(_data.situacao !== 3 && !startDelivery) ? styles.hide : styles.actions}>
         <TouchableOpacity
           onPress={() =>
             navigation.navigate('DeclineOrders', {
@@ -103,11 +114,8 @@ const StartDelivery = ({ route: {params}, navigation }) => {
           <Text style={styles.actionsTouchableLightText}>Suspender</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          // onPress={() =>
-          //   navigation.navigate('AcceptOrders', {
-          //     data: _data,
-          //   })
-          // }
+          disabled={!delivered}
+          onPress={confirmDelivery}
           style={delivered ? 
             styles.actionsTouchableActive : 
             styles.actionsTouchable}>
