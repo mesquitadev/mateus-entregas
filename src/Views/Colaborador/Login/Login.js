@@ -50,10 +50,9 @@ const Login = ({ navigation }) => {
     try {
       const myDeliveryResponse = await myDelivery(id);
 
-      if (!myDeliveryResponse.data) navigation.navigate('AcceptOrders');
-      else navigation.navigate('DeliveryInProgress', myDeliveryResponse.data);
+      navigation.navigate('DeliveryInProgress', myDeliveryResponse.data);
     } catch(error) {
-      Alert.alert('App Entregas', 'Encontramos um problema no acesso de entregador.');
+      navigation.navigate('AcceptOrders');
     }
   };
   

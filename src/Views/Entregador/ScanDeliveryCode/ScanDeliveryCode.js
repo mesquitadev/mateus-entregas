@@ -8,13 +8,29 @@ import {
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 
+import checkDelivery from '../../../services/checkDelivery';
 import styles from './styles';
 
 const ScanDeliveryCode = ({ navigation }) => {
+
+  const validateCode = async code => {
+    try {
+      const response = await checkDelivery(code);
+
+      navigation.navigate('ReceiveOrder', response.data);
+    } catch(error) {
+      if (error.response) {
+        if (error.response.status === 404) alert('Não existem pedidos para esse código.')
+        return;
+      }
+    }
+  };
+
   onSuccess = e => {
-    Linking.openURL(e.data).catch(err =>
-      console.error('An error occured', err)
-    );
+    // Linking.openURL(e.data).catch(err =>
+    //   console.error('An error occured', err)
+    // );
+    validateCode(e.data);
   };
   
   return(
