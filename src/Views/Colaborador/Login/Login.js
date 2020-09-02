@@ -19,7 +19,7 @@ import styles from './styles';
 
 import api from '../../../services/api'; // Temporário
 
-const Login = ({ navigation }) => {
+const Login = ({navigation}) => {
   const [user, setUser] = useState('');
   const [pass, setPass] = useState('');
   const [buttonEnabled, setButtonEnabled] = useState(true);
@@ -32,30 +32,30 @@ const Login = ({ navigation }) => {
   const textInputSenha = useRef(null);
 
   // Temporário até que o response do login venha com um payload mais detalhado
-  const getEntregadorId = async id => {
+  const getEntregadorId = async (id) => {
     try {
       const response = await api.get('/entregadores');
 
-      const find = response.data.find(item => {
+      const find = response.data.find((item) => {
         return item.usuario.id === id;
       });
 
       checkMyDelivery(find.id);
-    } catch(error) {
+    } catch (error) {
       alert(error);
     }
   };
 
-  const checkMyDelivery = async id => {
+  const checkMyDelivery = async (id) => {
     try {
       const myDeliveryResponse = await myDelivery(id);
 
       navigation.navigate('DeliveryInProgress', myDeliveryResponse.data);
-    } catch(error) {
+    } catch (error) {
       navigation.navigate('AcceptOrders');
     }
   };
-  
+
   const doLogin = async () => {
     // Comentando validacao de cpf para teste
     // const CPF = require('cpf');
@@ -63,7 +63,7 @@ const Login = ({ navigation }) => {
     //  Alert.alert('App Entregas', 'CPF inválido, verifique o número digitado e tente novamente.');
     //  return;
     // }
-    
+
     if (pass.length < 6) {
       Alert.alert(
         'App Entregas',
@@ -94,7 +94,7 @@ const Login = ({ navigation }) => {
           break;
 
         case 2: //rejeitado
-          navigation.navigate('DeliverymanRegisterDenied')
+          navigation.navigate('DeliverymanRegisterDenied');
           break;
 
         case 3: //analise -- enviar nova documentação
@@ -125,7 +125,9 @@ const Login = ({ navigation }) => {
     const unsubscribe = navigation.addListener('focus', () => {
       const cleanSStorageStatusCheckRegister = async () => {
         try {
-          await AsyncStorage.multiRemove(KEYS_CLEANNER);
+          await AsyncStorage.multiRemove(
+            KEYS_CLEANNER.KEYS_CADASTRO_ENTRERGADOR,
+          );
         } catch (error) {
           throw new Error('Não conseguimos limpar o storage do App.');
         }
