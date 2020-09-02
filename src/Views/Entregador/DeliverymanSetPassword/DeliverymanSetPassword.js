@@ -26,6 +26,7 @@ const DeliverymanSetPassword = ({navigation}) => {
                     style={styles.inputs} 
                     placeholder="Senha" 
                     onChangeText={text => setPass(text)}
+                    maxLength={8}
                     onKeyPress={enableTouchable}
                     secureTextEntry
                     
@@ -39,6 +40,7 @@ const DeliverymanSetPassword = ({navigation}) => {
                     style={styles.inputs} 
                     placeholder="Confirmar senha" 
                     onChangeText={text => setConfirmPass(text)}
+                    maxLength={8}
                     onKeyPress={enableTouchable}
                     secureTextEntry
                 />
