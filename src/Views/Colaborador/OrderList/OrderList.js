@@ -26,23 +26,7 @@ const OrderList = ({ navigation }) => {
   const [ count, setCount ] = useState(0);
   const [ loading, setLoading ] = useState(true)
 
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await api.get(`/pedidos-pronta-entrega`);
-      
-  //     setListItemsFilter(response.data);
-  //     setListItems(response.data);
-
-  //     setLoading(false);
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-
   useEffect(() => {
-    //TODO - Verificar se vem da pagina de comfirmação de entregas
     const unsubscribe = navigation.addListener('focus', () => {
       setCount(0)
       setListItemsFilter([]);

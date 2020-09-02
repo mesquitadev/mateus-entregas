@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   Alert,
   Image,
@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
-  BackHandler
 } from 'react-native';
 import {TextInputMask} from 'react-native-masked-text';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -24,6 +23,13 @@ const Login = ({ navigation }) => {
   const [user, setUser] = useState('');
   const [pass, setPass] = useState('');
   const [buttonEnabled, setButtonEnabled] = useState(true);
+  const [visibilityPassword, enableVisibilityPassword] = useState(true);
+
+  const pathIconEyeOpen = require('../../../res/img/open-eye.png');
+  const pathIconEyeClosed = require('../../../res/img/closed-eye.png');
+
+  const textInputCPF = useRef(null);
+  const textInputSenha = useRef(null);
 
   // Temporário até que o response do login venha com um payload mais detalhado
   const getEntregadorId = async id => {
@@ -131,27 +137,6 @@ const Login = ({ navigation }) => {
     return unsubscribe;
   }, [navigation]);
 
-  useEffect(() => {
-    const backAction = () => {
-      Alert.alert('App Entregas', 
-      'Tem certeza que deseja voltar?', [
-        {
-          text: "Cancelar",
-          onPress: () => null,
-          style: "cancel"
-        },
-        {text: "SIM", onPress: () => BackHandler.exitApp() }
-      ]);
-      return true;
-    };
-
-    const backHandler = BackHandler.addEventListener (
-      "hardwareBackPress",
-      backAction
-    );
-    return () => backHandler.remove();
-  }, []);
-
   return (
     <View style={styles.container}>
       <ScrollView
@@ -165,17 +150,39 @@ const Login = ({ navigation }) => {
           type={'cpf'}
           placeholder="CPF"
           value={user}
-          onChangeText={(text) => setUser(text.replace(/[^\d]+/g, ''))}
+          onChangeText={(text) => {
+            if (text.length == 14) {
+              textInputSenha.current.focus();
+            }
+            setUser(text.replace(/[^\d]+/g, ''));
+          }}
           style={styles.inputs}
           maxLength={14}
+          ref={textInputCPF}
         />
 
-        <TextInput
-          style={styles.inputs}
-          placeholder="Senha"
-          onChangeText={(text) => setPass(text)}
-          secureTextEntry={true}
-        />
+        <View>
+          <TextInput
+            style={styles.inputs}
+            placeholder="Senha"
+            onChangeText={(text) => setPass(text)}
+            secureTextEntry={visibilityPassword}
+            ref={textInputSenha}
+          />
+          {!visibilityPassword ? (
+            <TouchableOpacity
+              onPress={() => enableVisibilityPassword(true)}
+              style={styles.iconEye}>
+              <Image source={pathIconEyeOpen} width={24} height={24} />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={() => enableVisibilityPassword(false)}
+              style={styles.iconEye}>
+              <Image source={pathIconEyeClosed} width={24} height={24} />
+            </TouchableOpacity>
+          )}
+        </View>
 
         <TouchableOpacity
           onPress={() => doLogin()}

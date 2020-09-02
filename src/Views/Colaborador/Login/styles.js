@@ -64,6 +64,17 @@ const styles = StyleSheet.create({
 
   btnSecondaryText: {
     color: "#0095DA"
+  },
+  iconEye: {
+    alignItems: 'center',
+    height: 60,
+    justifyContent: 'center',
+    position: 'absolute',
+    marginVertical: 12,
+    marginHorizontal: 4,
+    right: 0,
+    width: 60,
+    zIndex: 5
   }
 });
 

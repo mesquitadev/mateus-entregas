@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     width: screenWidth * 0.9,
     alignSelf: "center",
     marginVertical: 15,
-    marginBottom: 100
+    marginBottom: 160
   },
 
   title: {
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#0095DA",
     alignItems: "center",
     paddingVertical: 15,
-    marginBottom: 15,
     width: screenWidth * 0.9,
     alignSelf: "center",
     borderRadius: 8,

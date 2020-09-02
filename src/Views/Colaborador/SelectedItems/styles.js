@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     marginVertical: 15,
+    marginBottom: 80
   },
 
   buttonBar: {
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#0095DA",
     alignItems: "center",
     paddingVertical: 15,
-    marginBottom: 15,
+    marginBottom: 0,
     width: screenWidth * 0.9,
     alignSelf: "center",
     borderRadius: 8,

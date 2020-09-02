@@ -1,7 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import Preloader from './Views/Colaborador/Preloader/Preloader';
 import Login from './Views/Colaborador/Login/Login';
 import BottomTabNavigator from './Components/BottomTabNavigator/BottomTabNavigator';
 import OrderDetails from './Views/Colaborador/OrderDetails/OrderDetails';
@@ -35,16 +34,7 @@ import DeliveryInProgress from './Views/Entregador/DeliveryInProgress/DeliveryIn
 const Stack = createStackNavigator();
 
 const Routes = () => (
-  <Stack.Navigator initialRouteName="Preloader">
-
-    <Stack.Screen
-      name="Preloader"
-      component={Preloader}
-      options={{
-        title: 'Acesse a sua conta',
-        headerShown: false
-      }}
-    />
+  <Stack.Navigator initialRouteName="Login">
 
     <Stack.Screen
       name="Login"
@@ -55,7 +45,6 @@ const Routes = () => (
         headerShown: false
       }}
     />
-    
     <Stack.Screen
       name="OrderList"
       component={BottomTabNavigator}

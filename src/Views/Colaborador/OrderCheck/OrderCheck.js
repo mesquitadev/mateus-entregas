@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { Alert, View, Text, FlatList, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import api from '../../../services/api';
 import OrderCheckItem from '../../../Components/OrderCheckItem/OrderCheckItem';
@@ -9,7 +9,6 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
   const [ orders, setOrders ] = useState([]);
   const [ selectedOrders, setSelectedOrders ] = useState([]);
   const [ user, setUser ] = useState('');
-  const [ identificador, setIdentificador ] = useState('');
 
   useEffect(() => {
     const getUserData = async () => {
@@ -29,17 +28,13 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
   }, []);
 
   const numeroPedidoList = params.orders.map((ordem, index) => {
-    //console.log(ordem.numeroPedido)
     return ({numeroPedido: ordem.numeroPedido})
   });
 
   checkSelectedOrders = async () => {
      if (selectedOrders.length !== orders.length){
-      console.warn('Você precisa conferir todos os pedidos.')
-     } 
-     else{
-      // console.log(params)
-      // console.log(user)
+      Alert.alert('App Entregas', 'Você precisa confirmar todos os itens da entrega.')
+     } else {
         const bodyParam ={
             colaborador: {
               id : user.id,
@@ -50,31 +45,21 @@ const OrderCheck = ({ route: { params }, navigation: { navigate } }) => {
               username: params.person.usuario.username,
             },  
             pedidos: numeroPedidoList,
-            // pedidos: [
-            //   {
-            //     "numeroPedido":"3000000839"
-            //   }
-            // ],
             log: {
-              ip: "127.0.0.1",
-              dispositivo: "Asus Zenfone 4",
-              localizacao: "-41.2866400;174.7755700"
+              ip: "",
+              dispositivo: "",
+              localizacao: ""
             }
           }
-         //console.log(bodyParam)
+          
          const response = await api.post(`/entrega`, bodyParam);
-         console.log(response.data.identificador)
          params.identificador = response.data.identificador
          params.identificador_id = response.data.id
          params.user_logged = user
         
          navigate('GenerateQrCode', params);
-        
-         //setIdentificador(response.data.identificador)
-        console.log(params)
         }
   };
-  //console.log(identificador)
 
   loadSelectedOrders = item => {
     if (selectedOrders.includes(item)) {
