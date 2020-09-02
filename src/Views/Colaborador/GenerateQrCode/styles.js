@@ -7,6 +7,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    bottom: 40
+  },
+  
   info: {
     alignItems: "center",
     justifyContent: "center",
