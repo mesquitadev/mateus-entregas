@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     fontSize: 16,
+    fontFamily: 'Montserrat-Medium'
   },
 
   btnPrimaryDisabled: {
@@ -51,7 +52,8 @@ const styles = StyleSheet.create({
 
   btnPrimaryText: {
     color: "#FFF",
-    fontWeight: "bold",
+    fontSize: 16,
+    fontFamily: 'Montserrat-SemiBold'
   },
 
   btnSecondary: {
@@ -63,7 +65,8 @@ const styles = StyleSheet.create({
   },
 
   btnSecondaryText: {
-    color: "#0095DA"
+    color: "#0095DA",
+    fontFamily: 'Montserrat-Medium'
   },
   iconEye: {
     alignItems: 'center',
