@@ -19,7 +19,7 @@ const DeliverymanRegisterDenied = ({url, children}) => {
                 <Ionicons name="logo-whatsapp" size={20} color={'#F92121'}/>
                 <Text 
                 style={styles.suporte} 
-                onPress={() => {Linking.openURL('https://whats.link/mateusentrega');}}>
+                onPress={() => {Linking.openURL('https://api.whatsapp.com/send?phone=5598992063786&text=Suporte');}}>
                     Suporte
                 </Text>
              </View>

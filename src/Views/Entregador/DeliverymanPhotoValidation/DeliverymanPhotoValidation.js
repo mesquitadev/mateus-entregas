@@ -1,24 +1,35 @@
 import React, {useState, useEffect} from 'react';
-import {Image, View, Text, TouchableOpacity} from 'react-native';
+import {Image, View, Text, TouchableOpacity, Alert} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import styles from './styles';
 
-const DeliverymanPhotoValidation = ({
-  route: {params},
-  navigation,
-}) => {
+import deliverymanPhotos from '../../../services/deliverymanPhotos';
+import { KEY_ID_DADOS_PESSOAIS } from '../../../Utils/keys';
+
+const DeliverymanPhotoValidation = ({route: {params}, navigation}) => {
+  const [idUser, setIdUser] = useState();
+
   const types = {
     cnh: {
       photoType: 'cnh',
-      routeRedirectError: 'DeliverymanPhotos',
+      routeRedirect: 'DeliverymanPhotos',
       eventGoBack: () => navigation.goBack(),
     },
     perfil: {
       photoType: 'perfil',
-      routeRedirectError: 'DeliverymanPhotos',
+      routeRedirect: 'DeliverymanPhotos',
       eventGoBack: () => navigation.goBack(),
     },
+  };
+
+  const getIdUserInStorage = async () => {
+    try {
+      const data = await AsyncStorage.getItem(KEY_ID_DADOS_PESSOAIS);
+      setIdUser(data);
+    } catch (e) {
+      return;
+    }
   };
 
   const setStatusInStorage = async () => {
@@ -29,9 +40,33 @@ const DeliverymanPhotoValidation = ({
       );
       return data;
     } catch (e) {
-      navigation.navigate(types[params.photoType].routeRedirectError);
+      Alert.alert(
+        'Mateus Entregas',
+        'Houve um erro ao salvar o status do check no storage!',
+      );
+      return;
     }
   };
+
+  const saveImage = async () => {
+    try {
+      const base64 = `data:image/jpeg;base64,${params.photo.base64}`;
+      await deliverymanPhotos({
+        imagemSelfie: params.photoType === 'perfil' ? base64 : '',
+        imagemCnh: params.photoType === 'cnh' ? base64 : '',
+        idUser: idUser,
+      });
+      await setStatusInStorage();
+      navigation.navigate(types[params.photoType].routeRedirect);
+    } catch (error) {
+      Alert.alert('Mateus Entregas', 'Houve um erro ao salvar a foto!');
+      return;
+    }
+  };
+
+  useEffect(() => {
+    getIdUserInStorage();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -65,8 +100,7 @@ const DeliverymanPhotoValidation = ({
 
         <TouchableOpacity
           onPress={async () => {
-            await setStatusInStorage();
-            navigation.navigate('DeliverymanPhotos');
+            saveImage();
           }}
           style={[styles.button, styles.buttonSalvar]}>
           <Text style={styles.textSalvar}>Salvar</Text>
