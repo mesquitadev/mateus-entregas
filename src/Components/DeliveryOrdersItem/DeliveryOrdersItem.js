@@ -55,6 +55,16 @@ const DeliveryOrdersItem = ({data, orderInProgress, navigate}) => {
     }
   };
   
+  if(data.pedido.cliente.pessoaJuridica == null) {
+    nome = data.pedido.cliente.pessoaFisica.nome;
+  } else {
+    if(data.pedido.cliente.pessoaJuridica.razaoSocial == null) {
+      nome = data.pedido.cliente.pessoaJuridica.cnpj;
+    } else {
+      nome = data.pedido.cliente.pessoaJuridica.razaoSocial;
+    }
+  }
+
   return (
     <TouchableOpacity
       style={[styles.orderItem, {borderColor: getItemColor()}]}
@@ -67,7 +77,7 @@ const DeliveryOrdersItem = ({data, orderInProgress, navigate}) => {
       <Text style={styles.label}>Realizado em {data.pedido.dataPedido}</Text>
       <Text style={styles.label}>Cliente</Text>
       {/* <Text style={styles.text}>{data.pedido.cliente.pessoaFisica.nome}</Text> */}
-      <Text style={styles.text}>Nome do cliente</Text>
+      <Text style={styles.text}>{nome}</Text>
       <Text style={styles.label}>Endereço de entrega</Text>
       <Text style={styles.text}>{data.pedido.endereco.bairro}</Text>
       <View style={styles.horizontalRule} />
