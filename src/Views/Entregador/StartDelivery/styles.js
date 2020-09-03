@@ -109,6 +109,15 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
 
+  returnTouchable: {
+    display: "flex",
+    backgroundColor: "#D98016",
+    width: screenWidth * 0.9,
+    alignItems: "center",
+    borderRadius: 5,
+    marginBottom: 15,
+  },
+
   startTouchableText: {
     color: "#FFF",
     padding: 15
