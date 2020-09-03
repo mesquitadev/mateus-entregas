@@ -10,10 +10,10 @@ const StartDelivery = ({ route: {params}, navigation }) => {
   const [ receiptCpf, setReceiptCpf ] = useState('');
   const [ receiptSituation, setReceiptSituation ] = useState('');
   
-  const [ showStartTouchable, setShowStartTouchable ] = useState('');
-  const [ showReturnTouchable, setShowReturnTouchable ] = useState('');
-  const [ showActionsTouchables, setShowActionsTouchables ] = useState('');
-  const [ delivered, setDelivered ] = useState('');
+  const [ showStartTouchable, setShowStartTouchable ] = useState(false);
+  const [ showReturnTouchable, setShowReturnTouchable ] = useState(false);
+  const [ showActionsTouchables, setShowActionsTouchables ] = useState(false);
+  const [ delivered, setDelivered ] = useState(false);
 
   const _data = params.data;
   const _pedido = params.data.pedido;
@@ -40,8 +40,8 @@ const StartDelivery = ({ route: {params}, navigation }) => {
     return unsubscribe;
   }, [ navigation ]);
 
-  const renderTouchables = async () => {
-    const situation = await _data.situacao;
+  const renderTouchables = () => {
+    const situation = _data.situacao;
 
     switch(situation) {
       case 2:
@@ -63,10 +63,12 @@ const StartDelivery = ({ route: {params}, navigation }) => {
         setShowStartTouchable(false);
         setShowReturnTouchable(true);
         setShowActionsTouchables(false);
+        break;
       default:
         setShowStartTouchable(false);
         setShowReturnTouchable(false);
         setShowActionsTouchables(false);
+        break;
     }
   };
 
@@ -97,7 +99,10 @@ const StartDelivery = ({ route: {params}, navigation }) => {
 
   const confirmDelivery = async () => {
     try {
-      const response = await confirmOrderDelivery(_data.id, receiptName, receiptCpf, receiptSituation);
+      const response = await confirmOrderDelivery(
+        _data.id, receiptName, 
+        receiptCpf, 
+        receiptSituation);
 
       navigation.navigate('OrderDelivered');
     } catch (error) {
@@ -121,6 +126,7 @@ const StartDelivery = ({ route: {params}, navigation }) => {
           </Text>
           <Text style={styles.status}>Aguardando entrega</Text>
         </View>
+
         <TouchableOpacity
           onPress={() => navigation.navigate('OrderDetails', {item: _pedido})}>
           <Text style={styles.btnViewMoreText}>Ver mais</Text>
@@ -139,62 +145,77 @@ const StartDelivery = ({ route: {params}, navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity
-          onPress={() => navigation.navigate('DeliveryReceipt')}
-          style={
-            [showActionsTouchables ? styles.receipt : styles.hide,
-            !delivered ? styles.receipt : styles.receiptActive]}>
-          <Image 
-            style={!delivered ? styles.receiptImg : styles.hide} 
-            source={require('../../../res/img/caixa.png')} 
-          />
-          <Image 
-            style={delivered ? styles.receiptImg : styles.hide} 
-            source={require('../../../res/img/icon-check.png')} 
-          />
-          <Text style={styles.receiptText}>Comprovante de entrega</Text>
-        </TouchableOpacity>
+        {showActionsTouchables ? (
+          <TouchableOpacity
+            onPress={() => navigation.navigate('DeliveryReceipt')}
+            style={!delivered ? styles.receipt : styles.receiptActive}>
+              
+            {!delivered ? (
+              <Image 
+                style={styles.receiptImg} 
+                source={require('../../../res/img/caixa.png')} 
+              />
+            ) : null}
+
+            {delivered ? (
+              <Image 
+                style={styles.receiptImg} 
+                source={require('../../../res/img/icon-check.png')} 
+              />
+            ) : null}
+
+            <Text style={styles.receiptText}>Comprovante de entrega</Text>
+          </TouchableOpacity>
+        ) : null}
       </View>
-
-      <TouchableOpacity
-        style={showStartTouchable ? styles.startTouchable : styles.hide}
-        onPress={handleStartDelivery}>
-        <Text style={styles.startTouchableText}>
-          Iniciar entrega
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={showReturnTouchable ? styles.returnTouchable : styles.hide}
-        onPress={handleReturnDelivery}>
-        <Text style={styles.startTouchableText}>
-          Retornar entrega
-        </Text>
-      </TouchableOpacity>
-
-      <View style={showActionsTouchables ? styles.actions : styles.hide}>
+      
+      {showStartTouchable ? (
         <TouchableOpacity
-          onPress={() =>
-            navigation.navigate('DeclineOrders', {
-              data: _data,
-            })
-          }
-          style={styles.actionsTouchableLight}>
-          <Text style={styles.actionsTouchableLightText}>Suspender</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          disabled={!delivered}
-          onPress={confirmDelivery}
-          style={delivered ? 
-            styles.actionsTouchableActive : 
-            styles.actionsTouchable}>
-          <Text style={delivered ? 
-              styles.actionsTouchableActiveText :
-              styles.actionsTouchableText}>
-            Entregar
+          style={styles.startTouchable}
+          onPress={handleStartDelivery}>
+          <Text style={styles.startTouchableText}>
+            Iniciar entrega
           </Text>
         </TouchableOpacity>
-      </View>
+      ) : null}
+      
+      {showReturnTouchable ? (
+        <View>
+          <TouchableOpacity
+            style={styles.returnTouchable}
+            onPress={handleReturnDelivery}>
+            <Text style={styles.startTouchableText}>
+              Retornar entrega
+            </Text>
+          </TouchableOpacity>
+        </View>
+      ) : null} 
+
+      {showActionsTouchables ? (
+        <View style={styles.actions}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('DeclineOrders', {
+                data: _data,
+              })
+            }
+            style={styles.actionsTouchableLight}>
+            <Text style={styles.actionsTouchableLightText}>Suspender</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            disabled={!delivered}
+            onPress={confirmDelivery}
+            style={delivered ? 
+              styles.actionsTouchableActive : 
+              styles.actionsTouchable}>
+            <Text style={delivered ? 
+                styles.actionsTouchableActiveText :
+                styles.actionsTouchableText}>
+              Entregar
+            </Text>
+          </TouchableOpacity>
+        </View>
+      ) : null}
     </View>
   );
 };
