@@ -51,7 +51,7 @@ const DeliveryOrders = ({ route, navigation }) => {
   const startSearchFilter = text => {
     const newData = listItemsFilter.filter(item => {
       const itemData = `
-        ${item.endereco.bairro.toUpperCase()}
+        ${item.pedido.endereco.bairro.toUpperCase()}
         `;      
       const textData = text.toUpperCase();
       return itemData.indexOf(textData) > -1;    
