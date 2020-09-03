@@ -2,12 +2,6 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 const screenWidth = Dimensions.get('screen').width;
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexGrow: 1,
-    marginBottom: 230
-  },
-  
   orderList: {
     alignItems: "center",
   },
