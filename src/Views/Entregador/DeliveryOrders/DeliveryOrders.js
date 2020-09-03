@@ -60,7 +60,7 @@ const DeliveryOrders = ({ route, navigation }) => {
   };
   
   return (
-    <View>
+    <View style={styles.container}>
       <UserHeader />
 
       <SearchFilter onChangeText={startSearchFilter} />

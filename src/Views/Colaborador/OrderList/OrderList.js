@@ -101,7 +101,7 @@ const OrderList = ({ navigation }) => {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <UserHeader />
 
       <SearchFilter onChangeText={this.startSearchFilter} />
