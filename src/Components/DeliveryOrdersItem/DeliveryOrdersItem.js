@@ -59,7 +59,7 @@ const DeliveryOrdersItem = ({data, orderInProgress, navigate}) => {
     <TouchableOpacity
       style={[styles.orderItem, {borderColor: getItemColor()}]}
       onPress={() => {
-        orderInProgress.length && data.situacao === 2 ?
+        orderInProgress.length && (data.situacao === 2 || data.situacao === 8) ?
         Alert.alert('Mateus Entregas', 'Você possui uma entrega em andamento') :
         navigate('StartDelivery', {data: data})
       }}>
