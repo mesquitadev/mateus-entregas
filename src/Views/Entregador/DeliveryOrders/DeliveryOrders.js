@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import myDelivery from '../../../services/myDelivery';
 import UserHeader from '../../../Components/UserHeader/UserHeader';
@@ -19,8 +20,10 @@ const DeliveryOrders = ({ route, navigation }) => {
 
       const fetchData = async () => {
         try {
-          const response = await myDelivery(route.params);
-          
+          const asyncResult = await AsyncStorage.getItem('deliveryman_id');
+          const deliverymanId = JSON.parse(asyncResult);
+
+          const response = await myDelivery(deliverymanId.id);
           setListItemsFilter(response.data.entregaPedidos);
           setListItems(response.data.entregaPedidos);
 

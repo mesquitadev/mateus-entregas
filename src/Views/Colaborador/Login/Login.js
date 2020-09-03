@@ -65,10 +65,13 @@ const Login = ({navigation}) => {
   }, [navigation]);
 
   const checkMyDelivery = async id => {
+    let data = { id: id };
+    AsyncStorage.setItem('deliveryman_id', JSON.stringify(data));
+
     try {
       const myDeliveryResponse = await myDelivery(id);
 
-      navigation.navigate('DeliveryInProgress', id);
+      navigation.navigate('DeliveryInProgress');
     } catch (error) {
       navigation.navigate('AcceptOrders');
     }

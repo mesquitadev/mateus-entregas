@@ -5,6 +5,7 @@ import UserHeader from '../../../Components/UserHeader/UserHeader';
 import styles from './styles';
 
 const AcceptOrders = ({ navigation }) => {
+  
   return(
     <>
       <UserHeader />

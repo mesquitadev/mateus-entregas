@@ -35,6 +35,7 @@ import DeliveryReceiptSuccess from './Views/Entregador/DeliveryReceiptSuccess/De
 import OrderDelivered from './Views/Entregador/OrderDelivered/OrderDelivered';
 import Preloader from './Views/Colaborador/Preloader/Preloader';
 import DeliverymanHelp from './Views/Entregador/DeliverymanHelp/DeliverymanHelp';
+import DeliverymanTabNavigator from './Components/DeliverymanTabNavigator/DeliverymanTabNavigator';
 
 const Stack = createStackNavigator();
 
