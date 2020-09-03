@@ -4,6 +4,7 @@ const screenWidth = Dimensions.get('screen').width;
 const styles = StyleSheet.create({
   orderItem: {
     backgroundColor: "#FFF",
+    borderWidth: 3,
     borderRadius: 8,
     shadowColor: '#00000033',
     shadowOffset: { width: 0, height: 2 },
@@ -12,7 +13,14 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     padding: 15,
     width: screenWidth * 0.9,
-    borderWidth: 2
+  },
+
+  active: {
+    borderColor: "#00A349"
+  },
+
+  inactive: {
+    borderColor: "transparent"
   },
 
   text: {
@@ -41,16 +49,17 @@ const styles = StyleSheet.create({
   },
 
   status: {
+    backgroundColor: "#B8E8FF",
     padding: 7,
     borderRadius: 30,
   },
   
   barText: {
-    color: "#fff",
+    color: "#0070A3",
     fontSize: 12,
   },
 
-  checkBox: {
+  trash: {
     position: "absolute",
     top: 15,
     right: 15,

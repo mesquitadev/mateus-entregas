@@ -10,6 +10,7 @@ import styles from './styles';
 const DeliveryOrders = ({ route, navigation }) => {
   const [ listItemsFilter, setListItemsFilter ] = useState([]);
   const [ listItems, setListItems ] = useState([]);
+  const [ orderInProgress, setOrderInProgress ] = useState('');
   
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -19,9 +20,15 @@ const DeliveryOrders = ({ route, navigation }) => {
       const fetchData = async () => {
         try {
           const response = await myDelivery(route.params);
-  
+          
           setListItemsFilter(response.data.entregaPedidos);
           setListItems(response.data.entregaPedidos);
+
+          const filter = response.data.entregaPedidos.filter(item => {
+            return item.situacao === 3;
+          });
+
+          setOrderInProgress(filter);
         } catch(error) {
           alert('Não foi possível trazer os pedidos.')
         }
@@ -35,7 +42,7 @@ const DeliveryOrders = ({ route, navigation }) => {
   }, [ navigation ]);
   
   const renderItem = ({ item }) => (
-    <DeliveryOrdersItem data={item} navigate={navigation.navigate} />
+    <DeliveryOrdersItem data={item} orderInProgress={orderInProgress} navigate={navigation.navigate} />
   );
 
   const startSearchFilter = text => {

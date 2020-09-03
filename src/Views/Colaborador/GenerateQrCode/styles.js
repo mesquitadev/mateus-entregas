@@ -7,10 +7,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    bottom: 40
+  },
+  
   info: {
     alignItems: "center",
     justifyContent: "center",
     flexGrow: 2,
+    top: 40
   },
 
   userName: {
@@ -24,13 +32,13 @@ const styles = StyleSheet.create({
     color: "#000000",
     marginBottom: 5,
     marginVertical:35,
-    fontSize: 14,
+    fontSize: 25,
     textAlign: "center",
     width: screenWidth * 0.7,
   },
   text: {
     marginVertical:35,
-    color: "#CCCCCC",
+    color: "#AAAAAA",
     marginBottom: 5,
     fontSize: 14,
     textAlign: "center",

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { Alert, View, Text, FlatList, TouchableOpacity } from 'react-native';
 
-import OrderItem from '../../../Components/OrderItem/OrderItem';
+import OrderItemSelected from '../../../Components/OrderItemSelected/OrderItemSelected';
 import styles from './styles';
 
 const SelectedItems = ({ route: { params }, navigation: { navigate } }) => {
@@ -12,9 +12,27 @@ const SelectedItems = ({ route: { params }, navigation: { navigate } }) => {
   }, []);
 
   renderItem = ({ item }) => (
-    <OrderItem data={item} navigate={navigate} showCheckBox={true} />
+    <OrderItemSelected data={item} navigate={navigate} />
   );
-  
+
+
+  loadSelectedItems = data => {
+    const newList = selectedItems.filter((item) => item.id != data.id);
+    setSelectedItems(newList);
+  };
+
+  confirmOrderCount = () =>
+  {
+    if(selectedItems.length > 0) {
+      navigate('SelectDeliveryPerson', selectedItems)
+      return;
+    }
+
+    Alert.alert('App Entregas', 'Não há nenhum pedido em sua lista.')
+    navigate('OrderList');
+    return
+  }
+
   return(
     <>
       <View style={styles.container}>
@@ -23,11 +41,12 @@ const SelectedItems = ({ route: { params }, navigation: { navigate } }) => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={this.renderItem}
         />
+
       </View>
       <View style={styles.buttonBar}>
         <TouchableOpacity
           style={styles.selectedItemsButton}
-          onPress={() => navigate('SelectDeliveryPerson', selectedItems)}>
+          onPress={() => confirmOrderCount()}>
           <Text style={styles.selectedItemsButtonText}>
             Encaminhar pedidos
           </Text>
