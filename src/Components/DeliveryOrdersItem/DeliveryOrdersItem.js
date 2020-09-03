@@ -6,45 +6,51 @@ import styles from './styles';
 const DeliveryOrdersItem = ({data, orderInProgress, navigate}) => {
 
   const getStatusText = () => {
-    let situacao = data.situacao;
+    let situation = data.situacao;
 
-    switch (situacao) {
+    switch (situation) {
       case 2:
         return 'Aguardando entrega'
         break;
       case 3:
         return 'Saiu para entrega'
         break;
-      case 4:
-        return 'Entregue'
+      case 6:
+        return 'Cancelado'
         break;
-      case 5:
-        return 'Entregue'
+      case 7:
+        return 'Saiu para entrega'
+        break;
+      case 8:
+        return 'Adiado'
         break;
       default:
-        return 'Aguardando'
+        return 'Entregue'
         break;
     }
   };
 
   const getItemColor = () => {
-    let situacao = data.situacao;
+    let situation = data.situacao;
 
-    switch (situacao) {
+    switch (situation) {
       case 2:
         return '#DAE0E3'
         break;
       case 3:
         return '#0095DA'
         break;
-      case 4:
-        return '#00A349'
+      case 6:
+        return '#F92121'
         break;
-      case 5:
-        return '#00A349'
+      case 7:
+        return '#0095DA'
+        break;
+      case 8:
+        return '#D98016'
         break;
       default:
-        return '#DAE0E3'
+        return '#00A349'
         break;
     }
   };
@@ -53,7 +59,7 @@ const DeliveryOrdersItem = ({data, orderInProgress, navigate}) => {
     <TouchableOpacity
       style={[styles.orderItem, {borderColor: getItemColor()}]}
       onPress={() => {
-        orderInProgress.length && data.situacao !== 3 ?
+        orderInProgress.length && data.situacao === 2 ?
         Alert.alert('Mateus Entregas', 'Você possui uma entrega em andamento') :
         navigate('StartDelivery', {data: data})
       }}>
