@@ -52,15 +52,15 @@ const Login = ({navigation}) => {
     setPass('')
 }
 
-
-  // useEffect(() => {
-  //   console.log("limpei os inputs")
-  //   const unsubscribe = navigation.addListener('focus', () => {
-  //     setUser("")
+//TODO - Clear state of input password text dont work
+  useEffect(() => {
+    console.log("limpei os inputs")
+    const unsubscribe = navigation.addListener('focus', () => {
+      setUser("")
   
-  //   });
-  //   //return unsubscribe;
-  // }, [navigation]);
+    });
+    //return unsubscribe;
+  }, [navigation]);
 
   const checkMyDelivery = async id => {
     try {

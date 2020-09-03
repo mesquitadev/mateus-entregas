@@ -35,6 +35,9 @@ const OrderList = ({ navigation }) => {
       const fetchData = async () => {
         const response = await api.get(`/pedidos-pronta-entrega`);
         console.log("Carreguei: pedidos-pronta-entrega")
+        
+        //if(response.data.length)
+console.log("===========>" + response.data.length);
         setListItemsFilter(response.data);
         setListItems(response.data);
         setLoading(false);
