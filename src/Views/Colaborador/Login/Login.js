@@ -47,6 +47,21 @@ const Login = ({navigation}) => {
     }
   };
 
+  const clearState = () => {
+    setUser('')
+    setPass('')
+}
+
+//TODO - Clear state of input password text dont work
+  useEffect(() => {
+    console.log("limpei os inputs")
+    const unsubscribe = navigation.addListener('focus', () => {
+      setUser("")
+  
+    });
+    //return unsubscribe;
+  }, [navigation]);
+
   const checkMyDelivery = async id => {
     try {
       const myDeliveryResponse = await myDelivery(id);
@@ -76,6 +91,8 @@ const Login = ({navigation}) => {
     try {
       setButtonEnabled(false);
       const response = await login(user, pass);
+      clearState();
+      setButtonEnabled(true);
 
       AsyncStorage.setItem('entregas_user_data', JSON.stringify(response.data));
 
@@ -103,9 +120,7 @@ const Login = ({navigation}) => {
           break;
       }
 
-      setUser('');
-      setPass('');
-      setButtonEnabled(true);
+      
     } catch (error) {
       if (error.response) {
         if (error.response.status == 404) {
@@ -178,6 +193,7 @@ const Login = ({navigation}) => {
             onChangeText={(text) => setPass(text)}
             secureTextEntry={visibilityPassword}
             ref={textInputSenha}
+            clearButtonMode="always"
           />
           {!visibilityPassword ? (
             <TouchableOpacity

@@ -28,7 +28,7 @@ const DeliverymanHelp = () => {
                         <Ionicons name="logo-whatsapp" size={20} color={'#0095DA'}/>
                         <Text 
                         style={styles.link} 
-                        onPress={() => {Linking.openURL('https://whats.link/mateusentrega');}}>
+                        onPress={() => {Linking.openURL('https://api.whatsapp.com/send?phone=5598992063786&text=Suporte');}}>
                         Suporte
                         </Text>
                     </View>
@@ -48,7 +48,7 @@ const DeliverymanHelp = () => {
                         <Ionicons name="logo-whatsapp" size={20} color={'#0095DA'}/>
                         <Text 
                         style={styles.link} 
-                        onPress={() => {Linking.openURL('https://whats.link/mateusentrega');}}>
+                        onPress={() => {Linking.openURL('https://api.whatsapp.com/send?phone=5598992063786&text=Suporte');}}>
                         Suporte
                         </Text>
                     </View>

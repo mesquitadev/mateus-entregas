@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 0,
     left: screenWidth / 8,
-    height: screenWidth * 0.30,
+    height: screenWidth * 0.20,
   },
 
   inputs: {

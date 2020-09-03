@@ -10,41 +10,51 @@ import {
 import {TextInputMask} from 'react-native-masked-text';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import deliverymanRegister from '../../../services/deliverymanRegister';
 import styles from './styles';
 
-import {KEY_CADASTRO_DADOS_PESSOAIS} from '../../../Utils/keys';
+import deliverymanRegister from '../../../services/deliverymanRegister';
+import {KEY_ID_DADOS_PESSOAIS} from '../../../Utils/keys';
 
 const DeliverymanRegister = ({navigation}) => {
-  const [name, setName] = useState('');
+  const [nome, setNome] = useState('');
   const [user, setUser] = useState('');
   const [cnh, setCnh] = useState('');
   const [datanascimento, setDataNascimento] = useState('');
   const [tel, setTel] = useState('');
   const [email, setEmail] = useState('');
 
-  const _payload = {
-    name: name,
-    cpf: user,
+  const formatedCPF = user.replace(/[^\d]/g, '');
+  const formatedDataNascimento =
+    datanascimento.substr(6, 4) +
+    '-' +
+    datanascimento.substr(3, 2) +
+    '-' +
+    datanascimento.substr(0, 2);
+  // const formatedTelefone = tel.replace(/[^\d]/g, '');
+
+  const payload = {
+    nome: nome,
+    cpf: formatedCPF,
     cnh: cnh,
-    dataNascimento: datanascimento,
-    telefone: tel,
+    dataNascimento: formatedDataNascimento,
     email: email,
+    telefone: tel,
   };
 
   const serializeData = async (payload) => {
     try {
       await AsyncStorage.setItem(
-        KEY_CADASTRO_DADOS_PESSOAIS,
+        KEY_ID_DADOS_PESSOAIS,
         JSON.stringify(payload),
       );
     } catch (error) {
-      Alert.alert('App Entrega', 'Houve um erro memorizar seu dados.');
+      console.log(error);
+      Alert.alert('App Entrega', 'Houve um erro memorizar os dados.');
     }
   };
 
   const resetInputs = () => {
-    setName('');
+    setNome('');
     setUser('');
     setCnh('');
     setDataNascimento('');
@@ -52,9 +62,36 @@ const DeliverymanRegister = ({navigation}) => {
     setEmail('');
   };
 
-  const doRegister = async () => {
-    //DEPOIS REFATORAMOS..
-    if (name.length == '') {
+  const savePersonalData = async () => {
+    try {
+      const response = await deliverymanRegister(payload);
+      if (response.status == 200) {
+        await serializeData(response.data.id);
+        if (await AsyncStorage.getItem(KEY_ID_DADOS_PESSOAIS)) {
+          navigation.navigate('DeliverymanPhotos');
+        }
+        resetInputs();
+        return;
+      }
+      return;
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status == 404) {
+          Alert.alert('Mateus Entrega', 'Impossível fazer o cadastro');
+        }
+        if (error.response.status == 406) {
+          Alert.alert('Mateus Entrega', 'Entregadorr já cadastrado!');
+        }
+        if (error.response.status == 500) {
+          Alert.alert('Mateus Entrega', 'Sistema em manutenção!');
+        }
+        return;
+      }
+    }
+  };
+
+  const doRegister = () => {
+    if (nome.length == '') {
       Alert.alert('App Entregas', 'Preencha os dados corretamente');
       return;
     } else if (user.length == '') {
@@ -73,36 +110,7 @@ const DeliverymanRegister = ({navigation}) => {
       Alert.alert('App Entregas', 'Preencha os dados corretamente');
       return;
     }
-
-    try {
-      const response = await deliverymanRegister(
-        name,
-        user,
-        cnh,
-        datanascimento,
-        tel,
-        email,
-      );
-      if (response.data.situacao == 0) {
-        await serializeData(_payload);
-        if (await AsyncStorage.getItem(KEY_CADASTRO_DADOS_PESSOAIS)) {
-          navigation.navigate('DeliverymanPhotos');
-        }
-        return;
-      }
-      resetInputs();
-    } catch (error) {
-      if (error.response) {
-        if (error.response.status == 404)
-          Alert.alert('App Entregas', 'Impossível fazer o cadastro');
-        if (error.response.status.toString().startsWith('50'))
-          Alert.alert(
-            'App Entregas',
-            'Sistema em manutenção. Tente novamente mais tarde.',
-          );
-        return;
-      }
-    }
+    savePersonalData();
   };
 
   return (
@@ -112,8 +120,8 @@ const DeliverymanRegister = ({navigation}) => {
           <TextInput
             style={styles.inputs}
             placeholder="Nome completo"
-            value={name}
-            onChangeText={(text) => setName(text)}
+            value={nome}
+            onChangeText={(text) => setNome(text)}
           />
           <TextInputMask
             type={'cpf'}
