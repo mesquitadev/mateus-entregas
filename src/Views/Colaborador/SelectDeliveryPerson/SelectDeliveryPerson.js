@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { PacmanIndicator } from 'react-native-indicators';
 
 import SearchFilter from '../../../Components/SearchFilter/SearchFilter';
@@ -45,19 +45,19 @@ const SelectDeliveryPerson = ({ route: { params }, navigation: { navigate } }) =
     </TouchableOpacity>
   );
   
-
-  console.disableYellowBox = true;
   return (
     <View>
       <SearchFilter onChangeText={this.startSearchFilter} />
-      <View style={styles.container}>
+     
+      <ScrollView style={styles.lista}>
         <FlatList 
           data={deliveryPerson}
           keyExtractor={(item, index) => index.toString()}
           renderItem={this.renderItem}
           nestedScrollEnabled
         />
-      </View>
+      </ScrollView>
+      
 
       <PacmanIndicator
       style={styles.loading}

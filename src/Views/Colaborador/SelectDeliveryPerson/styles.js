@@ -8,6 +8,13 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
 
+  lista: {
+    width: screenWidth * 0.9,
+    alignSelf: "center",
+    marginTop: 10,
+    marginBottom: 80,
+  },
+
   card: {
     flexDirection: "row",
     backgroundColor: "#FFF",
