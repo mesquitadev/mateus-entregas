@@ -122,6 +122,7 @@ const DeliverymanRegister = ({navigation}) => {
             placeholder="Nome completo"
             value={nome}
             onChangeText={(text) => setNome(text)}
+            autoFocus
           />
           <TextInputMask
             type={'cpf'}
