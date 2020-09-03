@@ -8,7 +8,7 @@ const Preloader = ({navigation}) => {
 
 
     setTimeout(() => {
-       navigation.replace('Login'); 
+      navigation.replace('Login'); 
     }, 2000);
 
     return (

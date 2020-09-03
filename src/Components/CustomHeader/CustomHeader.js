@@ -6,7 +6,7 @@ const CustomHeader = ({pathIcon, headerTitle, event}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={event} style={styles.iconContainer}>
-        <Image source={pathIcon} />
+        <Image style={styles.icon} source={pathIcon} />
       </TouchableOpacity>
       <Text style={styles.headerTitle}>{headerTitle}</Text>
     </View>

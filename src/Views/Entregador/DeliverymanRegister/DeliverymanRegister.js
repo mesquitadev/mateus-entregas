@@ -14,6 +14,7 @@ import styles from './styles';
 
 import deliverymanRegister from '../../../services/deliverymanRegister';
 import {KEY_ID_DADOS_PESSOAIS} from '../../../Utils/keys';
+const CPF = require('cpf');
 
 const DeliverymanRegister = ({navigation}) => {
   const [nome, setNome] = useState('');
@@ -30,7 +31,6 @@ const DeliverymanRegister = ({navigation}) => {
     datanascimento.substr(3, 2) +
     '-' +
     datanascimento.substr(0, 2);
-  // const formatedTelefone = tel.replace(/[^\d]/g, '');
 
   const payload = {
     nome: nome,
@@ -48,7 +48,6 @@ const DeliverymanRegister = ({navigation}) => {
         JSON.stringify(payload),
       );
     } catch (error) {
-      console.log(error);
       Alert.alert('App Entrega', 'Houve um erro memorizar os dados.');
     }
   };
@@ -91,6 +90,13 @@ const DeliverymanRegister = ({navigation}) => {
   };
 
   const doRegister = () => {
+    // if (!CPF.isValid(user)) {
+    //   Alert.alert(
+    //     'App Entregas',
+    //     'CPF inválido, verifique o número digitado e tente novamente.',
+    //   );
+    //   return;
+    // }
     if (nome.length == '') {
       Alert.alert('App Entregas', 'Preencha os dados corretamente');
       return;
@@ -122,6 +128,7 @@ const DeliverymanRegister = ({navigation}) => {
             placeholder="Nome completo"
             value={nome}
             onChangeText={(text) => setNome(text)}
+            autoFocus
           />
           <TextInputMask
             type={'cpf'}
