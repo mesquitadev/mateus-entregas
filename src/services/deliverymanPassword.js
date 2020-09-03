@@ -11,7 +11,6 @@ const deliverymanPassword = async (data) => {
       localizacao: '',
     },
   };
-  console.log(JSON.stringify(bodyHTTP))
   const response = await api.put(
     `/entregador/${data.idUser}/senha`,
     JSON.stringify(bodyHTTP),
