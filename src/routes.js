@@ -220,7 +220,7 @@ const Routes = () => (
     />
     <Stack.Screen
       name="DeliveryOrders"
-      component={DeliveryOrders}
+      component={DeliverymanTabNavigator}
       options={{
         headerShown: false,
       }}
