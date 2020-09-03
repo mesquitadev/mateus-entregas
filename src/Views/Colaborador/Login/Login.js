@@ -57,8 +57,6 @@ const Login = ({navigation}) => {
   useEffect(() => {
     
     const unsubscribe = navigation.addListener('focus', () => {
-      console.log("limpei os inputs")
-      textInputSenha.current.value = '';
       clearState()
       setUser('')
       setPass('')
@@ -181,7 +179,7 @@ const Login = ({navigation}) => {
           value={user}
           onChangeText={(text) => {
             if (text.length == 14) {
-              textInputSenha.current.focus();
+              textInputSenha.current._inputElement.focus()
             }
             setUser(text.replace(/[^\d]+/g, ''));
           }}
@@ -189,10 +187,6 @@ const Login = ({navigation}) => {
           maxLength={14}
           ref={textInputCPF}
         />
-
-        
-
-
         <View>
         <TextInputMask
           secureTextEntry={visibilityPassword}
@@ -204,7 +198,7 @@ const Login = ({navigation}) => {
           value={pass}
           onChangeText={(text) => setPass(text)}
           style={styles.inputs}
-          maxLength={14}
+          maxLength={32}
           ref={textInputSenha}
         />  
           {!visibilityPassword ? (
