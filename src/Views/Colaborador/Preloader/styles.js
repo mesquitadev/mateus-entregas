@@ -11,23 +11,23 @@ const styles = StyleSheet.create({
       },
 
       logo: {
-          height: 32.62,
-          width: 158
+        resizeMode: 'contain',
+        height: 93,
+        width: 233
       },
       subtitle: {
-          color: "#fff",
-          fontSize: 20,
-          fontWeight: "600",
-          marginTop: 5
+        color: "#fff",
+        fontSize: 20,
+        fontWeight: "600",
+        marginTop: 5
          
       },
       pulse: {
-          height: 18.82,
-          width: 71.09,
-          position: "relative",
-          top: 250
-          
-        
+        height: 18.82,
+        width: 71.09,
+        position: "relative",
+        top: 250
+                 
       }
     
 

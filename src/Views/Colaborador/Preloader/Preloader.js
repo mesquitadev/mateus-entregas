@@ -15,9 +15,7 @@ const Preloader = ({navigation}) => {
 
         <View style={styles.container}>
            
-            <Image style={styles.logo} source={require('../../../res/img/logoMateusWhite.png')} />
-            <Text style={styles.subtitle}>Entrega</Text>
-           
+            <Image style={styles.logo} source={require('../../../res/img/MATEUSENTREGA.png')} />
             <View>
                 <Image style={styles.pulse} source={require('../../../res/img/pulse.png')}/>
             </View>
