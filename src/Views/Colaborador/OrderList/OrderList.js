@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 
 import {
-  BallIndicator,
-  BarIndicator,
-  DotIndicator,
-  MaterialIndicator,
   PacmanIndicator,
-  PulseIndicator,
-  SkypeIndicator,
-  UIActivityIndicator,
-  WaveIndicator,
+  // BallIndicator,
+  // BarIndicator,
+  // DotIndicator,
+  // MaterialIndicator,
+  // PulseIndicator,
+  // SkypeIndicator,
+  // UIActivityIndicator,
+  // WaveIndicator,
 } from 'react-native-indicators';
 
 import UserHeader from '../../../Components/UserHeader/UserHeader';
@@ -37,7 +37,7 @@ const OrderList = ({ navigation }) => {
         console.log("Carreguei: pedidos-pronta-entrega")
         setListItemsFilter(response.data);
         setListItems(response.data);
-        
+        setLoading(false);
       };
       fetchData()
       return () => fetchData();
@@ -46,8 +46,6 @@ const OrderList = ({ navigation }) => {
     return unsubscribe;
   }, [navigation]);
 
-
-  
   loadSelectedItems = data => {
     if (selectedItems.includes(data)) {
       const index = selectedItems.indexOf(data);
