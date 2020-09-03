@@ -5,14 +5,15 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#FFF",
     flex: 1,
+    justifyContent: "center",
     alignItems: "center",
     paddingTop: 0,
+    
   },
 
   logo: {
-    width: screenWidth * 0.6,
+    width: screenWidth * 0.7,
     resizeMode: 'contain',
-    alignItems: 'center',
     paddingVertical: 0,
     left: screenWidth / 8,
     height: screenWidth * 0.20,
