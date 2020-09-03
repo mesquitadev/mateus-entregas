@@ -2,7 +2,9 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import OrderList from '../../Views/Colaborador/OrderList/OrderList';
+import DeliveryOrders from '../../Views/Entregador/DeliveryOrders/DeliveryOrders';
+import Reports from '../../Views/Colaborador/Reports/Reports';
+import Profile from '../../Views/Colaborador/Profile/Profile';
 
 Ionicons.loadFont();
 
@@ -30,9 +32,9 @@ const DeliverymanTabNavigator = () => (
       inactiveTintColor: '#787B7D',
     }}
   >
-    <Tab.Screen name="Pedidos" component={OrderList} />
-    <Tab.Screen name="Relatórios" component={OrderList} />
-    <Tab.Screen name="Perfil" component={OrderList} />
+    <Tab.Screen name="Pedidos" component={DeliveryOrders} />
+    <Tab.Screen name="Relatórios" component={Reports} />
+    <Tab.Screen name="Perfil" component={Profile} />
   </Tab.Navigator>
 );
 

@@ -73,7 +73,6 @@ const DeliverymanSetPassword = ({navigation}) => {
       await cleanStorage();
       navigation.navigate('DeliverymanSetRegister');
     } catch (error) {
-      console.log(error)
       Alert.alert('Mateus Entregas', 'Não foi possível salvar sua senha.');
     }
   };

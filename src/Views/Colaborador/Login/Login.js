@@ -25,7 +25,7 @@ const Login = ({navigation}) => {
   const [pass, setPass] = useState('');
   const [buttonEnabled, setButtonEnabled] = useState(true);
   const [visibilityPassword, enableVisibilityPassword] = useState(true);
-  
+
 
   const pathIconEyeOpen = require('../../../res/img/open-eye.png');
   const pathIconEyeClosed = require('../../../res/img/closed-eye.png');
@@ -55,7 +55,7 @@ const Login = ({navigation}) => {
 
 //TODO - Clear state of input password text dont work
   useEffect(() => {
-    
+
     const unsubscribe = navigation.addListener('focus', () => {
       clearState()
       setUser('')
@@ -65,10 +65,13 @@ const Login = ({navigation}) => {
   }, [navigation]);
 
   const checkMyDelivery = async id => {
+    let data = { id: id };
+    AsyncStorage.setItem('deliveryman_id', JSON.stringify(data));
+
     try {
       const myDeliveryResponse = await myDelivery(id);
 
-      navigation.navigate('DeliveryInProgress', id);
+      navigation.navigate('DeliveryInProgress');
     } catch (error) {
       navigation.navigate('AcceptOrders');
     }
@@ -122,13 +125,13 @@ const Login = ({navigation}) => {
           break;
       }
 
-      
+
     } catch (error) {
       if (error.response) {
         if (error.response.status == 404) {
           Alert.alert('App Entregas', 'Usuário ou senha inválidos.');
         }
-        
+
         if(error.response.status == 401) {
           Alert.alert('App Entregas', 'Acesso não autorizado, entre em contato com o SAC.');
         }
@@ -201,7 +204,7 @@ const Login = ({navigation}) => {
           style={styles.inputs}
           maxLength={32}
           ref={textInputSenha}
-        />  
+        />
           {!visibilityPassword ? (
             <TouchableOpacity
               onPress={() => enableVisibilityPassword(true)}

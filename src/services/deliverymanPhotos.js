@@ -1,7 +1,6 @@
 import api from './api';
 
 const deliverymanPhotos = async (data) => {
-  console.log(`/entregador/${data.idUser}/imagem`)
   const bodyHTTP = {
     imagemSelfie: data.imagemSelfie,
     imagemCnh: data.imagemCnh,

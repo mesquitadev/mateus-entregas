@@ -4,7 +4,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import UserHeader from '../../../Components/UserHeader/UserHeader';
 import styles from './styles';
 
-const DeliveryInProgress = ({ navigation, route }) => {
+const DeliveryInProgress = ({ navigation }) => {
   return(
     <>
       <UserHeader />
@@ -17,7 +17,7 @@ const DeliveryInProgress = ({ navigation, route }) => {
           <Text style={styles.text}>Você possui uma entrega em andamento</Text>
           
           <TouchableOpacity
-            onPress={() => navigation.navigate('DeliveryOrders', route.params)}
+            onPress={() => navigation.navigate('DeliveryOrders')}
             style={styles.button}>
             <Text style={styles.buttonText}>
               Continuar

@@ -35,17 +35,17 @@ import DeliveryReceiptSuccess from './Views/Entregador/DeliveryReceiptSuccess/De
 import OrderDelivered from './Views/Entregador/OrderDelivered/OrderDelivered';
 import Preloader from './Views/Colaborador/Preloader/Preloader';
 import DeliverymanHelp from './Views/Entregador/DeliverymanHelp/DeliverymanHelp';
+import DeliverymanTabNavigator from './Components/DeliverymanTabNavigator/DeliverymanTabNavigator';
 
 const Stack = createStackNavigator();
 
 const Routes = () => (
   <Stack.Navigator initialRouteName="Preloader">
-
     <Stack.Screen
       name="Preloader"
       component={Preloader}
       options={{
-        headerShown: false
+        headerShown: false,
       }}
     />
     <Stack.Screen
@@ -54,7 +54,7 @@ const Routes = () => (
       options={{
         title: 'Acesse a sua conta',
         headerTitleAlign: 'center',
-        headerShown: false
+        headerShown: false,
       }}
     />
     <Stack.Screen
@@ -112,7 +112,7 @@ const Routes = () => (
       component={OrderConfirmed}
       options={{
         title: 'Pedido Retirado',
-        headerShown: false
+        headerShown: false,
       }}
     />
 
@@ -162,7 +162,7 @@ const Routes = () => (
       name="DeclineOrdersInformation"
       component={DeclineOrdersInformation}
       options={{
-        headerShown: false
+        headerShown: false,
       }}
     />
     <Stack.Screen
@@ -200,10 +200,7 @@ const Routes = () => (
     <Stack.Screen
       name="DeliverymanSetRegister"
       component={DeliverymanSetRegister}
-      options={{
-        title: 'Cadastro',
-        headerTitleAlign: 'center'
-      }}
+      options={{headerShown: false}}
     />
     <Stack.Screen
       name="EnterDeliverymanCode"
@@ -222,51 +219,51 @@ const Routes = () => (
       }}
     />
     <Stack.Screen
-     name="DeliveryOrders"
-     component={DeliveryOrders}
-     options={{
-       headerShown: false
+      name="DeliveryOrders"
+      component={DeliverymanTabNavigator}
+      options={{
+        headerShown: false,
       }}
     />
     <Stack.Screen
-     name="GenerateQrCode"
-     component={GenerateQrCode}
-     options={{
-       title: "Confirmação",
-       headerBackTitle: "Voltar",
+      name="GenerateQrCode"
+      component={GenerateQrCode}
+      options={{
+        title: 'Confirmação',
+        headerBackTitle: 'Voltar',
       }}
     />
     <Stack.Screen
-     name="StartDelivery"
-     component={StartDelivery}
-     options={{
-       title: "Iniciar entrega",
-       headerBackTitle: "Voltar",
-       headerTitleAlign: 'center',
+      name="StartDelivery"
+      component={StartDelivery}
+      options={{
+        title: 'Iniciar entrega',
+        headerBackTitle: 'Voltar',
+        headerTitleAlign: 'center',
       }}
     />
     <Stack.Screen
       name="DeliveryReceipt"
       component={DeliveryReceipt}
       options={{
-        title: "Comprovante de entrega",
-        headerBackTitle: "Voltar",
+        title: 'Comprovante de entrega',
+        headerBackTitle: 'Voltar',
         headerTitleAlign: 'center',
       }}
     />
-    <Stack.Screen 
+    <Stack.Screen
       name="ReceiptByAnotherPerson"
       component={ReceiptByAnotherPerson}
       options={{
-        title: "Recebimento terceiros"
+        title: 'Recebimento terceiros',
       }}
     />
     <Stack.Screen
       name="DeliverymanRegisterDenied"
       component={DeliverymanRegisterDenied}
       options={{
-        title: "Cadastro",
-        headerBackTitle: "Voltar",
+        title: 'Cadastro',
+        headerBackTitle: 'Voltar',
         headerTitleAlign: 'center',
       }}
     />
@@ -303,10 +300,9 @@ const Routes = () => (
       component={DeliverymanHelp}
       options={{
         title: 'Ajuda',
-        headerTitleAlign: 'center'
+        headerTitleAlign: 'center',
       }}
     />
-
   </Stack.Navigator>
 );
 export default Routes;

@@ -25,8 +25,12 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: '#263238',
-    fontWeight: 'bold',
-    fontSize: 16,
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 18,
   },
+  icon: {
+    height: 20,
+    width: 20
+  }
 });
 export default styles;

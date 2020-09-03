@@ -34,8 +34,7 @@ const OrderList = ({ navigation }) => {
       setSelectedItems([])
       const fetchData = async () => {
         const response = await api.get(`/pedidos-pronta-entrega`);
-        console.log("Carreguei: pedidos-pronta-entrega")
-        
+
         if(response.data.length==0){
           Alert.alert('App Entregas', 'Não há pedidos disponiveis');
         }
@@ -53,7 +52,7 @@ const OrderList = ({ navigation }) => {
   loadSelectedItems = data => {
     if (selectedItems.includes(data)) {
       const index = selectedItems.indexOf(data);
-      
+
       selectedItems.splice(index, 1);
       if (count > 0) setCount(count-1);
     } else {
@@ -61,7 +60,7 @@ const OrderList = ({ navigation }) => {
       setCount(count+1);
     }
   };
-  
+
   renderItem = ({ item }) => (
     <OrderItem data={item} navigate={navigation.navigate} showCheckBox={true} />
   );
@@ -82,17 +81,17 @@ const OrderList = ({ navigation }) => {
     const newData = listItemsFilter.filter(item => {
       const itemData = `
         ${tipoPessoa(item)}
-        ${item.numeroPedido} 
+        ${item.numeroPedido}
         ${item.endereco.bairro.toUpperCase()}
-        `;      
+        `;
       const textData = text.toUpperCase();
-      
-      return itemData.indexOf(textData) > -1;    
+
+      return itemData.indexOf(textData) > -1;
     });
-    
+
     setListItems(newData);
   };
-  
+
   const FlatListHeader = () => {
     return (
       <View>
@@ -113,7 +112,7 @@ const OrderList = ({ navigation }) => {
             data={listItems}
             keyExtractor={(item, index) => index.toString()}
             renderItem={this.renderItem}
-            nestedScrollEnabled    
+            nestedScrollEnabled
             ListHeaderComponent={FlatListHeader}
           />
       </View>
