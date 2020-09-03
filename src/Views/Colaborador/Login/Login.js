@@ -25,6 +25,7 @@ const Login = ({navigation}) => {
   const [pass, setPass] = useState('');
   const [buttonEnabled, setButtonEnabled] = useState(true);
   const [visibilityPassword, enableVisibilityPassword] = useState(true);
+  
 
   const pathIconEyeOpen = require('../../../res/img/open-eye.png');
   const pathIconEyeClosed = require('../../../res/img/closed-eye.png');
@@ -54,10 +55,11 @@ const Login = ({navigation}) => {
 
 //TODO - Clear state of input password text dont work
   useEffect(() => {
-    console.log("limpei os inputs")
+    
     const unsubscribe = navigation.addListener('focus', () => {
-      setUser("")
-  
+      clearState()
+      setUser('')
+      setPass('')
     });
     //return unsubscribe;
   }, [navigation]);
@@ -177,7 +179,7 @@ const Login = ({navigation}) => {
           value={user}
           onChangeText={(text) => {
             if (text.length == 14) {
-              textInputSenha.current.focus();
+              textInputSenha.current._inputElement.focus()
             }
             setUser(text.replace(/[^\d]+/g, ''));
           }}
@@ -185,16 +187,20 @@ const Login = ({navigation}) => {
           maxLength={14}
           ref={textInputCPF}
         />
-
         <View>
-          <TextInput
-            style={styles.inputs}
-            placeholder="Senha"
-            onChangeText={(text) => setPass(text)}
-            secureTextEntry={visibilityPassword}
-            ref={textInputSenha}
-            clearButtonMode="always"
-          />
+        <TextInputMask
+          secureTextEntry={visibilityPassword}
+          type={'custom'}
+          options={{
+            mask: '******************************'
+          }}
+          placeholder="Senha"
+          value={pass}
+          onChangeText={(text) => setPass(text)}
+          style={styles.inputs}
+          maxLength={32}
+          ref={textInputSenha}
+        />  
           {!visibilityPassword ? (
             <TouchableOpacity
               onPress={() => enableVisibilityPassword(true)}
