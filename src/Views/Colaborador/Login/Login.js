@@ -186,6 +186,7 @@ const Login = ({navigation}) => {
           style={styles.inputs}
           maxLength={14}
           ref={textInputCPF}
+          autoFocus
         />
         <View>
         <TextInputMask
