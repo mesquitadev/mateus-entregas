@@ -9,7 +9,7 @@ const StartDelivery = ({ route: {params}, navigation }) => {
   const [ receiptName, setReceiptName ] = useState('');
   const [ receiptCpf, setReceiptCpf ] = useState('');
   const [ receiptSituation, setReceiptSituation ] = useState('');
-  
+  const [ statusText, setStatusText ] = useState('');
   const [ showStartTouchable, setShowStartTouchable ] = useState(false);
   const [ showReturnTouchable, setShowReturnTouchable ] = useState(false);
   const [ showActionsTouchables, setShowActionsTouchables ] = useState(false);
@@ -31,6 +31,9 @@ const StartDelivery = ({ route: {params}, navigation }) => {
     const unsubscribe = navigation.addListener('focus', () => {
       const fetchData = async () => {
         renderTouchables();
+        navigation.setOptions({
+          title: `Nº #${_pedido.numeroPedido}`
+        });
       };
 
       fetchData();
@@ -45,26 +48,37 @@ const StartDelivery = ({ route: {params}, navigation }) => {
 
     switch(situation) {
       case 2:
+        setStatusText('Aguardando entrega');
         setShowStartTouchable(true);
         setShowReturnTouchable(false);
         setShowActionsTouchables(false);
         break;
       case 3:
+        setStatusText('Saiu para entrega');
         setShowStartTouchable(false);
         setShowReturnTouchable(false);
         setShowActionsTouchables(true);
         break;
+      case 6:
+        setStatusText('Cancelado');
+        setShowStartTouchable(false);
+        setShowReturnTouchable(false);
+        setShowActionsTouchables(false);
+        break;
       case 7:
+        setStatusText('Saiu para entrega');
         setShowStartTouchable(false);
         setShowReturnTouchable(false);
         setShowActionsTouchables(true);
         break;
       case 8:
+        setStatusText('Adiado');
         setShowStartTouchable(false);
         setShowReturnTouchable(true);
         setShowActionsTouchables(false);
         break;
       default:
+        setStatusText('Entregue');
         setShowStartTouchable(false);
         setShowReturnTouchable(false);
         setShowActionsTouchables(false);
@@ -76,19 +90,6 @@ const StartDelivery = ({ route: {params}, navigation }) => {
     try {
       const response = await onStartDelivery(_data.id);
 
-      setShowStartTouchable(false);
-      setShowReturnTouchable(false);
-      setShowActionsTouchables(true);
-    } catch(error) {
-      alert('Não foi possível iniciar a entrega.')
-    }
-  };
-
-  const handleReturnDelivery = async () => {
-    try {
-      // const response = await onReturnDelivery(_data.id);
-      alert('onReturnDelivery');
-      
       setShowStartTouchable(false);
       setShowReturnTouchable(false);
       setShowActionsTouchables(true);
@@ -124,7 +125,7 @@ const StartDelivery = ({ route: {params}, navigation }) => {
           <Text style={styles.text}>
             {_pedido.endereco.estado}, {_pedido.endereco.cep}
           </Text>
-          <Text style={styles.status}>Aguardando entrega</Text>
+          <Text style={styles.status}>{statusText}</Text>
         </View>
 
         <TouchableOpacity
@@ -183,9 +184,9 @@ const StartDelivery = ({ route: {params}, navigation }) => {
         <View>
           <TouchableOpacity
             style={styles.returnTouchable}
-            onPress={handleReturnDelivery}>
+            onPress={handleStartDelivery}>
             <Text style={styles.startTouchableText}>
-              Retornar entrega
+              Retomar entrega
             </Text>
           </TouchableOpacity>
         </View>

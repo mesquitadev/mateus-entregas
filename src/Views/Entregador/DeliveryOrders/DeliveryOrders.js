@@ -25,7 +25,7 @@ const DeliveryOrders = ({ route, navigation }) => {
           setListItems(response.data.entregaPedidos);
 
           const filter = response.data.entregaPedidos.filter(item => {
-            return item.situacao === 3;
+            return (item.situacao === 3 || item.situacao === 7);
           });
 
           setOrderInProgress(filter);
