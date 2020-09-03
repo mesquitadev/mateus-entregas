@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import {Alert, View, Text, FlatList, TouchableOpacity } from 'react-native';
 
 import {
   PacmanIndicator,
@@ -36,8 +36,9 @@ const OrderList = ({ navigation }) => {
         const response = await api.get(`/pedidos-pronta-entrega`);
         console.log("Carreguei: pedidos-pronta-entrega")
         
-        //if(response.data.length)
-console.log("===========>" + response.data.length);
+        if(response.data.length==0){
+          Alert.alert('App Entregas', 'Não há pedidos disponiveis');
+        }
         setListItemsFilter(response.data);
         setListItems(response.data);
         setLoading(false);
