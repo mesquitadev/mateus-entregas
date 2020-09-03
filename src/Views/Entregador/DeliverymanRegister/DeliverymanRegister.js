@@ -80,7 +80,7 @@ const DeliverymanRegister = ({navigation}) => {
           Alert.alert('Mateus Entrega', 'Impossível fazer o cadastro');
         }
         if (error.response.status == 406) {
-          Alert.alert('Mateus Entrega', 'Entregadorr já cadastrado!');
+          Alert.alert('Mateus Entrega', 'Entregador já foi cadastrado!');
         }
         if (error.response.status == 500) {
           Alert.alert('Mateus Entrega', 'Sistema em manutenção!');
