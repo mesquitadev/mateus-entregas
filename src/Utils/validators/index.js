@@ -2,7 +2,9 @@ import validator from 'validator';
 import {Alert} from 'react-native';
 import CPF from 'cpf';
 
+const cpfRegex = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
 const fullNameRegex = /^([a-zA-ZzáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]|\s)+$/;
+
 const alertTitle = 'Mateus Entregas';
 const alertMessage = (text, type, aditional) => {
   return `O campo ${text} ${
@@ -17,21 +19,26 @@ class Validators {
 
   validateFullName(param) {
     if (!fullNameRegex.exec(param) || validator.isEmpty(param)) {
+      this.errors.push(1);
       Alert.alert(alertTitle, alertMessage('NOME COMPLETO', 'letras', 'números'));
       return;
     }
+    return;
   }
 
   validateCpf(param) {
-    if (!CPF.isValid(param) || validator.isEmpty(param)) {
+    if (!cpfRegex.exec(param) || validator.isEmpty(param)) {
       Alert.alert(alertTitle, alertMessage('CPF', 'números'));
-      return;
+      this.errors.push(1);
+      return false;
     }
+    return true;
   }
 
   validateCnh(param) {
     if (validator.isEmpty(param)) {
       Alert.alert(alertTitle, alertMessage('CNH', 'números'));
+      this.errors.push(1);
       return;
     }
   }
@@ -39,6 +46,7 @@ class Validators {
   validateDataNascimento(param) {
     if (validator.isEmpty(param)) {
       Alert.alert(alertTitle, alertMessage('DATA NASCIMENTO'));
+      this.errors.push(1);
       return;
     }
   }
@@ -46,6 +54,7 @@ class Validators {
   validateTelefone(param) {
     if (validator.isEmpty(param)) {
       Alert.alert(alertTitle, alertMessage('TELEFONE', 'números'));
+      this.errors.push(1);
       return;
     }
   }
@@ -53,6 +62,7 @@ class Validators {
   validateEmail(param) {
     if (!validator.isEmail(param) || validator.isEmpty(param)) {
       Alert.alert(alertTitle, alertMessage('EMAIL'));
+      this.errors.push(1);
       return;
     }
   }

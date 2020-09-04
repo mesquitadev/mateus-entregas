@@ -15,7 +15,7 @@ import styles from './styles';
 import deliverymanRegister from '../../../services/deliverymanRegister';
 import {KEY_ID_DADOS_PESSOAIS} from '../../../Utils/keys';
 
-import Validators from '../../../Utils/validators';
+import validateCPF from 'cpf';
 
 const DeliverymanRegister = ({navigation}) => {
   const [nome, setNome] = useState('');
@@ -92,13 +92,12 @@ const DeliverymanRegister = ({navigation}) => {
   };
 
   const doRegister = () => {
-    Validators.validateFullName(nome);
-    Validators.validateCpf(formatedCPF);
-    Validators.validateCnh(cnh);
-    Validators.validateDataNascimento(formatedDataNascimento);
-    Validators.validateTelefone(formatedTelefone);
-    Validators.validateEmail(email);
-    savePersonalData();
+    if(formatedCPF === '' || !validateCPF.isValid(formatedCPF)) {
+      Alert.alert('Mateus Entregas', 'CPF inválido');
+      return;
+    } else {
+      savePersonalData();
+    }
   };
 
   return (
