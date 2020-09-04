@@ -119,14 +119,25 @@ const StartDelivery = ({ route: {params}, navigation }) => {
     }
   };
   
+
+  if(_pedido.cliente.pessoaJuridica == null) {
+    nome = _pedido.cliente.pessoaFisica.nome;
+  } else {
+    if(_pedido.cliente.pessoaJuridica.razaoSocial == null) {
+      nome = _pedido.cliente.pessoaJuridica.cnpj;
+    } else {
+      nome = _pedido.cliente.pessoaJuridica.razaoSocial;
+    }
+  }
+
   return(
     <View style={styles.container}>
       <View style={styles.body}>
         <View style={styles.info}>
-          <Text style={styles.label}>Origem</Text>
-          <Text style={styles.text}>Loja -</Text>
+          {/* <Text style={styles.label}>Origem</Text>
+          <Text style={styles.text}>Loja -</Text> */}
           <Text style={styles.label}>Cliente</Text>
-          <Text style={styles.text}>Sem nome</Text>
+        <Text style={styles.text}>{nome}</Text>
           <Text style={styles.label}>Endereço de entrega</Text>
           <Text style={styles.text}>{_pedido.endereco.bairro}</Text>
           <Text style={styles.text}>{_pedido.endereco.endereco}</Text>
