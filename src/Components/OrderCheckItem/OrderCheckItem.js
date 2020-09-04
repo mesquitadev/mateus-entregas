@@ -22,7 +22,7 @@ const OrderCheckItem = ({ data }) => {
       <Image style={styles.image} source={require('../../res/img/caixa.png')} />
       <View style={styles.info}>
         <Text style={styles.number}>Nº #{data.numeroPedido}</Text>
-        <Text style={styles.name}> {nome.split(/(\s).+\s.+\s/).join("")}</Text>
+        <Text style={styles.name}> {nome.split(/(\s).+\s./).join("")}</Text>
       </View>
       <CheckBox
         boxType={'circle'}
