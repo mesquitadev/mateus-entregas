@@ -18,14 +18,14 @@ const StartDelivery = ({ route: {params}, navigation }) => {
   const _data = params.data;
   const _pedido = params.data.pedido;
 
-  useEffect(() => {
-    if (params?.post) {
-      setReceiptName(params.post.name);
-      setReceiptCpf(params.post.cpf);
-      setReceiptSituation(params.post.situacao);
-      setDelivered(true);
-    }
-  }, [params?.post]);
+  // useEffect(() => {
+  //   if (params?.post) {
+  //     setReceiptName(params.post.name);
+  //     setReceiptCpf(params.post.cpf);
+  //     setReceiptSituation(params.post.situacao);
+  //     setDelivered(true);
+  //   }
+  // }, [params?.post]);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -36,12 +36,20 @@ const StartDelivery = ({ route: {params}, navigation }) => {
         });
       };
 
+      if (params?.post) {
+        setReceiptName(params.post.name);
+        setReceiptCpf(params.post.cpf);
+        setReceiptSituation(params.post.situacao);
+        setShowActionsTouchables(true);
+        setDelivered(true);
+      }
+
       fetchData();
       return () => fetchData();
     });
 
     return unsubscribe;
-  }, [ navigation ]);
+  }, [ navigation, params?.post]);
 
   const renderTouchables = () => {
     const situation = _data.situacao;
