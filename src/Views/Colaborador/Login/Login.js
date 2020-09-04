@@ -37,11 +37,9 @@ const Login = ({ navigation }) => {
   const getEntregadorId = async (id) => {
     try {
       const response = await api.get('/entregadores');
-
       const find = response.data.find((item) => {
         return item.usuario.id === id;
       });
-
       checkMyDelivery(find.id);
     } catch (error) {
       alert(error);
@@ -55,7 +53,6 @@ const Login = ({ navigation }) => {
 
   //TODO - Clear state of input password text dont work
   useEffect(() => {
-
     const unsubscribe = navigation.addListener('focus', () => {
       clearState()
       setUser('')
@@ -66,9 +63,9 @@ const Login = ({ navigation }) => {
 
   const checkMyDelivery = async id => {
     let data = { id: id };
-    AsyncStorage.setItem('deliveryman_id', JSON.stringify(data));
 
     try {
+      await AsyncStorage.setItem('deliveryman_id', JSON.stringify(data));
       const myDeliveryResponse = await myDelivery(id);
       console.log("DeliveryInProgress: " + myDeliveryResponse);
       //selectedItems.filter((myDeliveryResponse.data.entregaPedidos) => myDeliveryResponse.data.entregaPedidos.situacao != 2);
@@ -79,9 +76,7 @@ const Login = ({ navigation }) => {
       } else {
         navigation.navigate('DeliveryInProgress');
       }
-
     } catch (error) {
-
       navigation.navigate('AcceptOrders');
     }
   };
