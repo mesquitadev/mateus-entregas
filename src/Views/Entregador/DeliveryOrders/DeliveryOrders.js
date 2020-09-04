@@ -32,7 +32,18 @@ const DeliveryOrders = ({ route, navigation }) => {
           });
           setOrderInProgress(filter);
         } catch(error) {
-          navigation.navigate('AcceptOrders');
+          if (error.response) {
+            if (error.response.status === 404) {
+              alert('Não existem pedidos para você.');
+              navigation.navigate('AcceptOrders');
+              return;
+            }
+            if (error.response.status === 406) {
+              alert('Os pedidos estão duplicados.');
+              navigation.navigate('AcceptOrders');
+              return;
+            }
+          }
         }
       };
 
