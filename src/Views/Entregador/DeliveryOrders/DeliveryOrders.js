@@ -33,7 +33,7 @@ const DeliveryOrders = ({ route, navigation }) => {
 
           setOrderInProgress(filter);
         } catch(error) {
-          alert('Não foi possível trazer os pedidos.')
+          alert('Não foi possível trazer os pedidos.');
         }
       };
 

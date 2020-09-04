@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import {Alert, Text, TextInput, TouchableOpacity, View} from 'react-native';
+
+import AsyncStorage from '@react-native-community/async-storage';
 import {TextInputMask} from 'react-native-masked-text';
 
 import styles from './styles';
@@ -8,9 +10,14 @@ const ReceiptByAnotherPerson = ({ navigation }) => {
   const [ name, setName ] = useState('');
   const [ cpf, setCpf ] = useState('');
   
-  const postReceipt = () => {
-    navigation.navigate('StartDelivery', 
-      {post: {name: name, cpf: cpf, situacao: 5}});
+  const saveReceipt = async () => {
+    try {
+      await AsyncStorage.setItem('receipt_by_another_person', 
+        JSON.stringify({ name: name, cpf: cpf, situacao: 5 })); 
+      await navigation.navigate('StartDelivery');
+    } catch (error) {
+      console.warn(error.message);
+    }
   };
   
   return (
@@ -28,7 +35,7 @@ const ReceiptByAnotherPerson = ({ navigation }) => {
         style={styles.inputs}
         maxLength={14}
       />
-      <TouchableOpacity style={styles.btnPrimary} onPress={postReceipt}>
+      <TouchableOpacity style={styles.btnPrimary} onPress={saveReceipt}>
         <Text style={styles.btnPrimaryText}>
           Confirmar
         </Text>

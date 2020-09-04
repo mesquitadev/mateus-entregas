@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, Linking, TouchableOpacity, Alert } from 'react-native';
 
+import AsyncStorage from '@react-native-community/async-storage';
 import onStartDelivery from '../../../services/onStartDelivery';
 import confirmOrderDelivery from '../../../services/confirmOrderDelivery';
 import styles from './styles';
@@ -23,6 +24,7 @@ const StartDelivery = ({ route: {params}, navigation }) => {
   //     setReceiptName(params.post.name);
   //     setReceiptCpf(params.post.cpf);
   //     setReceiptSituation(params.post.situacao);
+  //     setShowActionsTouchables(true);
   //     setDelivered(true);
   //   }
   // }, [params?.post]);
@@ -30,26 +32,36 @@ const StartDelivery = ({ route: {params}, navigation }) => {
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       const fetchData = async () => {
-        renderTouchables();
         navigation.setOptions({
           title: `Nº #${_pedido.numeroPedido}`
         });
-      };
 
-      if (params?.post) {
-        setReceiptName(params.post.name);
-        setReceiptCpf(params.post.cpf);
-        setReceiptSituation(params.post.situacao);
-        setShowActionsTouchables(true);
-        setDelivered(true);
-      }
+        let receipt = '';
+        try {
+          receipt = await AsyncStorage.getItem('receipt_by_another_person') || '';
+          const receiptJson = JSON.parse(receipt);
+
+          if (receiptJson) {
+            setReceiptName(receiptJson.name);
+            setReceiptCpf(receiptJson.cpf);
+            setReceiptSituation(receiptJson.situacao);
+            setShowActionsTouchables(true);
+            setDelivered(true);
+          }
+
+        } catch (error) {
+          console.warn(error.message);
+        }
+        
+        renderTouchables();
+      };
 
       fetchData();
       return () => fetchData();
     });
 
     return unsubscribe;
-  }, [ navigation, params?.post]);
+  }, [ navigation ]);
 
   const renderTouchables = () => {
     const situation = _data.situacao;
@@ -106,13 +118,24 @@ const StartDelivery = ({ route: {params}, navigation }) => {
     }
   };
 
+  const deleteReceipt = async () => {
+    try {
+      await AsyncStorage.removeItem('receipt_by_another_person');
+    } catch (error) {
+      console.warn(error.message);
+    }
+  };
+
   const confirmDelivery = async () => {
+    setDelivered(false);
+    
     try {
       const response = await confirmOrderDelivery(
-        _data.id, receiptName, 
-        receiptCpf, 
+        _data.id, receiptName,
+        receiptCpf,
         receiptSituation);
-
+      
+      deleteReceipt();
       navigation.navigate('OrderDelivered');
     } catch (error) {
       Alert.alert('Mateus Entregas', 'Não foi possível finalizar a entrega do pedido.');
@@ -222,6 +245,7 @@ const StartDelivery = ({ route: {params}, navigation }) => {
             style={styles.actionsTouchableLight}>
             <Text style={styles.actionsTouchableLightText}>Suspender</Text>
           </TouchableOpacity>
+          
           <TouchableOpacity
             disabled={!delivered}
             onPress={confirmDelivery}
