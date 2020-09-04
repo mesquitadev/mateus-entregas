@@ -1,33 +1,26 @@
 import React, {useState} from 'react';
-import {Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Text, TextInput, TouchableOpacity, View, Alert} from 'react-native';
 import {TextInputMask} from 'react-native-masked-text';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import styles from './styles';
-import Validators from '../../../Utils/validators';
+import validateCPF from 'cpf';
 
 const ReceiptByAnotherPerson = ({navigation}) => {
   const [name, setName] = useState('');
   const [cpf, setCpf] = useState('');
 
-  const formatedCPF = cpf.replace(/[^\d]/g, '');
-
-  // const valideAndSave = () => {
-  //   if (Validators.validateCpf(formatedCPF)) {
-  //     saveReceipt();
-  //     navigation.navigate('StartDelivery');
-  //   }
-  //   else 
-  //     return;
-  // };
-  
   const saveReceipt = async () => {
     try {
-      await AsyncStorage.setItem(
-        'receipt_by_another_person',
-        JSON.stringify({name: name, cpf: cpf, situacao: 5}),
-      );
-      navigation.navigate('StartDelivery');
+      if (cpf == '' || !validateCPF.isValid(cpf)) {
+        Alert.alert('Mateus Entregas', 'CPF inválido');
+      } else {
+        await AsyncStorage.setItem(
+          'receipt_by_another_person',
+          JSON.stringify({name: name, cpf: cpf, situacao: 5}),
+        );
+        navigation.navigate('StartDelivery');
+      }
     } catch (error) {
       console.warn(error.message);
     }
