@@ -72,7 +72,7 @@ const Login = ({ navigation }) => {
       const myDeliveryResponse = await myDelivery(id);
       console.log("DeliveryInProgress: " + myDeliveryResponse);
       //selectedItems.filter((myDeliveryResponse.data.entregaPedidos) => myDeliveryResponse.data.entregaPedidos.situacao != 2);
-    //  let tempedido = myDeliveryResponse.data.entregaPedidos.find(item => item.situacao === 2)
+      //  let tempedido = myDeliveryResponse.data.entregaPedidos.find(item => item.situacao === 2)
 
       if (myDeliveryResponse.data.situacao != 2) {
         navigation.navigate('AcceptOrders');
@@ -81,8 +81,8 @@ const Login = ({ navigation }) => {
       }
 
     } catch (error) {
-    
-    navigation.navigate('AcceptOrders');
+
+      navigation.navigate('AcceptOrders');
     }
   };
 
