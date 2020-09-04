@@ -37,15 +37,15 @@ class Validators {
   }
 
   validateDataNascimento(param) {
-    if (!validator.isNumeric(param) || validator.isEmpty(param)) {
-      Alert.alert(alertTitle, 'DATA NASCIMENTO');
+    if (validator.isEmpty(param)) {
+      Alert.alert(alertTitle, alertMessage('DATA NASCIMENTO'));
       return;
     }
   }
 
   validateTelefone(param) {
-    if (!validator.isNumeric(param) || validator.isEmpty(param)) {
-      Alert.alert(alertTitle, 'TELEFONE', 'números');
+    if (validator.isEmpty(param)) {
+      Alert.alert(alertTitle, alertMessage('TELEFONE', 'números'));
       return;
     }
   }

@@ -26,6 +26,7 @@ const DeliverymanRegister = ({navigation}) => {
   const [email, setEmail] = useState('');
 
   const formatedCPF = user.replace(/[^\d]/g, '');
+  const formatedTelefone = tel.replace(/[^\d]/g, '');
   const formatedDataNascimento =
     datanascimento.substr(6, 4) +
     '-' +
@@ -94,6 +95,8 @@ const DeliverymanRegister = ({navigation}) => {
     Validators.validateFullName(nome);
     Validators.validateCpf(formatedCPF);
     Validators.validateCnh(cnh);
+    Validators.validateDataNascimento(formatedDataNascimento);
+    Validators.validateTelefone(formatedTelefone);
     Validators.validateEmail(email);
     savePersonalData();
   };

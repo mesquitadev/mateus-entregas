@@ -40,7 +40,7 @@ const ReceiptByAnotherPerson = ({navigation}) => {
         style={styles.inputs}
         maxLength={14}
       />
-      <TouchableOpacity style={styles.btnPrimary} onPress={postReceipt}>
+      <TouchableOpacity style={styles.btnPrimary} onPress={saveReceipt}>
         <Text style={styles.btnPrimaryText}>Confirmar</Text>
       </TouchableOpacity>
     </View>
