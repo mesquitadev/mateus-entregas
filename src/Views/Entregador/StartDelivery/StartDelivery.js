@@ -32,9 +32,8 @@ const StartDelivery = ({ route: {params}, navigation }) => {
           
           if (receipt !== '') {
             const receiptJson = JSON.parse(receipt);
-            
-            // alert('voltandoRecibo');
 
+            setDelivered(true);
             setReceiptName(receiptJson.name);
             setReceiptCpf(receiptJson.cpf);
             setReceiptSituation(receiptJson.situacao);
@@ -60,42 +59,36 @@ const StartDelivery = ({ route: {params}, navigation }) => {
         setStatusText('Aguardando entrega');
         setShowStartTouchable(true);
         setShowReturnTouchable(false);
-        setDelivered(false);
         setShowActionsTouchables(false);
         break;
       case 3:
         setStatusText('Saiu para entrega');
         setShowStartTouchable(false);
         setShowReturnTouchable(false);
-        setDelivered(true);
         setShowActionsTouchables(true);
         break;
       case 6:
         setStatusText('Cancelado');
         setShowStartTouchable(false);
         setShowReturnTouchable(false);
-        setDelivered(false);
         setShowActionsTouchables(false);
         break;
       case 7:
         setStatusText('Saiu para entrega');
         setShowStartTouchable(false);
         setShowReturnTouchable(false);
-        setDelivered(true);
         setShowActionsTouchables(true);
         break;
       case 8:
         setStatusText('Adiado');
         setShowStartTouchable(false);
         setShowReturnTouchable(true);
-        setDelivered(false);
         setShowActionsTouchables(false);
         break;
       default:
         setStatusText('Entregue');
         setShowStartTouchable(false);
         setShowReturnTouchable(false);
-        setDelivered(false);
         setShowActionsTouchables(false);
         break;
     }
@@ -139,7 +132,6 @@ const StartDelivery = ({ route: {params}, navigation }) => {
     }
   };
   
-
   if(_pedido.cliente.pessoaJuridica == null) {
     nome = _pedido.cliente.pessoaFisica.nome;
   } else {

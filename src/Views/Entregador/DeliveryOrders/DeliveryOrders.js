@@ -30,10 +30,9 @@ const DeliveryOrders = ({ route, navigation }) => {
           const filter = response.data.entregaPedidos.filter(item => {
             return (item.situacao === 3 || item.situacao === 7);
           });
-
           setOrderInProgress(filter);
         } catch(error) {
-          alert('Não foi possível trazer os pedidos.');
+          navigation.navigate('AcceptOrders');
         }
       };
 
