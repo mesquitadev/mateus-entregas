@@ -34,15 +34,16 @@ const Login = ({ navigation }) => {
   const textInputSenha = useRef(null);
 
   // Temporário até que o response do login venha com um payload mais detalhado
-  const getEntregadorId = async (id) => {
+  const getEntregadorId = async id => {
     try {
-      const response = await api.get('/entregadores');
+      const response = await api.get('/entregadores-login');
       const find = response.data.find((item) => {
         return item.usuario.id === id;
       });
+      
       checkMyDelivery(find.id);
     } catch (error) {
-      alert(error);
+      Alert.alert('Mateus Entregas', 'Não foi possível buscar o identificador do entregador');
     }
   };
 
@@ -55,8 +56,6 @@ const Login = ({ navigation }) => {
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       clearState()
-      setUser('')
-      setPass('')
     });
     //return unsubscribe;
   }, [navigation]);
@@ -67,7 +66,7 @@ const Login = ({ navigation }) => {
     try {
       await AsyncStorage.setItem('deliveryman_id', JSON.stringify(data));
       const myDeliveryResponse = await myDelivery(id);
-      console.log("DeliveryInProgress: " + myDeliveryResponse);
+      // console.log("DeliveryInProgress: " + myDeliveryResponse);
       //selectedItems.filter((myDeliveryResponse.data.entregaPedidos) => myDeliveryResponse.data.entregaPedidos.situacao != 2);
       //  let tempedido = myDeliveryResponse.data.entregaPedidos.find(item => item.situacao === 2)
 
@@ -83,11 +82,11 @@ const Login = ({ navigation }) => {
 
   const doLogin = async () => {
     // Comentando validacao de cpf para teste
-    // const CPF = require('cpf');
-    // if(!CPF.isValid(user)) {
-    //  Alert.alert('App Entregas', 'CPF inválido, verifique o número digitado e tente novamente.');
-    //  return;
-    // }
+    const CPF = require('cpf');
+    if(!CPF.isValid(user)) {
+     Alert.alert('App Entregas', 'CPF inválido, verifique o número digitado e tente novamente.');
+     return;
+    }
 
     if (pass.length < 6) {
       Alert.alert(
@@ -102,8 +101,8 @@ const Login = ({ navigation }) => {
       const response = await login(user, pass);
       clearState();
       setButtonEnabled(true);
-
-      AsyncStorage.setItem('entregas_user_data', JSON.stringify(response.data));
+            
+      await AsyncStorage.setItem('entregas_user_data', JSON.stringify(response.data));
 
       switch (response.data.situacao) {
         case 0: //pendente
