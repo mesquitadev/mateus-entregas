@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import myDelivery from '../../../services/myDelivery';
@@ -34,12 +34,12 @@ const DeliveryOrders = ({ route, navigation }) => {
         } catch(error) {
           if (error.response) {
             if (error.response.status === 404) {
-              alert('Não existem pedidos para você.');
+              Alert.alert('Mateus Entregas', 'Você está sem pedidos no momento. Tente aceitar novos pedidos.');
               navigation.navigate('AcceptOrders');
               return;
             }
             if (error.response.status === 406) {
-              alert('Os pedidos estão duplicados.');
+              Alert.alert('Mateus Entregas', 'Os pedidos estão duplicados.');
               navigation.navigate('AcceptOrders');
               return;
             }
