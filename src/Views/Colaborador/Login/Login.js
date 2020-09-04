@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Alert,
   Image,
@@ -8,11 +8,11 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {TextInputMask} from 'react-native-masked-text';
+import { TextInputMask } from 'react-native-masked-text';
 import AsyncStorage from '@react-native-community/async-storage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import {KEYS_CLEANNER} from '../../../Utils/keys';
+import { KEYS_CLEANNER } from '../../../Utils/keys';
 
 import myDelivery from '../../../services/myDelivery';
 import login from '../../../services/login';
@@ -20,7 +20,7 @@ import styles from './styles';
 
 import api from '../../../services/api'; // Temporário
 
-const Login = ({navigation}) => {
+const Login = ({ navigation }) => {
   const [user, setUser] = useState('');
   const [pass, setPass] = useState('');
   const [buttonEnabled, setButtonEnabled] = useState(true);
@@ -51,9 +51,9 @@ const Login = ({navigation}) => {
   const clearState = () => {
     setUser('')
     setPass('')
-}
+  }
 
-//TODO - Clear state of input password text dont work
+  //TODO - Clear state of input password text dont work
   useEffect(() => {
 
     const unsubscribe = navigation.addListener('focus', () => {
@@ -70,18 +70,19 @@ const Login = ({navigation}) => {
 
     try {
       const myDeliveryResponse = await myDelivery(id);
-console.log("DeliveryInProgress: "+ myDeliveryResponse);
- //selectedItems.filter((myDeliveryResponse.data.entregaPedidos) => myDeliveryResponse.data.entregaPedidos.situacao != 2);
+      console.log("DeliveryInProgress: " + myDeliveryResponse);
+      //selectedItems.filter((myDeliveryResponse.data.entregaPedidos) => myDeliveryResponse.data.entregaPedidos.situacao != 2);
+    //  let tempedido = myDeliveryResponse.data.entregaPedidos.find(item => item.situacao === 2)
 
-let tempedido = myDeliveryResponse.data.entregaPedidos.find(item => item.situacao === 2)
-if(tempedido==undefined){
-  navigation.navigate('AcceptOrders');
-}else{
-  navigation.navigate('DeliveryInProgress');
-}
-      
+      if (myDeliveryResponse.data.situacao != 2) {
+        navigation.navigate('AcceptOrders');
+      } else {
+        navigation.navigate('DeliveryInProgress');
+      }
+
     } catch (error) {
-      navigation.navigate('AcceptOrders');
+    
+    navigation.navigate('AcceptOrders');
     }
   };
 
@@ -140,7 +141,7 @@ if(tempedido==undefined){
           Alert.alert('App Entregas', 'Usuário ou senha inválidos.');
         }
 
-        if(error.response.status == 401) {
+        if (error.response.status == 401) {
           Alert.alert('App Entregas', 'Acesso não autorizado, entre em contato com o SAC.');
         }
 
@@ -178,7 +179,7 @@ if(tempedido==undefined){
   return (
     <View style={styles.container}>
       <ScrollView
-        contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}>
+        contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
         <Image
           source={require('../../../res/img/logo_mateus.png')}
           style={styles.logo}
@@ -200,19 +201,19 @@ if(tempedido==undefined){
           autoFocus
         />
         <View>
-        <TextInputMask
-          secureTextEntry={visibilityPassword}
-          type={'custom'}
-          options={{
-            mask: '******************************'
-          }}
-          placeholder="Senha"
-          value={pass}
-          onChangeText={(text) => setPass(text)}
-          style={styles.inputs}
-          maxLength={32}
-          ref={textInputSenha}
-        />
+          <TextInputMask
+            secureTextEntry={visibilityPassword}
+            type={'custom'}
+            options={{
+              mask: '******************************'
+            }}
+            placeholder="Senha"
+            value={pass}
+            onChangeText={(text) => setPass(text)}
+            style={styles.inputs}
+            maxLength={32}
+            ref={textInputSenha}
+          />
           {!visibilityPassword ? (
             <TouchableOpacity
               onPress={() => enableVisibilityPassword(true)}
@@ -220,12 +221,12 @@ if(tempedido==undefined){
               <Image source={pathIconEyeOpen} width={24} height={24} />
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity
-              onPress={() => enableVisibilityPassword(false)}
-              style={styles.iconEye}>
-              <Image source={pathIconEyeClosed} width={24} height={24} />
-            </TouchableOpacity>
-          )}
+              <TouchableOpacity
+                onPress={() => enableVisibilityPassword(false)}
+                style={styles.iconEye}>
+                <Image source={pathIconEyeClosed} width={24} height={24} />
+              </TouchableOpacity>
+            )}
         </View>
 
         <TouchableOpacity
