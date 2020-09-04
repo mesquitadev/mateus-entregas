@@ -26,9 +26,9 @@ const DeliverymanSetRegister = ({navigation}) => {
             Falta pouco para você começar a entregar!
           </Text>
 
-          <Text style={styles.nameDeliveryman}>Nome do entregador</Text>
+         { /*<Text style={styles.nameDeliveryman}>Nome do entregador</Text>
 
-          <Text style={styles.cpfDeliveryman}>CPF: 0000000000-00</Text>
+             <Text style={styles.cpfDeliveryman}>CPF: 0000000000-00</Text>*/ }
 
           <View style={styles.divider} />
 
