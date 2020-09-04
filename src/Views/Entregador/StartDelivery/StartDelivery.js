@@ -19,16 +19,6 @@ const StartDelivery = ({ route: {params}, navigation }) => {
   const _data = params.data;
   const _pedido = params.data.pedido;
 
-  // useEffect(() => {
-  //   if (params?.post) {
-  //     setReceiptName(params.post.name);
-  //     setReceiptCpf(params.post.cpf);
-  //     setReceiptSituation(params.post.situacao);
-  //     setShowActionsTouchables(true);
-  //     setDelivered(true);
-  //   }
-  // }, [params?.post]);
-
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       const fetchData = async () => {
@@ -39,14 +29,15 @@ const StartDelivery = ({ route: {params}, navigation }) => {
         let receipt = '';
         try {
           receipt = await AsyncStorage.getItem('receipt_by_another_person') || '';
-          const receiptJson = JSON.parse(receipt);
+          
+          if (receipt !== '') {
+            const receiptJson = JSON.parse(receipt);
+            
+            // alert('voltandoRecibo');
 
-          if (receiptJson) {
             setReceiptName(receiptJson.name);
             setReceiptCpf(receiptJson.cpf);
             setReceiptSituation(receiptJson.situacao);
-            setShowActionsTouchables(true);
-            setDelivered(true);
           }
 
         } catch (error) {
@@ -64,43 +55,47 @@ const StartDelivery = ({ route: {params}, navigation }) => {
   }, [ navigation ]);
 
   const renderTouchables = () => {
-    const situation = _data.situacao;
-
-    switch(situation) {
+    switch(_data.situacao) {
       case 2:
         setStatusText('Aguardando entrega');
         setShowStartTouchable(true);
         setShowReturnTouchable(false);
+        setDelivered(false);
         setShowActionsTouchables(false);
         break;
       case 3:
         setStatusText('Saiu para entrega');
         setShowStartTouchable(false);
         setShowReturnTouchable(false);
+        setDelivered(true);
         setShowActionsTouchables(true);
         break;
       case 6:
         setStatusText('Cancelado');
         setShowStartTouchable(false);
         setShowReturnTouchable(false);
+        setDelivered(false);
         setShowActionsTouchables(false);
         break;
       case 7:
         setStatusText('Saiu para entrega');
         setShowStartTouchable(false);
         setShowReturnTouchable(false);
+        setDelivered(true);
         setShowActionsTouchables(true);
         break;
       case 8:
         setStatusText('Adiado');
         setShowStartTouchable(false);
         setShowReturnTouchable(true);
+        setDelivered(false);
         setShowActionsTouchables(false);
         break;
       default:
         setStatusText('Entregue');
         setShowStartTouchable(false);
         setShowReturnTouchable(false);
+        setDelivered(false);
         setShowActionsTouchables(false);
         break;
     }
@@ -108,7 +103,9 @@ const StartDelivery = ({ route: {params}, navigation }) => {
 
   const handleStartDelivery = async () => {
     try {
-      const response = await onStartDelivery(_data.id);
+      await onStartDelivery(_data.id);
+
+      _data.situacao = 3;
 
       setShowStartTouchable(false);
       setShowReturnTouchable(false);

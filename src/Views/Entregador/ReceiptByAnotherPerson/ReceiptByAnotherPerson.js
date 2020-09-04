@@ -14,7 +14,8 @@ const ReceiptByAnotherPerson = ({ navigation }) => {
     try {
       await AsyncStorage.setItem('receipt_by_another_person', 
         JSON.stringify({ name: name, cpf: cpf, situacao: 5 })); 
-      await navigation.navigate('StartDelivery');
+        
+      navigation.navigate('StartDelivery');
     } catch (error) {
       console.warn(error.message);
     }
