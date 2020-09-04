@@ -14,7 +14,8 @@ import styles from './styles';
 
 import deliverymanRegister from '../../../services/deliverymanRegister';
 import {KEY_ID_DADOS_PESSOAIS} from '../../../Utils/keys';
-const CPF = require('cpf');
+
+import Validators from '../../../Utils/validators';
 
 const DeliverymanRegister = ({navigation}) => {
   const [nome, setNome] = useState('');
@@ -90,32 +91,10 @@ const DeliverymanRegister = ({navigation}) => {
   };
 
   const doRegister = () => {
-    // if (!CPF.isValid(user)) {
-    //   Alert.alert(
-    //     'App Entregas',
-    //     'CPF inválido, verifique o número digitado e tente novamente.',
-    //   );
-    //   return;
-    // }
-    if (nome.length == '') {
-      Alert.alert('App Entregas', 'Preencha os dados corretamente');
-      return;
-    } else if (user.length == '') {
-      Alert.alert('App Entregas', 'Preencha os dados corretamente');
-      return;
-    } else if (cnh.length == '') {
-      Alert.alert('App Entregas', 'Preencha os dados corretamente');
-      return;
-    } else if (datanascimento.length == '') {
-      Alert.alert('App Entregas', 'Preencha os dados corretamente');
-      return;
-    } else if (tel.length == '') {
-      Alert.alert('App Entregas', 'Preencha os dados corretamente');
-      return;
-    } else if (email.length == '') {
-      Alert.alert('App Entregas', 'Preencha os dados corretamente');
-      return;
-    }
+    Validators.validateFullName(nome);
+    Validators.validateCpf(formatedCPF);
+    Validators.validateCnh(cnh);
+    Validators.validateEmail(email);
     savePersonalData();
   };
 
