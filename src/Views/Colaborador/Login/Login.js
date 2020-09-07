@@ -1,13 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  Alert,
-  Image,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  ScrollView,
-} from 'react-native';
+import { Alert, Image, Text, TouchableOpacity, View, ScrollView } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
 import AsyncStorage from '@react-native-community/async-storage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -25,7 +17,6 @@ const Login = ({ navigation }) => {
   const [pass, setPass] = useState('');
   const [buttonEnabled, setButtonEnabled] = useState(true);
   const [visibilityPassword, enableVisibilityPassword] = useState(true);
-
 
   const pathIconEyeOpen = require('../../../res/img/open-eye.png');
   const pathIconEyeClosed = require('../../../res/img/closed-eye.png');
@@ -52,7 +43,6 @@ const Login = ({ navigation }) => {
     setPass('')
   }
 
-  //TODO - Clear state of input password text dont work
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       clearState()
@@ -66,9 +56,6 @@ const Login = ({ navigation }) => {
     try {
       await AsyncStorage.setItem('deliveryman_id', JSON.stringify(data));
       const myDeliveryResponse = await myDelivery(id);
-      // console.log("DeliveryInProgress: " + myDeliveryResponse);
-      //selectedItems.filter((myDeliveryResponse.data.entregaPedidos) => myDeliveryResponse.data.entregaPedidos.situacao != 2);
-      //  let tempedido = myDeliveryResponse.data.entregaPedidos.find(item => item.situacao === 2)
 
       if (myDeliveryResponse.data.situacao != 2) {
         navigation.navigate('AcceptOrders');
@@ -81,7 +68,6 @@ const Login = ({ navigation }) => {
   };
 
   const doLogin = async () => {
-    // Comentando validacao de cpf para teste
     const CPF = require('cpf');
     if(!CPF.isValid(user)) {
      Alert.alert('App Entregas', 'CPF inválido, verifique o número digitado e tente novamente.');
@@ -127,8 +113,6 @@ const Login = ({ navigation }) => {
           navigation.navigate('DeliverymanPhotos');
           break;
       }
-
-
     } catch (error) {
       if (error.response) {
         if (error.response.status == 404) {
@@ -199,13 +183,13 @@ const Login = ({ navigation }) => {
             secureTextEntry={visibilityPassword}
             type={'custom'}
             options={{
-              mask: '******************************'
+              mask: '********************'
             }}
             placeholder="Senha"
             value={pass}
             onChangeText={(text) => setPass(text)}
             style={styles.inputs}
-            maxLength={32}
+            maxLength={20}
             ref={textInputSenha}
           />
           {!visibilityPassword ? (
