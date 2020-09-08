@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { Image, View, Text, TouchableOpacity } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import Moment from 'moment';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import styles from './styles';
 
@@ -22,7 +23,7 @@ if(data.cliente.pessoaJuridica == null) {
 
   return (
     <View style={[styles.orderItem, toggleCheckBox ? styles.active : styles.inactive]}>
-      <Text style={styles.text}>Nº #{data.numeroPedido}</Text>
+      <Text style={styles.text}><Ionicons name={'cart-outline'} size={16} color={"#777"}/> #{data.numeroPedido}  <Image source={require('../../res/img/gmcore.png')}  width={16} height={16} /> #{data.numeroEstoque}</Text>
       <Text style={styles.label}>Realizado em {Moment(data.dataPedido).format('MM/DD/YYYY HH:mm')}</Text>
       <Text style={styles.label}>Cliente</Text>
       <Text style={styles.text}>{nome}</Text>

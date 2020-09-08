@@ -1,17 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Alert, View, Text, FlatList, TouchableOpacity } from 'react-native';
 
-import {
-  PacmanIndicator,
-  // BallIndicator,
-  // BarIndicator,
-  // DotIndicator,
-  // MaterialIndicator,
-  // PulseIndicator,
-  // SkypeIndicator,
-  // UIActivityIndicator,
-  // WaveIndicator,
-} from 'react-native-indicators';
+import { PacmanIndicator } from 'react-native-indicators';
 
 import UserHeader from '../../../Components/UserHeader/UserHeader';
 import SearchFilter from '../../../Components/SearchFilter/SearchFilter';
@@ -82,6 +72,7 @@ const OrderList = ({ navigation }) => {
       const itemData = `
         ${tipoPessoa(item)}
         ${item.numeroPedido}
+        ${item.numeroEstoque}
         ${item.endereco.bairro.toUpperCase()}
         `;
       const textData = text.toUpperCase();
