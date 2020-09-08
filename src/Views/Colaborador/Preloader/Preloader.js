@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { Text, View, Image } from 'react-native';
 
 
 import styles from './styles';
@@ -19,6 +19,8 @@ const Preloader = ({navigation}) => {
             <View>
                 <Image style={styles.pulse} source={require('../../../res/img/pulse.png')}/>
             </View>
+
+            <Text style={{color: '#FFF'}}>Beta v0.1.1 </Text>
         </View>
 
     );
