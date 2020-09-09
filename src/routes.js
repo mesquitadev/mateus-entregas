@@ -11,7 +11,10 @@ import OrderCheck from './Views/Colaborador/OrderCheck/OrderCheck';
 import GenerateQrCode from './Views/Colaborador/GenerateQrCode/GenerateQrCode';
 
 import DeliverymanRegister from './Views/Entregador/DeliverymanRegister/DeliverymanRegister';
+import DeliverymanRegisterAddress from './Views/Entregador/DeliverymanRegisterAddress/DeliverymanRegisterAddress';
+import DeliverymanRegisterBank from './Views/Entregador/DeliverymanRegisterBank/DeliverymanRegisterBank';
 import DeliverymanPhotos from './Views/Entregador/DeliverymanPhotos/DeliverymanPhotos';
+import DeliverymanVehicleData from './Views/Entregador/DeliverymanVehicleData/DeliverymanVehicleData';
 import DeclineOrders from './Views/Entregador/DeclineOrders/DeclineOrders';
 import DeclineOrdersInformation from './Views/Entregador/DeclineOrdersInformation/DeclineOrdersInformation';
 import AcceptOrders from './Views/Entregador/AcceptOrders/AcceptOrders';
@@ -126,12 +129,35 @@ const Routes = () => (
         headerBackTitle: 'Voltar',
       }}
     />
-
+    <Stack.Screen
+      name="DeliverymanRegisterAddress"
+      component={DeliverymanRegisterAddress}
+      options={{
+        title: 'Endereço',
+        headerBackTitle: 'Voltar',
+      }}
+    />
+    <Stack.Screen
+      name="DeliverymanRegisterBank"
+      component={DeliverymanRegisterBank}
+      options={{
+        title: 'Dados Bancários',
+        headerBackTitle: 'Voltar',
+      }}
+    />
     <Stack.Screen
       name="DeliverymanPhotos"
       component={DeliverymanPhotos}
       options={{
         title: 'Conclua as etapas a seguir',
+        headerBackTitle: 'Voltar',
+      }}
+    />
+    <Stack.Screen
+      name="DeliverymanVehicleData"
+      component={DeliverymanVehicleData}
+      options={{
+        title: 'Dados do Veículo',
         headerBackTitle: 'Voltar',
       }}
     />
