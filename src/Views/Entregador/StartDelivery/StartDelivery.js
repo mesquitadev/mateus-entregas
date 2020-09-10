@@ -128,9 +128,9 @@ const StartDelivery = ({ route: {params}, navigation }) => {
         receiptCpf,
         receiptSituation);
       
-      setIsLoading(false);
-      deleteReceipt();
-      navigation.navigate('OrderDelivered');
+        deleteReceipt();
+        setIsLoading(false);
+        navigation.navigate('OrderDelivered');
     } catch (error) {
       setIsLoading(false);
       Alert.alert('Mateus Entregas', 'Não foi possível finalizar a entrega do pedido.');
