@@ -31,16 +31,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#0095DA",
     alignItems: "center",
     paddingVertical: 15,
-    marginVertical: 10,
+    marginVertical: 640,
     width: screenWidth,
-    alignSelf: "center",
     borderRadius: 0,
-    bottom: 120,
+   
+  
+   
   },
 
   active: {
     display: "flex",
-    position: 'absolute'
+    position: 'absolute',
   },
 
   inactive: {

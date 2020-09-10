@@ -93,34 +93,40 @@ const OrderList = ({ navigation }) => {
 
   return (
     <View>
-      <UserHeader />
+      
+      <View>
+        <UserHeader />
 
-      <SearchFilter onChangeText={this.startSearchFilter} />
+        <SearchFilter onChangeText={this.startSearchFilter} />
+        
+        <View style={styles.orderList}>
+            <FlatList
+              style={styles.flatListEstilo}
+              data={listItems}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={this.renderItem}
+              nestedScrollEnabled
+              ListHeaderComponent={FlatListHeader}
+            />
+        </View>
 
-      <View style={styles.orderList}>
-          <FlatList
-            style={styles.flatListEstilo}
-            data={listItems}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={this.renderItem}
-            nestedScrollEnabled
-            ListHeaderComponent={FlatListHeader}
-          />
+        <PacmanIndicator
+        style={styles.loading}
+        animating={loading}
+        hidesWhenStopped={true}
+        color='rgb(0, 149, 218)' />
+
+        
       </View>
-
-      <PacmanIndicator
-      style={styles.loading}
-      animating={loading}
-      hidesWhenStopped={true}
-      color='rgb(0, 149, 218)' />
 
       <TouchableOpacity
         style={[ styles.selectedItemsButton, count > 0 ? styles.active : styles.inactive ]}
         onPress={() => navigation.navigate('SelectedItems', selectedItems)}>
         <Text style={styles.selectedItemsButtonText}>
-          {`Ver pedidos selecionados  ${count}`}
+        {`Ver pedidos selecionados  ${count}`}
         </Text>
       </TouchableOpacity>
+      
     </View>
   );
 }
