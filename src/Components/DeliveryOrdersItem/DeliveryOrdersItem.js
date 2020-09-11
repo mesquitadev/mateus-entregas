@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Alert} from 'react-native';
 
+import Moment from 'moment';
 import styles from './styles';
 
 const DeliveryOrdersItem = ({data, orderInProgress, navigate}) => {
@@ -54,6 +55,10 @@ const DeliveryOrdersItem = ({data, orderInProgress, navigate}) => {
         break;
     }
   };
+
+  const getPedidoData = () => {
+    return Moment(data.pedido.dataPedido).format("DD/MM/YYYY HH:mm");
+  };
   
   if(data.pedido.cliente.pessoaJuridica == null) {
     nome = data.pedido.cliente.pessoaFisica.nome;
@@ -74,7 +79,7 @@ const DeliveryOrdersItem = ({data, orderInProgress, navigate}) => {
         navigate('StartDelivery', {data: data})
       }}>
       <Text style={styles.text}>Nº #{data.pedido.numeroPedido}</Text>
-      <Text style={styles.label}>Realizado em {data.pedido.dataPedido}</Text>
+      <Text style={styles.label}>Realizado em {getPedidoData()}</Text>
       <Text style={styles.label}>Cliente</Text>
       {/* <Text style={styles.text}>{data.pedido.cliente.pessoaFisica.nome}</Text> */}
       <Text style={styles.text}>{nome}</Text>
