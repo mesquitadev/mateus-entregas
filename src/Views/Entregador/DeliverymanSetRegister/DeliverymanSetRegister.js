@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Text, View, Image, ScrollView, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -7,10 +7,7 @@ import CustomHeader from '../../../Components/CustomHeader/CustomHeader';
 import patchIcon from '../../../res/img/cancel.png';
 
 const DeliverymanSetRegister = ({navigation}) => {
-  const [entrega, SetEntrega] = useState('');
-  const [analise, setAnalise] = useState('');
-  const [icon, setIcon] = useState('');
-
+ 
   return (
     <>
       <CustomHeader
@@ -49,8 +46,8 @@ const DeliverymanSetRegister = ({navigation}) => {
 
           <View style={styles.wrapper}>
             <View style={styles.result}>
-              <Text style={styles.approved}>Foto da CNH</Text>
-              <Text style={styles.resultConfirm}>Enviada</Text>
+              <Text style={styles.approved}>Endereço</Text>
+              <Text style={styles.resultConfirm}>Enviado</Text>
             </View>
             <View>
               <Ionicons name="checkmark-circle" size={28} color={'#00A349'} />
@@ -59,8 +56,28 @@ const DeliverymanSetRegister = ({navigation}) => {
 
           <View style={styles.wrapper}>
             <View style={styles.result}>
-              <Text style={styles.approved}>Foto do Perfil</Text>
-              <Text style={styles.resultConfirm}>Enviada</Text>
+              <Text style={styles.approved}>Dados do veículo</Text>
+              <Text style={styles.resultConfirm}>Enviado</Text>
+            </View>
+            <View>
+              <Ionicons name="checkmark-circle" size={28} color={'#00A349'} />
+            </View>
+          </View>
+
+          <View style={styles.wrapper}>
+            <View style={styles.result}>
+              <Text style={styles.approved}>Fotos</Text>
+              <Text style={styles.resultConfirm}>Enviado</Text>
+            </View>
+            <View>
+              <Ionicons name="checkmark-circle" size={28} color={'#00A349'} />
+            </View>
+          </View>
+
+          <View style={styles.wrapper}>
+            <View style={styles.result}>
+              <Text style={styles.approved}>Dados bancários</Text>
+              <Text style={styles.resultConfirm}>Enviado</Text>
             </View>
             <View>
               <Ionicons name="checkmark-circle" size={28} color={'#00A349'} />
