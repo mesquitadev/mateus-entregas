@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   TextInput,
@@ -24,6 +24,7 @@ const DeliverymanRegister = ({navigation}) => {
   const [datanascimento, setDataNascimento] = useState('');
   const [tel, setTel] = useState('');
   const [email, setEmail] = useState('');
+  const [disabledButton, setDisabledButton] = useState(false);
 
   const formatedCPF = user.replace(/[^\d]/g, '');
   const formatedTelefone = tel.replace(/[^\d]/g, '');
@@ -33,6 +34,13 @@ const DeliverymanRegister = ({navigation}) => {
     datanascimento.substr(3, 2) +
     '-' +
     datanascimento.substr(0, 2);
+
+  useEffect(() => {
+    if (nome && user && cnh && datanascimento && tel && email) {
+      setDisabledButton(true);
+      return;
+    }
+  });
 
   const payload = {
     nome: nome,
@@ -92,7 +100,7 @@ const DeliverymanRegister = ({navigation}) => {
   };
 
   const doRegister = () => {
-    if(formatedCPF === '' || !validateCPF.isValid(formatedCPF)) {
+    if (formatedCPF === '' || !validateCPF.isValid(formatedCPF)) {
       Alert.alert('Mateus Entregas', 'CPF inválido');
       return;
     } else {
@@ -154,9 +162,16 @@ const DeliverymanRegister = ({navigation}) => {
             value={email}
             onChangeText={(text) => setEmail(text)}
           />
+
           <TouchableOpacity
+            disabled={!disabledButton}
             onPress={() => doRegister()}
-            style={styles.btnPrimary}>
+            style={[
+              styles.btnPrimary,
+              {
+                backgroundColor: disabledButton ? '#0095DA' : '#DAE0E3',
+              },
+            ]}>
             <Text style={styles.btnPrimaryText}>Confirmar</Text>
           </TouchableOpacity>
         </View>

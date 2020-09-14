@@ -10,56 +10,65 @@ import {
 import {TextInputMask} from 'react-native-masked-text';
 import styles from './styles';
 
-const DeliverymanRegisterBank  = ({navigation}) => {
+const DeliverymanRegisterBank = ({navigation}) => {
+  const [banco, setBanco] = useState('');
+  const [agencia, setAgencia] = useState('');
+  const [conta, setConta] = useState('');
+  const [confirmationVisibility, setConfirmationVisibility] = useState(false);
 
-    const [banco, setBanco] = useState('');
-    const [agencia, setAgencia] = useState('');
-    const [conta, setConta] = useState('');
+  return (
+    <ScrollView>
+      <View style={styles.container}>
+        <View style={styles.wrapper}>
+          <Text style={styles.info}>
+            Apenas conta <Text style={styles.bold}>corrente</Text>, e a conta do
+            banco tem que ser o nome do{' '}
+            <Text style={styles.bold}>CPF cadastrado</Text> inicialmente
+          </Text>
 
-    return (
-        <ScrollView>
-            <View style={styles.container}>
-                <View style={styles.wrapper}>
+          <TextInput
+            style={styles.inputs}
+            placeholder={'Banco'}
+            value={banco}
+            onChangeText={(text) => setBanco(text)}
+          />
 
-                    <Text style={styles.info}>Apenas conta <Text style={styles.bold}>corrente</Text>, e a conta do banco 
-                    tem que ser o nome do <Text style={styles.bold}>CPF cadastrado</Text> inicialmente 
-                    </Text>
+          <View style={styles.row}>
+            <TextInput
+              style={styles.inputsagencia}
+              placeholder={'Agência'}
+              value={agencia}
+              onChangeText={(text) => setAgencia(text)}
+            />
 
-                    <TextInput
-                    style={styles.inputs}
-                    placeholder={"Banco"}
-                    value={banco}
-                    onChangeText={(text) => setBanco(text)}
-                    />
+            <TextInput
+              style={styles.inputsconta}
+              placeholder={'Conta corrente'}
+              value={conta}
+              onChangeText={(text) => setConta(text)}
+            />
+          </View>
 
-                    <View style={styles.row}>
-                        <TextInput
-                        style={styles.inputsagencia}
-                        placeholder={"Agência"}
-                        value={agencia}
-                        onChangeText={(text) => setAgencia(text)}
-                        />
-
-                        <TextInput
-                        style={styles.inputsconta}
-                        placeholder={"Conta corrente"}
-                        value={conta}
-                        onChangeText={(text) => setConta(text)}
-                        />
-                    </View>
-
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate("DeliverymanSetPassword")}
-                        style={styles.btnPrimary}>
-                        <Text style={styles.btnPrimaryText}>Confirmar</Text>
-                    </TouchableOpacity>
-
-                </View>
-            </View>
-        </ScrollView>
-
-    );
-
-} 
+          <TouchableOpacity
+            disabled={!confirmationVisibility}
+            onPress={() => navigation.navigate('DeliverymanSetPassword')}
+            style={styles.btnPrimary}>
+            <Text
+              style={[
+                styles.btnPrimary,
+                {
+                  backgroundColor: confirmationVisibility
+                    ? '#0095DA'
+                    : '#DAE0E3',
+                },
+              ]}>
+              >Confirmar
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ScrollView>
+  );
+};
 
 export default DeliverymanRegisterBank;
