@@ -52,18 +52,13 @@ const DeliverymanRegisterBank = ({navigation}) => {
           <TouchableOpacity
             disabled={!confirmationVisibility}
             onPress={() => navigation.navigate('DeliverymanSetPassword')}
-            style={styles.btnPrimary}>
-            <Text
-              style={[
-                styles.btnPrimary,
-                {
-                  backgroundColor: confirmationVisibility
-                    ? '#0095DA'
-                    : '#DAE0E3',
-                },
-              ]}>
-              >Confirmar
-            </Text>
+            style={[
+              styles.btnPrimary,
+              {
+                backgroundColor: confirmationVisibility ? '#0095DA' : '#DAE0E3',
+              },
+            ]}>
+            <Text style={styles.btnPrimaryText}>Confirmar</Text>
           </TouchableOpacity>
         </View>
       </View>
