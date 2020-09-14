@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   TextInput,
@@ -15,7 +15,12 @@ const DeliverymanRegisterBank = ({navigation}) => {
   const [agencia, setAgencia] = useState('');
   const [conta, setConta] = useState('');
   const [confirmationVisibility, setConfirmationVisibility] = useState(false);
-
+  useEffect(() => {
+    if (banco && agencia && conta) {
+      setConfirmationVisibility(true);
+      return;
+    }
+  });
   return (
     <ScrollView>
       <View style={styles.container}>
