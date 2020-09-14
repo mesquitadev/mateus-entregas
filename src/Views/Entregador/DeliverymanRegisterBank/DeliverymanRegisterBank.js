@@ -5,9 +5,13 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  Alert,
 } from 'react-native';
 import {Picker} from '@react-native-community/picker';
 import api from '../../../services/api';
+import delivermanRegisterBank from '../../../services/deliverymanRegisterBank';
+import {KEY_ID_DADOS_PESSOAIS} from '../../../Utils/keys';
+import AsyncStorage from '@react-native-community/async-storage';
 import styles from './styles';
 
 const DeliverymanRegisterBank = ({navigation}) => {
@@ -16,9 +20,20 @@ const DeliverymanRegisterBank = ({navigation}) => {
   const [agencia, setAgencia] = useState('');
   const [conta, setConta] = useState('');
   const [confirmationVisibility, setConfirmationVisibility] = useState(false);
+  const [idUser, setIdUser] = useState();
   useEffect(() => {
     buscaBancos();
+    getIdUserInStorage();
   }, []);
+
+  const getIdUserInStorage = async () => {
+    try {
+      const data = await AsyncStorage.getItem(KEY_ID_DADOS_PESSOAIS);
+      setIdUser(data);
+    } catch (e) {
+      return;
+    }
+  };
 
   const buscaBancos = () => {
     api
@@ -42,6 +57,28 @@ const DeliverymanRegisterBank = ({navigation}) => {
     }
   };
 
+  const saveBank = async () => {
+    if (agencia == '' || conta == '' || banco == '') {
+      Alert.alert('App Entrega', 'Houve um erro ao memorizar os dados.');
+      return;
+    }
+
+    try {
+      await delivermanRegisterBank({
+        banco: banco,
+        agencia: agencia,
+        conta: conta,
+        idUser: idUser,
+      });
+      navigation.navigate('DeliverymanSetPassword');
+    } catch (error) {
+      Alert.alert(
+        'Mateus Entregas',
+        'Não foi possível salvar os dados Bancários.',
+      );
+    }
+  };
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -55,7 +92,7 @@ const DeliverymanRegisterBank = ({navigation}) => {
             selectedValue={banco}
             style={styles.inputs}
             onValueChange={(itemValue, itemIndex) => setBanco(itemValue)}>
-            <Picker.Item label="Selecione o Banco..." value={null} />
+            <Picker.Item label="Selecione o Banco..." value={''} />
             {bancos.map((b) => (
               <Picker.Item
                 key={b.itemIndex}
@@ -70,6 +107,7 @@ const DeliverymanRegisterBank = ({navigation}) => {
               style={styles.inputsagencia}
               placeholder={'Agência'}
               value={agencia}
+              keyboardType="numeric"
               onChangeText={(text) => setAgencia(text)}
             />
 
@@ -77,13 +115,14 @@ const DeliverymanRegisterBank = ({navigation}) => {
               style={styles.inputsconta}
               placeholder={'Conta corrente'}
               value={conta}
+              keyboardType="numeric"
               onChangeText={(text) => setConta(text)}
             />
           </View>
 
           <TouchableOpacity
             disabled={!confirmationVisibility}
-            onPress={() => navigation.navigate('DeliverymanSetPassword')}
+            onPress={() => saveBank()}
             style={[
               styles.btnPrimary,
               {backgroundColor: confirmationVisibility ? '#0095DA' : '#DAE0E3'},
