@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   TextInput,
@@ -7,21 +7,39 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import {TextInputMask} from 'react-native-masked-text';
+
+import AsyncStorage from '@react-native-community/async-storage';
+
+import deliverymanAddress from '../../../services/deliverymanAddress';
+import {KEY_ID_DADOS_PESSOAIS} from '../../../Utils/keys';
 import styles from './styles';
 
 
 const DeliverymanRegisterAddress = ({navigation}) => {
 
+    const [idUser, setIdUser] = useState();
     const [cep, setCep] = useState('');
     const [estado, setEstado] = useState('');
     const [cidade, setCidade] = useState('');
-    const [endereco, setEndereco] = useState('');
+    const [logradouro, setLogradouro] = useState('');
     const [bairro, setBairro] = useState('');
     const [numero, setNumero] = useState('');
     const [complemento, setComplemento] = useState('');
 
-    const doRegister = () => {
+    useEffect(() => {
+        getIdUserInStorage();
+    }, []);
+
+    const getIdUserInStorage = async () => {
+        try {
+          const data = await AsyncStorage.getItem(KEY_ID_DADOS_PESSOAIS);
+          setIdUser(data);
+        } catch (e) {
+          return;
+        }
+    };
+
+    const saveAddress = async () => {
 
         if(cep.length == ''){
             Alert.alert('Mateus entregas',' Verifique os campos em branco')
@@ -32,7 +50,7 @@ const DeliverymanRegisterAddress = ({navigation}) => {
         }else if (cidade.length == '') {
             Alert.alert('Mateus entregas',' Verifique os campos em branco')
             return;
-        }else if (endereco.length == '') {
+        }else if (logradouro.length == '') {
             Alert.alert('Mateus entregas',' Verifique os campos em branco')
             return;
         }else if (bairro.length == '') {
@@ -42,9 +60,23 @@ const DeliverymanRegisterAddress = ({navigation}) => {
             Alert.alert('Mateus entregas',' Verifique os campos em branco')
             return;
         }
-
-        navigation.navigate("DeliverymanVehicleData")
-
+    
+        try {
+          await deliverymanAddress({
+            cep: cep,
+            logradouro: logradouro,
+            estado: estado,
+            cidade: cidade,
+            logradouro: logradouro,
+            bairro: bairro,
+            numero: numero,
+            complemento: complemento,
+            idUser: idUser
+          });
+          navigation.navigate('DeliverymanVehicleData');
+        } catch (error) {
+          Alert.alert('Mateus Entregas', 'Não foi possível salvar os dados de Endereço.');
+        }
     }
 
     return (
@@ -63,9 +95,10 @@ const DeliverymanRegisterAddress = ({navigation}) => {
                     />
                     <TextInput
                     style={styles.inputs}
-                    placeholder={"Estado"}
+                    placeholder={"UF"}
                     value={estado}
-                    onChangeText={(text) => setEstado(text)}
+                    onChangeText={(text) => setEstado(text.toUpperCase())}
+                    maxLength={2}
                     />
                     <TextInput
                     style={styles.inputs}
@@ -76,8 +109,8 @@ const DeliverymanRegisterAddress = ({navigation}) => {
                     <TextInput
                     style={styles.inputs}
                     placeholder={"Endereço"}
-                    value={endereco}
-                    onChangeText={(text) => setEndereco(text)}
+                    value={logradouro}
+                    onChangeText={(text) => setLogradouro(text)}
                     />
                     <View style={styles.row}>
                         <TextInput
@@ -102,7 +135,9 @@ const DeliverymanRegisterAddress = ({navigation}) => {
                     />
 
                     <TouchableOpacity
-                    onPress={() => doRegister()}
+                    onPress={async () => {
+                        await saveAddress();
+                      }}
                     style={styles.btnPrimary}>
                     <Text style={styles.btnPrimaryText}>Confirmar</Text>
                     </TouchableOpacity>
