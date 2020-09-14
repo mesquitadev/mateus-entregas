@@ -5,22 +5,43 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
-  Alert,
 } from 'react-native';
-import {TextInputMask} from 'react-native-masked-text';
+import {Picker} from '@react-native-community/picker';
+import api from '../../../services/api';
 import styles from './styles';
 
 const DeliverymanRegisterBank = ({navigation}) => {
   const [banco, setBanco] = useState('');
+  const [bancos, setBancos] = useState([]);
   const [agencia, setAgencia] = useState('');
   const [conta, setConta] = useState('');
   const [confirmationVisibility, setConfirmationVisibility] = useState(false);
   useEffect(() => {
+    buscaBancos();
+  }, []);
+
+  const buscaBancos = () => {
+    api
+      .get('bancos')
+      .then((res) => {
+        setBancos(res.data);
+      })
+      .catch((err) => {
+        console.log('erro: ', err);
+      });
+  };
+
+  useEffect(() => {
+    handleDisableButton();
+  });
+
+  const handleDisableButton = () => {
     if (banco && agencia && conta) {
       setConfirmationVisibility(true);
       return;
     }
-  });
+  };
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -30,13 +51,19 @@ const DeliverymanRegisterBank = ({navigation}) => {
             banco tem que ser o nome do{' '}
             <Text style={styles.bold}>CPF cadastrado</Text> inicialmente
           </Text>
-
-          <TextInput
+          <Picker
+            selectedValue={banco}
             style={styles.inputs}
-            placeholder={'Banco'}
-            value={banco}
-            onChangeText={(text) => setBanco(text)}
-          />
+            onValueChange={(itemValue, itemIndex) => setBanco(itemValue)}>
+            <Picker.Item label="Selecione o Banco..." value={null} />
+            {bancos.map((b) => (
+              <Picker.Item
+                key={b.itemIndex}
+                label={b.descricao}
+                value={b.descricao}
+              />
+            ))}
+          </Picker>
 
           <View style={styles.row}>
             <TextInput
@@ -59,9 +86,7 @@ const DeliverymanRegisterBank = ({navigation}) => {
             onPress={() => navigation.navigate('DeliverymanSetPassword')}
             style={[
               styles.btnPrimary,
-              {
-                backgroundColor: confirmationVisibility ? '#0095DA' : '#DAE0E3',
-              },
+              {backgroundColor: confirmationVisibility ? '#0095DA' : '#DAE0E3'},
             ]}>
             <Text style={styles.btnPrimaryText}>Confirmar</Text>
           </TouchableOpacity>

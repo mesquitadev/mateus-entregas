@@ -19,6 +19,8 @@ target 'entregas' do
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
+  pod 'RNCPicker', :path => '../node_modules/@react-native-community/picker'
+
   target 'entregasTests' do
     inherit! :complete
     # Pods for testing
