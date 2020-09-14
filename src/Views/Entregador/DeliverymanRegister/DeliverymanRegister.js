@@ -69,7 +69,7 @@ const DeliverymanRegister = ({navigation}) => {
       if (response.status == 200) {
         await serializeData(response.data.id);
         if (await AsyncStorage.getItem(KEY_ID_DADOS_PESSOAIS)) {
-          navigation.navigate('DeliverymanPhotos');
+          navigation.navigate('DeliverymanRegisterAddress');
         }
         resetInputs();
         return;
