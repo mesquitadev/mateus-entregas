@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   TextInput,
@@ -7,7 +7,10 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import {TextInputMask} from 'react-native-masked-text';
+import api from '../../../services/api';
+import deliverymanAddress from '../../../services/deliverymanAddress';
+import {KEY_ID_DADOS_PESSOAIS} from '../../../Utils/keys';
+import AsyncStorage from '@react-native-community/async-storage';
 import styles from './styles';
 
 
@@ -16,12 +19,40 @@ const DeliverymanRegisterAddress = ({navigation}) => {
     const [cep, setCep] = useState('');
     const [estado, setEstado] = useState('');
     const [cidade, setCidade] = useState('');
-    const [endereco, setEndereco] = useState('');
+    const [logradouro, setLogradouro] = useState('');
     const [bairro, setBairro] = useState('');
     const [numero, setNumero] = useState('');
     const [complemento, setComplemento] = useState('');
+    const [idUser, setIdUser] = useState();
 
-    const doRegister = () => {
+   
+    useEffect(() => {
+        getIdUserInStorage();
+      }, []);
+
+    const getIdUserInStorage = async () => {
+        try {
+          const data = await AsyncStorage.getItem(KEY_ID_DADOS_PESSOAIS);
+          setIdUser(data);
+        } catch (e) {
+          return;
+        }
+    };
+    
+    const submitAddress = () => {
+        const fetchData = async () => {
+            const response = await api.get(`/cep/${cep}`);
+                setBairro(response.data.bairro)
+                setEstado(response.data.uf)
+                setLogradouro(response.data.logradouro)
+                setCidade(response.data.localidade)
+               // console.log(response.data)
+            }
+        fetchData()
+        return () => fetchData();
+    }
+       
+    const saveAddress = async () => {
 
         if(cep.length == ''){
             Alert.alert('Mateus entregas',' Verifique os campos em branco')
@@ -32,7 +63,7 @@ const DeliverymanRegisterAddress = ({navigation}) => {
         }else if (cidade.length == '') {
             Alert.alert('Mateus entregas',' Verifique os campos em branco')
             return;
-        }else if (endereco.length == '') {
+        }else if (logradouro.length == '') {
             Alert.alert('Mateus entregas',' Verifique os campos em branco')
             return;
         }else if (bairro.length == '') {
@@ -42,10 +73,26 @@ const DeliverymanRegisterAddress = ({navigation}) => {
             Alert.alert('Mateus entregas',' Verifique os campos em branco')
             return;
         }
-
-        navigation.navigate("DeliverymanVehicleData")
-
-    }
+       
+        try {
+          await deliverymanAddress({
+            cep: cep,
+            logradouro: logradouro,
+            numero: numero,
+            complemento: complemento,
+            bairro: bairro,
+            estado: estado,
+            cidade: cidade,
+            idUser: idUser,
+          });
+          navigation.navigate('DeliverymanVehicleData');
+        } catch (error) {
+          Alert.alert(
+            'Mateus Entregas',
+            'Não foi possível salvar os dados de Endereço.',
+          );
+        }
+    };
 
     return (
         <ScrollView>
@@ -60,12 +107,14 @@ const DeliverymanRegisterAddress = ({navigation}) => {
                     maxLength={8}
                     keyboardType="numeric"
                     autoFocus
+                    onBlur={() => submitAddress()} 
                     />
                     <TextInput
                     style={styles.inputs}
-                    placeholder={"Estado"}
+                    placeholder={"UF"}
                     value={estado}
-                    onChangeText={(text) => setEstado(text)}
+                    onChangeText={(text) => setEstado(text.toUpperCase())}
+                    maxLength={2}
                     />
                     <TextInput
                     style={styles.inputs}
@@ -76,8 +125,8 @@ const DeliverymanRegisterAddress = ({navigation}) => {
                     <TextInput
                     style={styles.inputs}
                     placeholder={"Endereço"}
-                    value={endereco}
-                    onChangeText={(text) => setEndereco(text)}
+                    value={logradouro}
+                    onChangeText={(text) => setLogradouro(text)}
                     />
                     <View style={styles.row}>
                         <TextInput
@@ -102,7 +151,7 @@ const DeliverymanRegisterAddress = ({navigation}) => {
                     />
 
                     <TouchableOpacity
-                    onPress={() => doRegister()}
+                    onPress={() => saveAddress()}
                     style={styles.btnPrimary}>
                     <Text style={styles.btnPrimaryText}>Confirmar</Text>
                     </TouchableOpacity>
