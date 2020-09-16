@@ -74,7 +74,7 @@ const DeliverymanPhotos = ({ navigation, route: {params}}) => {
       <TouchableOpacity
         disabled={!confirmationVisibility}
         onPress={() => {
-          navigation.navigate('DeliverymanRegisterBank');
+          navigation.navigate('DeliverymanSetPassword');
         }}
         style={[
           styles.btnPrimary,
