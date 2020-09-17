@@ -31,17 +31,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#0095DA",
     alignItems: "center",
     paddingVertical: 15,
-    marginVertical: 640,
+    //marginVertical: 630,
     width: screenWidth,
     borderRadius: 0,
+    bottom: 130
    
-  
    
   },
 
   active: {
     display: "flex",
     position: 'absolute',
+    
   },
 
   inactive: {
