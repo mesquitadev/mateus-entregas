@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const screenWidth = Dimensions.get('screen').width;
+const screenHeight =  Dimensions.get('screen').height;
 const styles = StyleSheet.create({
   orderList: {
     alignItems: "center",
@@ -34,15 +35,13 @@ const styles = StyleSheet.create({
     //marginVertical: 630,
     width: screenWidth,
     borderRadius: 0,
-    bottom: 130
-   
-   
+    // bottom: 130
   },
 
   active: {
     display: "flex",
-    position: 'absolute',
-    
+    position: "absolute",
+    top: screenHeight - 170
   },
 
   inactive: {

@@ -14,9 +14,9 @@ const ReceiptByQrCode = ({ navigation }) => {
 
   const validateCode = async code => {
     try {
-      const response = await checkDelivery(code);
+      // const response = await checkDelivery(code);
 
-      navigation.navigate('ReceiveOrder', response.data);
+      // navigation.navigate('ReceiveOrder', response.data);
     } catch(error) {
       if (error.response) {
         if (error.response.status === 404) alert('Código do cliente inválido.')
